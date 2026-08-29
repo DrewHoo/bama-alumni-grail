@@ -1,0 +1,199 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bama Alumni Grail</title>
+<meta name="description" content="An open hunt dossier for one specific sweatshirt: an early-90s University of Alabama Alumni crewneck on a Jerzees Super Sweats blank. Target spec, live near-misses, sold comps, and the standing search protocol.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐘%3C/text%3E%3C/svg%3E">
+<script src="https://drewhoover.com/embed/back-bar.js" async></script>
+<style>
+:root{--paper:#f4f1ea;--ink:#2b2620;--crimson:#9e1b32;--charcoal:#4a4a4a;--card:#fffdf8;--line:#ddd6c8;--good:#2e6b3f;--dead:#8a8378}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Georgia,'Times New Roman',serif}
+a{color:var(--crimson)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.masthead{padding:44px 0 10px;border-bottom:3px double var(--line)}
+.kicker{font:600 12px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--charcoal)}
+.kicker a{color:inherit;text-decoration:none;transition:.15s;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+.kicker a:hover{border-bottom-color:currentColor}
+h1{font-size:clamp(30px,5.5vw,50px);margin:.25em 0 .1em;color:var(--crimson);letter-spacing:.01em}
+.sub{font-style:italic;color:var(--charcoal);margin:0 0 18px;max-width:64ch}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px;font:600 12px/1 'Helvetica Neue',Arial,sans-serif}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--charcoal)}
+.pill b{color:var(--crimson)}
+.legend{font:13px/1.5 'Helvetica Neue',Arial,sans-serif;color:var(--charcoal);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:18px 0 0}
+.verdict{margin:26px 0 0;background:#fdf6ee;border:1px solid #e8cfa4;border-left:6px solid var(--crimson);border-radius:10px;padding:16px 20px}
+.verdict h2{margin:0 0 6px;font-size:20px;color:var(--crimson)}
+.verdict p{margin:6px 0;font-size:15px}
+section{margin:40px 0}
+section>h2{font-size:26px;color:var(--crimson);border-bottom:2px solid var(--line);padding-bottom:6px;margin-bottom:6px}
+section>.intro{color:var(--charcoal);font-size:15px;max-width:78ch;margin:8px 0 18px}
+.target{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:start}
+.target .photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.target .photos img{width:100%;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;background:#fff}
+.target .photos img.hero{grid-column:1/-1}
+.spec{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;font-size:15px}
+.spec h3{margin:0 0 10px;font-size:17px}
+.spec dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.spec dt{font:600 12px/1.6 'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--charcoal)}
+.spec dd{margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.card .imgbox{aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .imgbox img{width:100%;height:100%;object-fit:contain;cursor:zoom-in}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{margin:0;font-size:15.5px;line-height:1.35}
+.card .meta{font:600 12px/1 'Helvetica Neue',Arial,sans-serif;color:var(--charcoal);display:flex;gap:6px;flex-wrap:wrap}
+.card .meta span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 8px}
+.card .price{font:700 18px/1 'Helvetica Neue',Arial,sans-serif;color:var(--crimson)}
+.card .note{font-size:13.5px;color:var(--charcoal);font-style:italic;flex:1}
+.card .cta{display:block;text-align:center;background:var(--crimson);color:#fff;text-decoration:none;font:700 13px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.04em;padding:11px 0;border-radius:8px}
+.card .cta:hover{filter:brightness(1.1)}
+.card .ribbon{position:absolute;top:10px;left:-6px;background:var(--charcoal);color:#fff;font:700 11px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.08em;padding:5px 10px;border-radius:0 4px 4px 0}
+.card.best .ribbon{background:var(--good)}
+.card.sold{filter:saturate(.55)}
+.card.sold .ribbon{background:var(--dead)}
+.card.sold .price{color:var(--dead);text-decoration:line-through}
+#watch table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+#watch th,#watch td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+#watch th{font:600 12px/1.4 'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--charcoal);background:var(--paper)}
+#watch tr:last-child td{border-bottom:none}
+footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;font:13px/1.6 'Helvetica Neue',Arial,sans-serif;color:var(--charcoal)}
+.lb{position:fixed;inset:0;background:rgba(20,16,12,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:94vw;max-height:92vh;border-radius:6px}
+@media(max-width:760px){.target{grid-template-columns:1fr}}
+</style>
+</head><body>
+<header class="masthead"><div class="wrap">
+  <div class="kicker"><a href="https://github.com/DrewHoo/shopping-lookbook" target="_blank" rel="noopener">A shopping lookbook</a> · except it's a manhunt for one sweatshirt</div>
+  <h1>The Bama Alumni Grail</h1>
+  <p class="sub">One ash-gray University of Alabama <b>Alumni</b> crewneck — big straight-set outline ALABAMA, the university seal rising behind it, a charcoal ALUMNI ribbon below — on a made-in-USA Jerzees Super Sweats blank. It exists. One of them is being hunted.</p>
+  <div class="pills" id="pills"></div>
+  <div class="legend"><b>How to read this page:</b> the target spec is the sweatshirt in hand (photos below). Everything else is ranked by distance from it. Prices &amp; availability as of <b>Aug 29, 2026</b> — vintage listings die fast; buy buttons go to the live listing. No affiliate links, no trackers.</div>
+</div></header>
+
+<div class="wrap">
+<div class="verdict">
+  <h2>Current verdict: not listed anywhere — yet.</h2>
+  <p>As of Aug 29, 2026, the exact print (outline ALABAMA + seal + ALUMNI banner, ash gray) is <b>not live</b> on eBay, Etsy, Poshmark, Mercari, Depop, Grailed, Vinted, OfferUp, or AlabamaVTG's full catalog (91 crest/crew items swept). Facebook Marketplace couldn't be searched — it's login-walled and this Chrome profile isn't signed in to Facebook.</p>
+  <p>But the print family is real and circulates: three dead listings and one sold Poshmark prove versions of it sell for <b>$19–$50</b> when they surface. The play is the standing watch below.</p>
+</div>
+
+<section id="grail">
+  <h2>The target</h2>
+  <p class="intro">Photographed in hand. The neck tag is <b>Jerzees Super Sweats, 42-44 (a 90s Large), Made in U.S.A.</b>; the care tag is <b>Russell Corp, Alexander City, AL — WPL 7332</b>, ~50/50 poly-cotton with 5% other fiber. That tag combo dates it to roughly 1988–1995.</p>
+  <div class="target">
+    <div class="photos">
+      <img class="hero" src="img/target-front.jpg" alt="Front: outline ALABAMA over university seal and ALUMNI banner on ash gray">
+      <img src="img/target-necktag.jpg" alt="Jerzees Super Sweats 42-44 neck tag">
+      <img src="img/target-caretag.jpg" alt="Russell Corp care tag, WPL 7332">
+    </div>
+    <div class="spec">
+      <h3>Match checklist (in priority order)</h3>
+      <dl>
+        <dt>Graphic</dt><dd>Straight-set serif <b>ALABAMA</b> — charcoal-heather fill, crimson outline; circular <b>University of Alabama seal</b> rising behind the letters; charcoal <b>ALUMNI</b> ribbon banner below</dd>
+        <dt>Color</dt><dd>Ash / light heather gray</dd>
+        <dt>Blank</dt><dd>Jerzees Super Sweats (Russell Corp), Made in USA — same-era Russell/Jerzees acceptable</dd>
+        <dt>Size</dt><dd>42-44 / L (fits like a modern L–XL); XL acceptable</dd>
+        <dt>Condition</dt><dd>Honest wear fine; no large stains or holes</dd>
+        <dt>Price guide</dt><dd>Comps say <b>$20–$50</b>; up to ~$75 for a true exact match is rational grail money</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="live">
+  <h2>Closest live listings</h2>
+  <p class="intro">Nothing here is the exact print — these are the nearest live cousins, ranked. The Galt Sand crest crews share the arch-plus-seal architecture (Galt Sand appears to be the print family's maker); the Jerzees pieces get the blank and the era right but not the graphic.</p>
+  <div class="grid" data-tier="live"></div>
+</section>
+
+<section id="modern">
+  <h2>New production, same idea</h2>
+  <p class="intro">If the point is wearing the thing rather than owning the artifact: three licensed, in-stock options that carry the same content (seal + ALUMNI) or the same look (seal on light gray). All available in L/XL today.</p>
+  <div class="grid" data-tier="modern"></div>
+</section>
+
+<section id="sold">
+  <h2>Proof it exists: sold &amp; ended comps</h2>
+  <p class="intro">Dead listings, kept for identification and price truth. If one of these sellers relists — or a lookalike appears — this is what it'll look like. The Poshmark Russell (embroidered "EST. 1831 ALUMNI", ash, size L) is the closest documented cousin: it sold for $28.</p>
+  <div class="grid" data-tier="sold"></div>
+</section>
+
+<section id="watch">
+  <h2>The standing watch</h2>
+  <p class="intro">The grail will surface eventually — 90s Alabama gear churns onto these marketplaces weekly. These are the exact searches, newest-first where supported. A recurring agent runs this protocol; you can also click through any time.</p>
+  <table>
+    <tr><th>Where</th><th>Search</th><th>Notes</th></tr>
+    <tr><td>eBay</td><td><a target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=alabama+alumni+sweatshirt&_sop=10">alabama alumni sweatshirt</a> · <a target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=jerzees+alabama+sweatshirt&_sop=10">jerzees alabama</a> · <a target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=galt+sand+alabama&_sop=10">galt sand alabama</a></td><td>Best channel. Log in &amp; "Save this search" for instant email alerts.</td></tr>
+    <tr><td>Etsy</td><td><a target="_blank" rel="noopener" href="https://www.etsy.com/search?q=vintage+alabama+alumni+sweatshirt">vintage alabama alumni sweatshirt</a></td><td>Vintage dealers title carefully — "alumni" would appear.</td></tr>
+    <tr><td>Poshmark</td><td><a target="_blank" rel="noopener" href="https://poshmark.com/search?query=alabama%20alumni%20sweatshirt&type=listings">alabama alumni sweatshirt</a></td><td>Where the closest cousin sold. Low prices.</td></tr>
+    <tr><td>Mercari</td><td><a target="_blank" rel="noopener" href="https://www.mercari.com/search/?keyword=alabama%20alumni%20sweatshirt">alabama alumni sweatshirt</a></td><td>Renders only in a real browser session.</td></tr>
+    <tr><td>Grailed / Depop</td><td><a target="_blank" rel="noopener" href="https://www.grailed.com/shop?query=alabama%20sweatshirt">grailed</a> · <a target="_blank" rel="noopener" href="https://www.depop.com/search/?q=alabama+alumni+sweatshirt">depop</a></td><td>Long-tail; occasionally underpriced.</td></tr>
+    <tr><td>Facebook Marketplace</td><td><a target="_blank" rel="noopener" href="https://www.facebook.com/marketplace/search?query=vintage%20alabama%20alumni%20sweatshirt&deliveryMethod=shipping">vintage alabama alumni sweatshirt</a></td><td><b>Blocked until Chrome is signed in to Facebook</b> — sign in once and the agent can search it.</td></tr>
+    <tr><td>AlabamaVTG</td><td><a target="_blank" rel="noopener" href="https://alabamavtg.com/collections/sweatshirts">full sweatshirt collection</a></td><td>Specialist dealer; whole catalog sweepable via products.json.</td></tr>
+  </table>
+</section>
+</div>
+
+<footer><div class="wrap">
+  Hunt dossier · researched &amp; verified in-browser Aug 29, 2026 · every listing opened live before earning a card · sold comps retained for identification · not affiliated with any seller or the University of Alabama.
+</div></footer>
+
+<div class="lb" id="lb"><img id="lbimg" alt=""></div>
+<script>
+const SETS=[
+ {tier:'live',best:1,ribbon:'ONLY LIVE "ALUMNI"',title:'Alabama Alumni Champion crew — red, size M',shop:'eBay',price:'$19.27',
+  url:'https://www.ebay.com/itm/188010505058',img:'https://i.ebayimg.com/images/g/oQsAAeSwEdZpfWCp/s-l500.webp',big:'https://i.ebayimg.com/images/g/oQsAAeSwEdZpfWCp/s-l1600.webp',
+  meta:['ALUMNI print','Champion','M','red'],note:'The only live listing anywhere that says ALUMNI. Plain arched text — no seal, no banner — and red, not ash. A placeholder, not the grail.'},
+ {tier:'live',best:1,ribbon:'CLOSEST LAYOUT',title:'Galt Sand crest crew — arch + seal + ROLL TIDE, XL',shop:'eBay · SonnyBDeals (2,394)',price:'$32.79 obo',
+  url:'https://www.ebay.com/itm/237034267075',img:'https://i.ebayimg.com/images/g/bPsAAeSwSHBqkLqo/s-l500.webp',big:'https://i.ebayimg.com/images/g/bPsAAeSwSHBqkLqo/s-l1600.webp',
+  meta:['arch + seal','Galt Sand','XL','oatmeal'],note:'Same print architecture as the grail — arched ALABAMA over the university seal — with ROLL TIDE where ALUMNI should be. Oatmeal, not ash. The nearest live thing to the target.'},
+ {tier:'live',ribbon:'ARCH + SEAL',title:'Arched ALABAMA + seal crew — red, XL, heavyweight boxy',shop:'eBay · Jewel Sales (3,121)',price:'$29.99 obo',
+  url:'https://www.ebay.com/itm/287527836720',img:'https://i.ebayimg.com/images/g/NoMAAeSwyo1pad5P/s-l500.webp',big:'https://i.ebayimg.com/images/g/NoMAAeSwyo1pad5P/s-l1600.webp',
+  meta:['arch + seal','XL','red','flaw noted'],note:'Right architecture, wrong colorway, and the seller flags a flaw — read the photos before offering.'},
+ {tier:'live',ribbon:'SEAL PRINT',title:'Galt Sand seal crew — white, size M',shop:'eBay',price:'$25.00',
+  url:'https://www.ebay.com/itm/389661101003',img:'https://i.ebayimg.com/images/g/gp8AAeSw0gNpnNE6/s-l500.webp',big:'https://i.ebayimg.com/images/g/gp8AAeSw0gNpnNE6/s-l1600.webp',
+  meta:['seal','Galt Sand','M','white'],note:'Big university seal under the arch, no ALUMNI banner, white body, and an M — two sizes and one banner away.'},
+ {tier:'live',ribbon:'RIGHT BLANK',title:'Jerzees 90s crew — gray, XL, Big Al print',shop:'eBay',price:'$67.97',
+  url:'https://www.ebay.com/itm/147493175080',img:'https://i.ebayimg.com/images/g/5SkAAeSwVUhqHT65/s-l500.webp',big:'https://i.ebayimg.com/images/g/5SkAAeSwVUhqHT65/s-l1600.webp',
+  meta:['Jerzees','XL','ash gray','USA'],note:'Right blank family, right ash gray, right era — wearing the mascot instead of the seal. Priced like the seller knows the blank is the good part.'},
+ {tier:'live',ribbon:'RIGHT BLANK',title:'Jerzees crew — embroidered script, XL',shop:'eBay',price:'$24.22',
+  url:'https://www.ebay.com/itm/318691866249',img:'https://i.ebayimg.com/images/g/4bwAAeSwK8JpRYbf/s-l500.webp',big:'https://i.ebayimg.com/images/g/4bwAAeSwK8JpRYbf/s-l1600.webp',
+  meta:['Jerzees','XL','USA made'],note:'Same maker, USA tag, honest price — the budget stand-in while the hunt runs.'},
+ {tier:'modern',best:1,ribbon:'SAME CONTENT',title:'UA Alumni Seal Sweatshirt — Cardinal',shop:'JNJ Apparel, Tuscaloosa',price:'$42.00',
+  url:'https://store.jnjapparel.net/products/ua-alumni-sweatshirt-quick-ship',img:'https://cdn.shopify.com/s/files/1/0619/5281/9375/files/UA_Alumni_Seal_Sweatshirt_Gildan_Cardinal_00.jpg?width=600',big:'https://cdn.shopify.com/s/files/1/0619/5281/9375/files/UA_Alumni_Seal_Sweatshirt_Gildan_Cardinal_00.jpg',
+  meta:['seal + ALUMNI','S–3XL in stock','Gildan','licensed'],note:'The modern print closest to the grail’s content — seal plus ALUMNI — from the Tuscaloosa shop that prints for campus. Cardinal only; no ash.'},
+ {tier:'modern',ribbon:'SAME LOOK',title:'Vintage University of Alabama Seal Crewneck — Light Grey',shop:'Homefield Apparel',price:'$68.00',
+  url:'https://www.homefieldapparel.com/products/vintage-university-of-alabama-seal-crewneck',img:'https://cdn.shopify.com/s/files/1/0009/0839/4551/files/AL-CREW-001-VAULT-LGREY.png?width=600',big:'https://cdn.shopify.com/s/files/1/0009/0839/4551/files/AL-CREW-001-VAULT-LGREY.png',
+  meta:['seal','S–4XL in stock','light grey','College Vault'],note:'Vintage-styled seal crew on the right color. No ALUMNI banner, but the closest a new sweatshirt gets to the grail’s look and feel.'},
+ {tier:'modern',ribbon:'CAMPUS STORE',title:'Alabama Alumni Sweatshirt — Champion, Crimson/White',shop:'University of Alabama Supply Store',price:'$68.00',
+  url:'https://www.universitysupplystore.com/shop_product_detail.asp?catalog_id=514&catalog_name=U1dFQVRTLCBKQUNLRVRTLCAmIFBVTExPVkVSUw&pf_id=20032&product_name=QWxhYmFtYSBBbHVtbmkgU3dlYXRzaGlydA&type=1&target=shop_product_list.asp',img:'',big:'',
+  meta:['ALUMNI spellout','Champion','crimson / white'],note:'The official campus-store alumni crew — bold ALABAMA ALUMNI lettering, no seal. Listed for completeness; image and size stock live on their page.'},
+ {tier:'sold',ribbon:'SOLD $28',title:'Russell "EST. 1831 ALUMNI" embroidered crew — ash, L',shop:'Poshmark',price:'$28.00',
+  url:'https://poshmark.com/listing/Vintage-University-of-Alabama-Alumni-Sweatshirt-Size-L-by-Russell-Athletic-682d29bdc4e7b427ae13bba2',img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/05/20/682d29bdc4e7b427ae13bba2/m_682d2bb744ad4d0c708ba25f.jpg',big:'https://di2ponv0v5otw.cloudfront.net/posts/2025/05/20/682d29bdc4e7b427ae13bba2/m_682d2bb744ad4d0c708ba25f.jpg',
+  meta:['ALUMNI','Russell','L','ash'],note:'The closest documented cousin: ash, size L, Russell-made, ALUMNI on the chest (embroidered, boxed — no seal). Sold for $28. This is the price truth.'},
+ {tier:'sold',ribbon:'ENDED',title:'Gear for Sports "UNIVERSITY OF ALABAMA / seal / ALUMNI" — cardinal, XL',shop:'eBay',price:'—',
+  url:'https://www.ebay.com/itm/314276293100',img:'https://i.ebayimg.com/images/g/Z0gAAOSwpt5jm24x/s-l500.webp',big:'https://i.ebayimg.com/images/g/Z0gAAOSwpt5jm24x/s-l1600.webp',
+  meta:['seal + ALUMNI','Gear for Sports','XL'],note:'Arch, seal, ALUMNI — the whole grail formula, in cardinal. Ended listing; the seller may relist. Proof the formula was printed by multiple makers.'},
+ {tier:'sold',ribbon:'ENDED',title:'Champion "ALABAMA ALUMNI" crew — red, L',shop:'eBay',price:'—',
+  url:'https://www.ebay.com/itm/355722465642',img:'https://i.ebayimg.com/images/g/I3QAAOSwljlmR-Lu/s-l500.webp',big:'https://i.ebayimg.com/images/g/I3QAAOSwljlmR-Lu/s-l1600.webp',
+  meta:['ALUMNI','Champion','L','red'],note:'Same idea in Champion’s plainer voice. Ended — kept as an identification comp for the watch.'}
+];
+const grids={};document.querySelectorAll('.grid').forEach(g=>grids[g.dataset.tier]=g);
+SETS.forEach(s=>{
+  const el=document.createElement('div');el.className='card '+s.tier+(s.best?' best':'');
+  el.innerHTML=(s.ribbon?'<div class="ribbon">'+s.ribbon+'</div>':'')+
+    (s.img?'<div class="imgbox"><img loading="lazy" src="'+s.img+'" data-big="'+(s.big||s.img)+'" alt=""></div>':'')+
+    '<div class="body"><h3>'+s.title+'</h3><div class="meta">'+s.meta.map(m=>'<span>'+m+'</span>').join('')+'</div>'+
+    '<div class="price">'+s.price+'</div><div class="note">'+s.note+'</div>'+
+    '<a class="cta" target="_blank" rel="noopener" href="'+s.url+'">'+(s.tier==='sold'?'View dead listing':'View on '+s.shop.split('·')[0].split(',')[0].trim())+'</a></div>';
+  grids[s.tier].appendChild(el);});
+const counts={live:0,modern:0,sold:0};SETS.forEach(s=>counts[s.tier]++);
+document.getElementById('pills').innerHTML=
+ '<span class="pill"><b>0</b> exact matches live</span><span class="pill"><b>'+counts.live+'</b> nearest live cousins</span><span class="pill"><b>'+counts.modern+'</b> modern fallbacks</span><span class="pill"><b>'+counts.sold+'</b> sold comps</span><span class="pill"><b>9</b> channels watched</span>';
+const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg');
+document.addEventListener('click',e=>{const t=e.target;
+  if(t.tagName==='IMG'&&(t.dataset.big||t.closest('.photos'))){lbimg.src=t.dataset.big||t.src;lb.classList.add('on');}
+  else if(e.target===lb||e.target===lbimg){lb.classList.remove('on');}});
+</script>
+</body></html>

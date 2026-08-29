@@ -1,0 +1,32 @@
+{
+  "updated": "2026-08-29",
+  "target": {
+    "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
+    "color": "ash / light heather gray",
+    "blank": "Jerzees Super Sweats (Russell Corp, Alexander City AL, WPL 7332), Made in USA, ~50/50 +5% other fiber",
+    "size": "42-44 (90s L; modern L-XL ok)",
+    "era": "~1988-1995",
+    "priceGuide": "20-50 USD typical comp; up to ~75 for exact match"
+  },
+  "channels": {
+    "searched": ["ebay", "etsy", "poshmark", "mercari", "depop", "grailed", "vinted", "offerup", "alabamavtg.com (full products.json sweep)", "google/bing web index"],
+    "blocked": [{"channel": "facebook-marketplace", "reason": "login-walled; Chrome profile not signed in to Facebook as of 2026-08-29"}]
+  },
+  "seen": [
+    {"id": "ebay:188010505058", "title": "Alabama Alumni Champion Red Pullover M", "price": 19.27, "verdict": "live-cousin", "why": "only live ALUMNI print; plain text, red, Champion, M"},
+    {"id": "ebay:237034267075", "title": "Galt Sand crest crew XL oatmeal (arch+seal+ROLL TIDE)", "price": 32.79, "verdict": "live-cousin", "why": "closest live layout; ROLL TIDE instead of ALUMNI"},
+    {"id": "ebay:287527836720", "title": "Arch+seal red XL heavyweight boxy FLAW", "price": 29.99, "verdict": "live-cousin"},
+    {"id": "ebay:389661101003", "title": "Galt Sand seal crew white M", "price": 25.00, "verdict": "live-cousin"},
+    {"id": "ebay:147493175080", "title": "Jerzees 90s gray XL Big Al", "price": 67.97, "verdict": "live-cousin", "why": "right blank+color, wrong graphic"},
+    {"id": "ebay:318691866249", "title": "Jerzees XL embroidered crimson script", "price": 24.22, "verdict": "live-cousin"},
+    {"id": "ebay:407081072815", "title": "90s L Alumni Crest berry small-chest print (Balmexis)", "price": 24.99, "verdict": "off-target", "why": "small crest print, washed berry color"},
+    {"id": "ebay:257710076204", "title": "RARE UA Seal XL J&M Sports", "price": 49.98, "verdict": "off-target", "why": "decorative shield crest, not the seal+banner print"},
+    {"id": "ebay:314276293100", "title": "Gear for Sports UNIVERSITY OF ALABAMA/seal/ALUMNI cardinal XL", "verdict": "dead-comp", "why": "full formula in cardinal; watch for relist"},
+    {"id": "ebay:355722465642", "title": "Champion ALABAMA ALUMNI red L", "verdict": "dead-comp"},
+    {"id": "ebay:315899347029", "title": "UA crew XL 80s/90s 'College Alumni' (red arch spellout)", "verdict": "dead-comp", "why": "title said alumni; photo shows plain red arch"},
+    {"id": "poshmark:682d29bdc4e7b427ae13bba2", "title": "Russell embroidered EST.1831 ALUMNI ash L", "price": 28.00, "verdict": "sold-comp", "why": "closest documented cousin; sold"},
+    {"id": "jnj:ua-alumni-sweatshirt-quick-ship", "title": "UA Alumni Seal Sweatshirt Cardinal", "price": 42.00, "verdict": "modern-fallback", "why": "seal+ALUMNI content; S-3XL in stock 2026-08-29"},
+    {"id": "homefield:vintage-university-of-alabama-seal-crewneck", "title": "Vintage UA Seal Crewneck Light Grey", "price": 68.00, "verdict": "modern-fallback", "why": "right color+seal; S-4XL in stock 2026-08-29"},
+    {"id": "universitysupplystore:20032", "title": "Alabama Alumni Sweatshirt (Champion, crimson/white)", "price": 68.00, "verdict": "modern-fallback", "why": "text-only ALUMNI spellout"}
+  ]
+}
