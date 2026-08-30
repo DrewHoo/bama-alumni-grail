@@ -2,11 +2,12 @@
   "updated": "2026-08-30",
   "target": {
     "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
-    "color": "ash / light heather gray",
+    "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black \u2014 color is gated before graphic.",
     "blank": "Jerzees Super Sweats (Russell Corp, Alexander City AL, WPL 7332), Made in USA, ~50/50 +5% other fiber",
     "size": "42-44 (90s L; modern L-XL ok)",
     "era": "~1988-1995",
-    "priceGuide": "20-50 USD typical comp; up to ~75 for exact match"
+    "priceGuide": "20-50 USD typical comp; up to ~75 for exact match",
+    "colorRule": "Added 2026-08-30 at Drew's direction: a non-gray sweatshirt is not a viable option regardless of how exact the print is. Non-gray items may be logged as documentation comps but never surfaced as candidates."
   },
   "channels": {
     "searched": [
@@ -30,28 +31,29 @@
       "id": "ebay:188010505058",
       "title": "Alabama Alumni Champion Red Pullover M",
       "price": 19.27,
-      "verdict": "live-cousin",
-      "why": "only live ALUMNI print; plain text, red, Champion, M"
+      "verdict": "off-target-color",
+      "why": "red \u2014 fails the 2026-08-30 gray-only rule (was live-cousin for the ALUMNI print)"
     },
     {
       "id": "ebay:237034267075",
       "title": "Galt Sand crest crew XL oatmeal (arch+seal+ROLL TIDE)",
       "price": 32.79,
-      "verdict": "live-cousin",
-      "why": "closest live layout; ROLL TIDE instead of ALUMNI"
+      "verdict": "off-target-color",
+      "why": "warm tan/sand, not gray \u2014 fails the 2026-08-30 gray-only rule (was the \"closest layout\" card)"
     },
     {
       "id": "ebay:287527836720",
       "title": "Arch+seal red XL heavyweight boxy FLAW",
       "price": 29.99,
-      "verdict": "dead-comp",
-      "why": "arch+seal red XL; listing ended 2026-08-30 unsold"
+      "verdict": "dead-comp-nongray",
+      "why": "arch+seal red XL; listing ended 2026-08-30 unsold | non-gray: documentation only, never a candidate"
     },
     {
       "id": "ebay:389661101003",
       "title": "Galt Sand seal crew white M (listing says Sz M)",
       "price": 25.0,
-      "verdict": "live-cousin"
+      "verdict": "off-target-color",
+      "why": "cream/white \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "ebay:147493175080",
@@ -84,13 +86,14 @@
     {
       "id": "ebay:314276293100",
       "title": "Gear for Sports UNIVERSITY OF ALABAMA/seal/ALUMNI cardinal XL",
-      "verdict": "dead-comp",
-      "why": "full formula in cardinal; watch for relist"
+      "verdict": "dead-comp-nongray",
+      "why": "full formula in cardinal; watch for relist | non-gray: documentation only, never a candidate"
     },
     {
       "id": "ebay:355722465642",
       "title": "Champion ALABAMA ALUMNI red L",
-      "verdict": "dead-comp"
+      "verdict": "dead-comp-nongray",
+      "why": "non-gray: documentation only, never a candidate"
     },
     {
       "id": "ebay:315899347029",
@@ -109,8 +112,8 @@
       "id": "jnj:ua-alumni-sweatshirt-quick-ship",
       "title": "UA Alumni Seal Sweatshirt Cardinal",
       "price": 42.0,
-      "verdict": "modern-fallback",
-      "why": "seal+ALUMNI content; S-3XL in stock 2026-08-29"
+      "verdict": "off-target-color",
+      "why": "cardinal only \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "homefield:vintage-university-of-alabama-seal-crewneck",
@@ -123,8 +126,8 @@
       "id": "universitysupplystore:20032",
       "title": "Alabama Alumni Sweatshirt (Champion, crimson/white)",
       "price": 68.0,
-      "verdict": "modern-fallback",
-      "why": "text-only ALUMNI spellout"
+      "verdict": "off-target-color",
+      "why": "crimson/white \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "ebay:287514759556",
