@@ -19,14 +19,11 @@
       "vinted",
       "offerup",
       "alabamavtg.com (full products.json sweep)",
-      "google/bing web index"
+      "google/bing web index",
+      "facebook-marketplace (shipping 500mi + local Alabama pickup)"
     ],
-    "blocked": [
-      {
-        "channel": "facebook-marketplace",
-        "reason": "login-walled; Chrome profile still not signed in to Facebook as of 2026-08-30"
-      }
-    ]
+    "blocked": [],
+    "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend \u2014 use default (suggested) sort, and sweep local pickup separately from shipping."
   },
   "seen": [
     {
@@ -214,6 +211,55 @@
       "price": 35.0,
       "verdict": "off-target",
       "why": "crest print in crimson; only new crest/alumni item in the 2026-08-30 catalog sweep"
+    },
+    {
+      "id": "fb:1725865938433325",
+      "title": "Champion gray crew, arch ALABAMA + seal + CRIMSON TIDE banner, L (Birmingham AL)",
+      "price": 35.0,
+      "verdict": "live-cousin",
+      "why": "closest live: gray body, size L, all three graphic elements; banner says CRIMSON TIDE, letters arch, Champion not Jerzees; local pickup only"
+    },
+    {
+      "id": "fb:1336905075106119",
+      "title": "Vintage Alabama Sweatshirt (Leeds, AL)",
+      "price": 40.0,
+      "verdict": "off-target",
+      "why": "crimson, ALABAMA + elephant + CRIMSON TIDE"
+    },
+    {
+      "id": "fb:2966564207028287",
+      "title": "90s Alabama University Crewneck, Russell XL (Huntsville AL)",
+      "price": 35.0,
+      "verdict": "off-target",
+      "why": "faded maroon, ROLL TIDE + helmet"
+    },
+    {
+      "id": "fb:896972830116653",
+      "title": "Vintage 1991 Alabama Crimson Tide crewneck (Helena AL)",
+      "price": 35.0,
+      "verdict": "off-target",
+      "why": "crimson, vertical ALABAMA + 1991 Sunkist Fiesta Bowl"
+    },
+    {
+      "id": "fb:1762421411739277",
+      "title": "Vintage USA Made Russell Athletic Alabama XL 90s",
+      "price": 30.0,
+      "verdict": "off-target",
+      "why": "gray but Big A + elephant, no seal"
+    },
+    {
+      "id": "fb:1565776015259835",
+      "title": "Vintage Nike Alabama Crimson Tide Gray S-M",
+      "price": 45.0,
+      "verdict": "off-target",
+      "why": "gray, ALABAMA CRIMSON TIDE + script A, size S-M"
+    },
+    {
+      "id": "fb:2020641059318213",
+      "title": "1992 Alabama National Champions sweatshirt XL",
+      "price": 65.0,
+      "verdict": "off-target",
+      "why": "gray 1992 Champs commemorative print"
     }
   ]
 }

@@ -74,7 +74,7 @@ footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;fon
 <div class="wrap">
 <div class="verdict">
   <h2>Current verdict: not listed anywhere — yet.</h2>
-  <p>As of Aug 30, 2026, the exact print (outline ALABAMA + seal + ALUMNI banner, ash gray) is <b>not live</b> on eBay, Etsy, Poshmark, Mercari, Depop, Grailed, Vinted, OfferUp, or AlabamaVTG's full catalog. The Aug 30 sweep re-ran every channel newest-first and turned up one new cousin worth a card and two dead cousins to retire. Facebook Marketplace still couldn't be searched — it's login-walled and this Chrome profile isn't signed in to Facebook.</p>
+  <p>As of Aug 30, 2026, the exact print (outline ALABAMA + seal + ALUMNI banner, ash gray) is <b>not live</b> on eBay, Etsy, Poshmark, Mercari, Depop, Grailed, Vinted, OfferUp, or AlabamaVTG's full catalog. Facebook Marketplace joined the sweep on Aug 30 once the browser was signed in — both shipping (500-mile radius) and local Alabama pickup, which is the likeliest place this shirt still sits in somebody's closet. It produced the best cousin yet but no exact print.</p>
   <p>But the print family is real and circulates: three dead listings and one sold Poshmark prove versions of it sell for <b>$19–$50</b> when they surface. The play is the standing watch below.</p>
 </div>
 
@@ -103,7 +103,7 @@ footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;fon
 
 <section id="live">
   <h2>Closest live listings</h2>
-  <p class="intro">Nothing here is the exact print — these are the nearest live cousins, ranked. The Russell seal crew and the Galt Sand crest crews share the arch-plus-seal architecture (Galt Sand appears to be the print family's maker); the Jerzees piece gets the blank and the era right but not the graphic.</p>
+  <p class="intro">Nothing here is the exact print — these are the nearest live cousins, ranked. The Facebook Champion and the Galt Sand crest crews share the arch-plus-seal-plus-banner architecture (Galt Sand appears to be the print family's maker); the Russell gets the seal itself; the Jerzees piece gets the blank and the era right but not the graphic.</p>
   <div class="grid" data-tier="live"></div>
 </section>
 
@@ -145,7 +145,10 @@ const SETS=[
  {tier:'live',best:1,ribbon:'ONLY LIVE "ALUMNI"',title:'Alabama Alumni Champion crew — red, size M',shop:'eBay',price:'$19.27',
   url:'https://www.ebay.com/itm/188010505058',img:'https://i.ebayimg.com/images/g/oQsAAeSwEdZpfWCp/s-l500.webp',big:'https://i.ebayimg.com/images/g/oQsAAeSwEdZpfWCp/s-l1600.webp',
   meta:['ALUMNI print','Champion','M','red'],note:'The only live listing anywhere that says ALUMNI. Plain arched text — no seal, no banner — and red, not ash. A placeholder, not the grail.'},
- {tier:'live',best:1,ribbon:'REAL SEAL PRINT',title:'Russell Athletic seal crew — UNIVERSITY OF / seal / ALABAMA, L',shop:'eBay · Attack (870, 100%)',price:'$47.99',
+ {tier:'live',best:1,ribbon:'ARCH + SEAL + BANNER, GRAY, L',title:'Champion gray crew — arch ALABAMA + seal + CRIMSON TIDE banner, L',shop:'Facebook Marketplace · Birmingham, AL',price:'$35',
+  url:'https://www.facebook.com/marketplace/item/1725865938433325',img:'',big:'',
+  meta:['arch + seal + banner','Champion','L','gray','local pickup'],note:'All three structural elements the grail has — big ALABAMA, the seal tucked under it, a ribbon banner below — on an oatmeal-gray body in a men\u2019s L, described as worn once or twice. The banner reads CRIMSON TIDE instead of ALUMNI and the letters arch instead of sitting straight, but on color, size and architecture this is the closest live thing found so far. Birmingham pickup, no shipping offered.'},
+ {tier:'live',ribbon:'REAL SEAL PRINT',title:'Russell Athletic seal crew — UNIVERSITY OF / seal / ALABAMA, L',shop:'eBay · Attack (870, 100%)',price:'$47.99',
   url:'https://www.ebay.com/itm/287514759556',img:'https://i.ebayimg.com/images/g/Fb0AAeSwbiNqeJzE/s-l500.webp',big:'https://i.ebayimg.com/images/g/Fb0AAeSwbiNqeJzE/s-l1600.webp',
   meta:['seal','Russell','L','charcoal','USA'],note:'The actual university seal, printed large and dead center, on a made-in-USA Russell blank in a 90s Large. Everything the grail needs except the two things it is named for: the color is washed charcoal instead of ash, and the ribbon below the arch reads ALABAMA, not ALUMNI. Closest live print to the target as of Aug 30.'},
  {tier:'live',best:1,ribbon:'CLOSEST LAYOUT',title:'Galt Sand crest crew — arch + seal + ROLL TIDE, XL',shop:'eBay · SonnyBDeals (2,394)',price:'$32.79 obo',
@@ -193,7 +196,7 @@ SETS.forEach(s=>{
   grids[s.tier].appendChild(el);});
 const counts={live:0,modern:0,sold:0};SETS.forEach(s=>counts[s.tier]++);
 document.getElementById('pills').innerHTML=
- '<span class="pill"><b>0</b> exact matches live</span><span class="pill"><b>'+counts.live+'</b> nearest live cousins</span><span class="pill"><b>'+counts.modern+'</b> modern fallbacks</span><span class="pill"><b>'+counts.sold+'</b> sold comps</span><span class="pill"><b>9</b> channels watched</span>';
+ '<span class="pill"><b>0</b> exact matches live</span><span class="pill"><b>'+counts.live+'</b> nearest live cousins</span><span class="pill"><b>'+counts.modern+'</b> modern fallbacks</span><span class="pill"><b>'+counts.sold+'</b> sold comps</span><span class="pill"><b>10</b> channels watched</span>';
 const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg');
 document.addEventListener('click',e=>{const t=e.target;
   if(t.tagName==='IMG'&&(t.dataset.big||t.closest('.photos'))){lbimg.src=t.dataset.big||t.src;lb.classList.add('on');}
