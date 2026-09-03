@@ -48,6 +48,10 @@ section>.intro{color:var(--charcoal);font-size:15px;max-width:78ch;margin:8px 0 
 .card .note{font-size:13.5px;color:var(--charcoal);font-style:italic;flex:1}
 .card .cta{display:block;text-align:center;background:var(--crimson);color:#fff;text-decoration:none;font:700 13px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.04em;padding:11px 0;border-radius:8px}
 .card .cta:hover{filter:brightness(1.1)}
+.card .imgbox{position:relative}
+.card .added{position:absolute;bottom:8px;right:8px;background:rgba(43,38,32,.82);color:#fff;font:600 10px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.07em;text-transform:uppercase;padding:5px 8px;border-radius:999px;backdrop-filter:blur(2px);pointer-events:none}
+.card .added.fresh{background:var(--good);}
+.card .added.noimg{position:static;align-self:flex-start;background:var(--charcoal)}
 .card .ribbon{position:absolute;top:10px;left:-6px;background:var(--charcoal);color:#fff;font:700 11px/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.08em;padding:5px 10px;border-radius:0 4px 4px 0}
 .card.best .ribbon{background:var(--good)}
 .card.sold{filter:saturate(.55)}
@@ -69,7 +73,7 @@ footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;fon
   <h1>The Bama Alumni Grail</h1>
   <p class="sub">One ash-gray University of Alabama <b>Alumni</b> crewneck — big straight-set outline ALABAMA, the university seal rising behind it, a charcoal ALUMNI ribbon below — on a made-in-USA Jerzees Super Sweats blank. It exists. One of them is being hunted.</p>
   <div class="pills" id="pills"></div>
-  <div class="legend"><b>How to read this page:</b> the target spec is the sweatshirt in hand (photos below). Everything else is ranked by distance from it — after passing two hard gates: <b>it has to be gray</b>, and <b>it has to be an L or an XL</b>. Crimson versions of the print are kept below as comps, never as options; XXLs are not kept at all. Prices &amp; availability as of <b>Sep 3, 2026</b> — vintage listings die fast; buy buttons go to the live listing. No affiliate links, no trackers.</div>
+  <div class="legend"><b>How to read this page:</b> the target spec is the sweatshirt in hand (photos below). Everything else is ranked by distance from it — after passing two hard gates: <b>it has to be gray</b>, and <b>it has to be an L or an XL</b>. Crimson versions of the print are kept below as comps, never as options; XXLs are not kept at all. Prices &amp; availability as of <b>Sep 3, 2026</b> — vintage listings die fast; buy buttons go to the live listing. Each card is stamped with the date it was added to this page, so the new arrivals are obvious. No affiliate links, no trackers.</div>
 </div></header>
 
 <div class="wrap">
@@ -83,7 +87,7 @@ footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;fon
 <aside class="verdict" style="border-color:var(--crimson)">
   <h2>Also wanted: the elephant-through-the-A print</h2>
   <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
-    <img src="img/listings/wanted-elephant-a-print.jpg" alt="Ash crew: arched ALABAMA over a block A with the elephant on the crossbar, CRIMSON TIDE below" style="width:190px;border-radius:4px;cursor:zoom-in" data-big="img/listings/wanted-elephant-a-print.jpg">
+    <span style="position:relative;display:inline-block;flex:0 0 auto"><img src="img/listings/wanted-elephant-a-print.jpg" alt="Ash crew: arched ALABAMA over a block A with the elephant on the crossbar, CRIMSON TIDE below" style="display:block;width:190px;border-radius:4px;cursor:zoom-in" data-big="img/listings/wanted-elephant-a-print.jpg"><span class="added fresh" style="position:absolute;bottom:8px;right:8px">newest · Sep 3</span></span>
     <p style="flex:1;min-width:260px">Arched serif ALABAMA over a big crimson block <b>A</b> with the elephant striding across the crossbar, serif <b>CRIMSON TIDE</b> underneath, on ash. Drew and Meridith both like this one specifically, so it is a genuine second target rather than a cousin — <b>if it turns up gray in an L or an XL, it is a buy on its own merits</b>. The copy photographed here is the print exactly right and the size exactly wrong (2XL, $39.99), which is why it is a reference image and not a card.</p>
   </div>
 </aside>
@@ -153,42 +157,45 @@ footer{border-top:3px double var(--line);margin:50px 0 0;padding:20px 0 60px;fon
 <script>
 const SETS=[
  {tier:'live',best:1,ribbon:'EXACT BLANK · JERZEES 42-44 USA',title:'Jerzees Super Sweats 42-44 — outline ALABAMA + university seal, charcoal',shop:'eBay \u00b7 DenimbanditCO (2,145, 99.9%)',price:'$21.25',
-  url:'https://www.ebay.com/itm/318692814939',img:'img/listings/jerzees-supersweats-l.webp',big:'img/listings/jerzees-supersweats-l.webp',
+  added:'2026-08-31',url:'https://www.ebay.com/itm/318692814939',img:'img/listings/jerzees-supersweats-l.webp',big:'img/listings/jerzees-supersweats-l.webp',
   meta:['seal','Jerzees Super Sweats','42-44 / L','charcoal','Made in USA'],note:'The neck tag in the photos is the neck tag in the target photos: Jerzees SUPER SWEATS, 42-44, MADE IN U.S.A. Same blank, same size, same era \u2014 and the front carries the real University of Alabama seal, 1831 and all, sitting under outline ALABAMA in crimson. Two things separate it from the grail: the letters arch instead of running straight across, and the ALUMNI ribbon is missing. Charcoal rather than ash, which the gate allows. Shipping from Semmes, Alabama, for $7.60. At $21.25 with Best Offer this is the cheapest way to own the correct blank.'},
  {tier:'live',ribbon:'ASH + FULL-COLOR SEAL',title:'Ash crew \u2014 arch ALABAMA + full-color seal, XL',shop:'eBay \u00b7 bosswhitevintage (946, 99.9%)',price:'$39.99',
-  url:'https://www.ebay.com/itm/377279857609',img:'img/listings/ash-seal-xl.webp',big:'img/listings/ash-seal-xl.webp',
+  added:'2026-08-31',url:'https://www.ebay.com/itm/377279857609',img:'img/listings/ash-seal-xl.webp',big:'img/listings/ash-seal-xl.webp',
   meta:['seal','XL','ash gray','90s'],note:'The best color match on the board \u2014 true light ash, the shade the target is \u2014 with the seal printed large in full color under an arched crimson ALABAMA. Size XL, which the checklist accepts. No banner, no ALUMNI, blank unnamed. Long Beach seller, $10 shipping.'},
  {tier:'live',ribbon:'ASH \u00b7 SEAL IN WREATH',title:'Ash crew \u2014 ALABAMA over seal in laurel, XL',shop:'Etsy',price:'$80.00',
-  url:'https://www.etsy.com/listing/4461167693/',img:'img/listings/etsy-ash-laurel-xl.jpg',big:'img/listings/etsy-ash-laurel-xl.jpg',
+  added:'2026-08-31',url:'https://www.etsy.com/listing/4461167693/',img:'img/listings/etsy-ash-laurel-xl.jpg',big:'img/listings/etsy-ash-laurel-xl.jpg',
   meta:['seal','XL','ash gray','stained'],note:'Ash gray, outline ALABAMA, seal ringed in laurel \u2014 close on look, but the seller lists yellow staining and wants $80, which is grail money for a cousin. Ranked last for that reason. Included because it is genuinely in the family and genuinely gray.'},
  {tier:'live',ribbon:'ARCH + SEAL + BANNER, GRAY, L',title:'Champion gray crew — arch ALABAMA + seal + CRIMSON TIDE banner, L',shop:'Facebook Marketplace · Birmingham, AL',price:'$35',
-  url:'https://www.facebook.com/marketplace/item/1725865938433325',img:'',big:'',
+  added:'2026-08-30',url:'https://www.facebook.com/marketplace/item/1725865938433325',img:'',big:'',
   meta:['arch + seal + banner','Champion','L','gray','local pickup'],note:'All three structural elements the grail has — big ALABAMA, the seal tucked under it, a ribbon banner below — on an oatmeal-gray body in a men\u2019s L, described as worn once or twice. The banner reads CRIMSON TIDE instead of ALUMNI and the letters arch instead of sitting straight, but on color, size and architecture this is the closest live thing found so far. Birmingham pickup, no shipping offered.'},
  {tier:'live',ribbon:'REAL SEAL PRINT',title:'Russell Athletic seal crew — UNIVERSITY OF / seal / ALABAMA, L',shop:'eBay · Attack (870, 100%)',price:'$47.99',
-  url:'https://www.ebay.com/itm/287514759556',img:'img/listings/russell-seal-l.webp',big:'img/listings/russell-seal-l.webp',
+  added:'2026-08-30',url:'https://www.ebay.com/itm/287514759556',img:'img/listings/russell-seal-l.webp',big:'img/listings/russell-seal-l.webp',
   meta:['seal','Russell','L','charcoal','USA'],note:'The actual university seal, printed large and dead center, on a made-in-USA Russell blank in a 90s Large. Everything the grail needs except the two things it is named for: the color is washed charcoal instead of ash, and the ribbon below the arch reads ALABAMA, not ALUMNI. Closest live print to the target as of Aug 30.'},
  {tier:'live',ribbon:'RIGHT BLANK',title:'Jerzees 90s crew — gray, XL, Big Al print',shop:'eBay',price:'$67.97',
-  url:'https://www.ebay.com/itm/147493175080',img:'img/listings/jerzees-bigal-xl.webp',big:'img/listings/jerzees-bigal-xl.webp',
+  added:'2026-08-29',url:'https://www.ebay.com/itm/147493175080',img:'img/listings/jerzees-bigal-xl.webp',big:'img/listings/jerzees-bigal-xl.webp',
   meta:['Jerzees','XL','ash gray','USA'],note:'Right blank family, right ash gray, right era — wearing the mascot instead of the seal. Priced like the seller knows the blank is the good part.'},
  {tier:'modern',best:1,ribbon:'ONLY GRAY OPTION',title:'Vintage University of Alabama Seal Crewneck — Light Grey',shop:'Homefield Apparel',price:'$68.00',
-  url:'https://www.homefieldapparel.com/products/vintage-university-of-alabama-seal-crewneck',img:'img/listings/modern-homefield-seal-grey.png',big:'img/listings/modern-homefield-seal-grey.png',
+  added:'2026-08-29',url:'https://www.homefieldapparel.com/products/vintage-university-of-alabama-seal-crewneck',img:'img/listings/modern-homefield-seal-grey.png',big:'img/listings/modern-homefield-seal-grey.png',
   meta:['seal','S–4XL in stock','light grey','College Vault'],note:'Vintage-styled seal crew on the right color. No ALUMNI banner, but the closest a new sweatshirt gets to the grail’s look and feel.'},
  {tier:'sold',ribbon:'SOLD $28 · ASH · SIZE L',title:'Russell "EST. 1831 ALUMNI" embroidered crew — ash, L',shop:'Poshmark',price:'$28.00',
-  url:'https://poshmark.com/listing/Vintage-University-of-Alabama-Alumni-Sweatshirt-Size-L-by-Russell-Athletic-682d29bdc4e7b427ae13bba2',img:'img/listings/sold-poshmark-russell-alumni-l.jpg',big:'img/listings/sold-poshmark-russell-alumni-l.jpg',
+  added:'2026-08-29',url:'https://poshmark.com/listing/Vintage-University-of-Alabama-Alumni-Sweatshirt-Size-L-by-Russell-Athletic-682d29bdc4e7b427ae13bba2',img:'img/listings/sold-poshmark-russell-alumni-l.jpg',big:'img/listings/sold-poshmark-russell-alumni-l.jpg',
   meta:['ALUMNI','Russell','L','ash'],note:'The closest documented cousin: ash, size L, Russell-made, ALUMNI on the chest (embroidered, boxed — no seal). Sold for $28. This is the price truth.'},
  {tier:'sold',ribbon:'THE WHOLE FORMULA · WRONG COLOR',title:'Gear for Sports "UNIVERSITY OF ALABAMA / seal / ALUMNI" — cardinal, XL',shop:'eBay',price:'—',
-  url:'https://www.ebay.com/itm/314276293100',img:'img/listings/sold-gearforsports-cardinal-xl.webp',big:'img/listings/sold-gearforsports-cardinal-xl.webp',
+  added:'2026-08-29',url:'https://www.ebay.com/itm/314276293100',img:'img/listings/sold-gearforsports-cardinal-xl.webp',big:'img/listings/sold-gearforsports-cardinal-xl.webp',
   meta:['seal + ALUMNI','Gear for Sports','XL'],note:'Arch, seal, ALUMNI — the whole grail formula, in cardinal. Ended listing; the seller may relist. Proof the formula was printed by multiple makers.'},
  {tier:'sold',ribbon:'ALUMNI PRINT · WRONG COLOR',title:'Champion "ALABAMA ALUMNI" crew — red, L',shop:'eBay',price:'—',
-  url:'https://www.ebay.com/itm/355722465642',img:'img/listings/sold-champion-alumni-red-l.webp',big:'img/listings/sold-champion-alumni-red-l.webp',
+  added:'2026-08-29',url:'https://www.ebay.com/itm/355722465642',img:'img/listings/sold-champion-alumni-red-l.webp',big:'img/listings/sold-champion-alumni-red-l.webp',
   meta:['ALUMNI','Champion','L','red'],note:'Same idea in Champion’s plainer voice. Ended — kept as an identification comp for the watch.'}
 ];
 const grids={};document.querySelectorAll('.grid').forEach(g=>grids[g.dataset.tier]=g);
+const LATEST=SETS.reduce((a,x)=>x.added>a?x.added:a,'');
+const fmt=d=>{const[y,m,dd]=d.split('-');return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]+' '+(+dd);};
+const tag=(s,cls)=>s.added?'<span class="added'+cls+(s.added===LATEST?' fresh':'')+'" title="Added to this page on '+s.added+'">'+(s.added===LATEST?'newest \u00b7 ':'added ')+fmt(s.added)+'</span>':'';
 SETS.forEach(s=>{
   const el=document.createElement('div');el.className='card '+s.tier+(s.best?' best':'');
   el.innerHTML=(s.ribbon?'<div class="ribbon">'+s.ribbon+'</div>':'')+
-    (s.img?'<div class="imgbox"><img loading="lazy" src="'+s.img+'" data-big="'+(s.big||s.img)+'" alt=""></div>':'')+
-    '<div class="body"><h3>'+s.title+'</h3><div class="meta">'+s.meta.map(m=>'<span>'+m+'</span>').join('')+'</div>'+
+    (s.img?'<div class="imgbox"><img loading="lazy" src="'+s.img+'" data-big="'+(s.big||s.img)+'" alt="">'+tag(s,'')+'</div>':'')+
+    '<div class="body">'+(s.img?'':tag(s,' noimg'))+'<h3>'+s.title+'</h3><div class="meta">'+s.meta.map(m=>'<span>'+m+'</span>').join('')+'</div>'+
     '<div class="price">'+s.price+'</div><div class="note">'+s.note+'</div>'+
     '<a class="cta" target="_blank" rel="noopener" href="'+s.url+'">'+(s.tier==='sold'?'View dead listing':'View on '+s.shop.split('·')[0].split(',')[0].trim())+'</a></div>';
   grids[s.tier].appendChild(el);});
