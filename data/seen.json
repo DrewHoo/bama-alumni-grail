@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-31",
+  "updated": "2026-09-03",
   "target": {
     "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
-    "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
+    "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black \u2014 color is gated before graphic.",
     "blank": "Jerzees Super Sweats (Russell Corp, Alexander City AL, WPL 7332), Made in USA, ~50/50 +5% other fiber",
     "size": "42-44 (90s L; modern L-XL ok)",
     "era": "~1988-1995",
@@ -23,8 +23,10 @@
       "google/bing web index",
       "facebook-marketplace (shipping 500mi + local Alabama pickup)"
     ],
-    "blocked": [],
-    "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images)."
+    "blocked": [
+      "facebook-marketplace (Claude-in-Chrome extension not connected on 2026-09-03; FB needs Drew's real signed-in Chrome)"
+    ],
+    "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend \u2014 use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) \u2014 screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) \u2014 the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching \u2014 eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way."
   },
   "seen": [
     {
@@ -32,14 +34,14 @@
       "title": "Alabama Alumni Champion Red Pullover M",
       "price": 19.27,
       "verdict": "off-target-color",
-      "why": "red — fails the 2026-08-30 gray-only rule (was live-cousin for the ALUMNI print)"
+      "why": "red \u2014 fails the 2026-08-30 gray-only rule (was live-cousin for the ALUMNI print)"
     },
     {
       "id": "ebay:237034267075",
       "title": "Galt Sand crest crew XL oatmeal (arch+seal+ROLL TIDE)",
       "price": 32.79,
       "verdict": "off-target-color",
-      "why": "warm tan/sand, not gray — fails the 2026-08-30 gray-only rule (was the \"closest layout\" card)"
+      "why": "warm tan/sand, not gray \u2014 fails the 2026-08-30 gray-only rule (was the \"closest layout\" card)"
     },
     {
       "id": "ebay:287527836720",
@@ -53,7 +55,7 @@
       "title": "Galt Sand seal crew white M (listing says Sz M)",
       "price": 25.0,
       "verdict": "off-target-color",
-      "why": "cream/white — fails the 2026-08-30 gray-only rule"
+      "why": "cream/white \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "ebay:147493175080",
@@ -113,7 +115,7 @@
       "title": "UA Alumni Seal Sweatshirt Cardinal",
       "price": 42.0,
       "verdict": "off-target-color",
-      "why": "cardinal only — fails the 2026-08-30 gray-only rule"
+      "why": "cardinal only \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "homefield:vintage-university-of-alabama-seal-crewneck",
@@ -127,7 +129,7 @@
       "title": "Alabama Alumni Sweatshirt (Champion, crimson/white)",
       "price": 68.0,
       "verdict": "off-target-color",
-      "why": "crimson/white — fails the 2026-08-30 gray-only rule"
+      "why": "crimson/white \u2014 fails the 2026-08-30 gray-only rule"
     },
     {
       "id": "ebay:287514759556",
@@ -152,7 +154,7 @@
       "id": "ebay:389651704092",
       "title": "UA Seal Crewneck Vintage L 'Light Gray'",
       "verdict": "off-target",
-      "why": "title lies — photo is maroon/gray colorblock script, no seal"
+      "why": "title lies \u2014 photo is maroon/gray colorblock script, no seal"
     },
     {
       "id": "ebay:365148957850",
@@ -266,28 +268,28 @@
     },
     {
       "id": "ebay:318692814939",
-      "title": "Jerzees Super Sweats 42-44 L charcoal — outline ALABAMA + UA seal (Semmes AL)",
+      "title": "Jerzees Super Sweats 42-44 L charcoal \u2014 outline ALABAMA + UA seal (Semmes AL)",
       "price": 21.25,
       "verdict": "live-cousin",
       "why": "BEST cousin to date: exact blank (Jerzees SUPER SWEATS 42-44 MADE IN USA) + exact size + real UA seal + gray. Misses: letters arch not straight-set, no ALUMNI ribbon, charcoal not ash"
     },
     {
       "id": "ebay:377279857609",
-      "title": "Vintage 90s UA gray crewneck XL #3046 — arch ALABAMA + full-color seal",
+      "title": "Vintage 90s UA gray crewneck XL #3046 \u2014 arch ALABAMA + full-color seal",
       "price": 39.99,
       "verdict": "live-cousin",
       "why": "best color match on the board (true ash) + full-color seal; no ALUMNI banner, blank unnamed, XL"
     },
     {
       "id": "etsy:4461167693",
-      "title": "Vintage 90s UA gray sweatshirt XL — arch ALABAMA + seal in laurel",
+      "title": "Vintage 90s UA gray sweatshirt XL \u2014 arch ALABAMA + seal in laurel",
       "price": 80.0,
       "verdict": "live-cousin",
       "why": "ash + seal in the right family but $80 and seller notes yellow staining; ranked last"
     },
     {
       "id": "etsy:4544640765",
-      "title": "Vintage 90s Alabama XL — ALABAMA + seal + wreath + ROLL TIDE banner, faded gray",
+      "title": "Vintage 90s Alabama XL \u2014 ALABAMA + seal + wreath + ROLL TIDE banner, faded gray",
       "price": 69.35,
       "verdict": "off-target",
       "why": "gray and the right architecture but banner reads ROLL TIDE, heavily faded, $69"
@@ -462,7 +464,7 @@
       "id": "ebay:277382932095",
       "title": "Champion Alabama M gray crewneck UA seal logo",
       "verdict": "off-target",
-      "why": "seal print on gray but size M — fails size gate (from WebSearch index)"
+      "why": "seal print on gray but size M \u2014 fails size gate (from WebSearch index)"
     },
     {
       "id": "etsy:4542331532",
@@ -490,7 +492,7 @@
     },
     {
       "id": "depop:duwtylips-vintage-university-of-alabama-crimson",
-      "title": "Ash boxy crew — big UNIVERSITY OF ALABAMA seal in laurel",
+      "title": "Ash boxy crew \u2014 big UNIVERSITY OF ALABAMA seal in laurel",
       "verdict": "off-target",
       "why": "ash + seal but cropped/boxy short-body cut, no outline ALABAMA letters"
     },
@@ -539,6 +541,366 @@
       "title": "Vintage early 90s Alabama sweatshirt Large",
       "verdict": "off-target",
       "why": "Mercari 2026-08-31 sweep; not the seal/ALUMNI print"
+    },
+    {
+      "id": "ebay:117379841929",
+      "title": "Ash 2XL \u2014 straight-set outline ALABAMA + UA seal in rope oval below",
+      "verdict": "live-cousin",
+      "why": "NEW BEST-GRAPHIC COUSIN: true ash, straight-set serif ALABAMA (not arched) with the real UA seal directly below. Misses: seal sits below the letters instead of rising behind them, no ALUMNI ribbon, size 2XL (one past the XL ceiling), blank unnamed. VTGLA, $9.99 ship",
+      "price": 34.99
+    },
+    {
+      "id": "ebay:158253840280",
+      "title": "Russell gray 2XL \u2014 arch ALABAMA + CRIMSON TIDE banner",
+      "verdict": "off-target",
+      "why": "banner family but arched letters, no seal, 2XL; cheap comp only",
+      "price": 8.0
+    },
+    {
+      "id": "ebay:406465557561",
+      "title": "Jerzees gray XL \u2014 arch ALABAMA ROLL TIDE + circled A",
+      "verdict": "off-target",
+      "why": "made in Honduras (modern blank), arch + ROLL TIDE, script-A medallion not the seal",
+      "price": 20.29
+    },
+    {
+      "id": "ebay:227503290327",
+      "title": "Gray XL Made in USA \u2014 ALABAMA + Big Al + ROLL TIDE",
+      "verdict": "off-target",
+      "why": "gray and USA-made but mascot print, no seal or ALUMNI",
+      "price": 30.0
+    },
+    {
+      "id": "ebay:227205039906",
+      "title": "Jerzees gray XL USA \u2014 1992 13-0 National Champions",
+      "verdict": "off-target",
+      "why": "commemorative champs print; gray/right-blank family only",
+      "price": 39.95
+    },
+    {
+      "id": "ebay:127428562145",
+      "title": "Jerzees Russell gray XL USA \u2014 BAMA arch",
+      "verdict": "off-target",
+      "why": "BAMA spellout, no seal",
+      "price": 42.0
+    },
+    {
+      "id": "ebay:407190049560",
+      "title": "Pannill gray 2XL \u2014 ALABAMA + Big Al",
+      "verdict": "off-target",
+      "why": "mascot print, 2XL",
+      "price": 39.99
+    },
+    {
+      "id": "ebay:257708934126",
+      "title": "FOTL grey L \u2014 football/elephant graphic",
+      "verdict": "off-target",
+      "why": "wrong print family",
+      "price": 18.22
+    },
+    {
+      "id": "ebay:137616984147",
+      "title": "Champion Reverse Weave gray L",
+      "verdict": "off-target",
+      "why": "plain/embroidered RW, no seal or ALUMNI",
+      "price": 49.95
+    },
+    {
+      "id": "ebay:407190446103",
+      "title": "Russell gray XL \u2014 BAMA block",
+      "verdict": "off-target",
+      "why": "BAMA block letters only",
+      "price": 33.74
+    },
+    {
+      "id": "ebay:267774640494",
+      "title": "JanSport gray L \u2014 ALABAMA + seal-ish medallion",
+      "verdict": "off-target",
+      "why": "JanSport athletics print, $59, not the seal layout",
+      "price": 59.0
+    },
+    {
+      "id": "ebay:267747291068",
+      "title": "Gray L 80s Big Al",
+      "verdict": "off-target",
+      "why": "mascot",
+      "price": 50.0
+    },
+    {
+      "id": "ebay:236397282228",
+      "title": "Jerzees gray 2XL USA",
+      "verdict": "off-target",
+      "why": "wrong print",
+      "price": 49.99
+    },
+    {
+      "id": "ebay:128049188955",
+      "title": "TSI grey M USA \u2014 ALABAMA U OF A",
+      "verdict": "off-target",
+      "why": "size M and wrong print",
+      "price": 24.9
+    },
+    {
+      "id": "ebay:137414179566",
+      "title": "Lee Sports RED 2XL \u2014 1990s UA seal print",
+      "verdict": "off-target-color",
+      "why": "real seal print but crimson \u2014 hard color gate; documentation only",
+      "price": 34.39
+    },
+    {
+      "id": "ebay:336725780675",
+      "title": "White L 90s crewneck",
+      "verdict": "off-target",
+      "why": "white",
+      "price": 33.16
+    },
+    {
+      "id": "ebay:286967989959",
+      "title": "Jerzees RED L deadstock USA",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 39.99
+    },
+    {
+      "id": "ebay:188876208496",
+      "title": "Galt Sand RED L Tuscaloosa",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 27.07
+    },
+    {
+      "id": "ebay:198606476445",
+      "title": "Jerzees RED L 80s USA",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 45.0
+    },
+    {
+      "id": "ebay:178464227978",
+      "title": "Savvy RED XL USA embroidered",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 28.98
+    },
+    {
+      "id": "ebay:187942504167",
+      "title": "Red XXL 90s USA",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 15.1
+    },
+    {
+      "id": "ebay:407188970434",
+      "title": "MV Sport white M Pro Weave",
+      "verdict": "off-target",
+      "why": "white, size M",
+      "price": 39.99
+    },
+    {
+      "id": "etsy:4553450192",
+      "title": "Russell BAMA charcoal L USA",
+      "verdict": "off-target",
+      "why": "charcoal passes the gate but the print is a BAMA arch \u2014 no seal, no ALUMNI; dossier already holds a better same-blank charcoal card",
+      "price": 34.99
+    },
+    {
+      "id": "etsy:4360395259",
+      "title": "Colosseum grey \u2014 arch ALABAMA + CRIMSON TIDE",
+      "verdict": "off-target",
+      "why": "arched, no seal, small",
+      "price": 25.0
+    },
+    {
+      "id": "etsy:4499048484",
+      "title": "Ash XL \u2014 ALABAMA FOOTBALL + elephant",
+      "verdict": "off-target",
+      "why": "football print",
+      "price": 57.0
+    },
+    {
+      "id": "etsy:4533213297",
+      "title": "Ash/white XL \u2014 ROLL TIDE + elephant",
+      "verdict": "off-target",
+      "why": "mascot print",
+      "price": 40.5
+    },
+    {
+      "id": "etsy:4531850305",
+      "title": "White/ash L \u2014 BAMA arch",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "etsy:4534297916",
+      "title": "XL printed pullover",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "etsy:4457583424",
+      "title": "Crimson L",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 102.4
+    },
+    {
+      "id": "etsy:1197468152",
+      "title": "Crimson XL USA",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 86.4
+    },
+    {
+      "id": "etsy:4409538784",
+      "title": "70s Russell crimson L",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 74.99
+    },
+    {
+      "id": "etsy:920399238",
+      "title": "Crimson \u2014 ALABAMA + Crimson Tide",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "etsy:777735195",
+      "title": "Ash/white L hooded quarter-zip",
+      "verdict": "off-target",
+      "why": "hooded, wrong print"
+    },
+    {
+      "id": "etsy:1432485300",
+      "title": "Russell ash XXL \u2014 BAMA + elephant",
+      "verdict": "off-target",
+      "why": "mascot",
+      "price": 40.0
+    },
+    {
+      "id": "etsy:4559316607",
+      "title": "Maroon \u2014 ALABAMA arch",
+      "verdict": "off-target-color",
+      "why": "maroon",
+      "price": 30.0
+    },
+    {
+      "id": "etsy:4522271926",
+      "title": "Crimson L embroidered",
+      "verdict": "off-target-color",
+      "why": "red",
+      "price": 42.75
+    },
+    {
+      "id": "etsy:4496486785",
+      "title": "Large printed logo",
+      "verdict": "off-target",
+      "why": "wrong print",
+      "price": 42.3
+    },
+    {
+      "id": "etsy:4550749121",
+      "title": "XL BAMA spellout",
+      "verdict": "off-target",
+      "why": "wrong print",
+      "price": 44.1
+    },
+    {
+      "id": "poshmark:6a996358c6e38a3fda05d796",
+      "title": "Million Dollar Band 2010 BCS gray L",
+      "verdict": "off-target",
+      "why": "2010 band shirt, not the seal print",
+      "price": 34.0
+    },
+    {
+      "id": "poshmark:6a76ff58e5e917b553b6faee",
+      "title": "Starter UA crew XL",
+      "verdict": "off-target",
+      "why": "Starter, wrong print",
+      "price": 59.0
+    },
+    {
+      "id": "depop:rdtrooaks-90s-alabama-crimson-tide-grey-5574",
+      "title": "90s grey crew",
+      "verdict": "off-target",
+      "why": "grey but print not in the seal/ALUMNI family"
+    },
+    {
+      "id": "depop:joesclgthesvtg-vintage-university-of-alabama-crimson-1e06",
+      "title": "Crimson vtg crew",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "depop:thriftbandane-vintage-90s-alabama-crimson-tide-3870",
+      "title": "Red 90s crew",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "grailed:104237518",
+      "title": "Ash L \u2014 large crimson script A",
+      "verdict": "off-target",
+      "why": "script A only, no seal or ALUMNI"
+    },
+    {
+      "id": "grailed:103108290",
+      "title": "Russell XL",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "grailed:102731018",
+      "title": "Russell L",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "grailed:104847976",
+      "title": "Champion L vintage",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "grailed:104775916",
+      "title": "MV Sport L",
+      "verdict": "off-target",
+      "why": "wrong print"
+    },
+    {
+      "id": "mercari:m11268388025",
+      "title": "CRIMSON \u2014 straight-set ALABAMA + seal below (same print as ebay:117379841929)",
+      "verdict": "off-target-color",
+      "why": "the exact print family of the new best cousin, in crimson \u2014 hard color gate; documentation only"
+    },
+    {
+      "id": "mercari:m98314240601",
+      "title": "Crimson U/ALABAMA",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "mercari:m17483751511",
+      "title": "Pro Weave crimson",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "mercari:m32514192016",
+      "title": "Starter crimson XL",
+      "verdict": "off-target-color",
+      "why": "red"
+    },
+    {
+      "id": "mercari:m81137781279",
+      "title": "Stadium Athletics gray XL",
+      "verdict": "off-target",
+      "why": "modern blank, wrong print"
+    },
+    {
+      "id": "mercari:m88198493982",
+      "title": "JanSport gray hoodie XL",
+      "verdict": "off-target",
+      "why": "hooded"
     }
   ]
 }
