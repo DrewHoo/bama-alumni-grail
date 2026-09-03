@@ -4,10 +4,20 @@
     "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
     "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black \u2014 color is gated before graphic.",
     "blank": "Jerzees Super Sweats (Russell Corp, Alexander City AL, WPL 7332), Made in USA, ~50/50 +5% other fiber",
-    "size": "42-44 (90s L; modern L-XL ok)",
+    "size": "L or XL only. 42-44 (90s L) ideal; modern L-XL fine. XXL/2XL is a HARD NO as of 2026-09-03 (Drew's direction) - a 2XL wears too big, no exceptions however good the print.",
     "era": "~1988-1995",
     "priceGuide": "20-50 USD typical comp; up to ~75 for exact match",
-    "colorRule": "Added 2026-08-30 at Drew's direction: a non-gray sweatshirt is not a viable option regardless of how exact the print is. Non-gray items may be logged as documentation comps but never surfaced as candidates."
+    "colorRule": "Added 2026-08-30 at Drew's direction: a non-gray sweatshirt is not a viable option regardless of how exact the print is. Non-gray items may be logged as documentation comps but never surfaced as candidates.",
+    "sizeRule": "Added 2026-09-03: only L and XL are entertained. XXL/2XL items may be logged as documentation of a print family but never surfaced as candidates or dossier cards.",
+    "likedAlternatePrints": [
+      {
+        "name": "Elephant-through-the-A",
+        "desc": "Arched serif ALABAMA over a large crimson block A with the elephant striding across the A's crossbar, serif CRIMSON TIDE below. Ash gray.",
+        "why": "Drew and Meridith both specifically like this version of the elephant + A (flagged 2026-09-03 off ebay:407190049560, a 2XL that is out on size).",
+        "wanted": "Flag any ash/gray example of this exact print in L or XL - it is a genuine alternate buy, not just a cousin.",
+        "reference": "img/listings/wanted-elephant-a-print.jpg"
+      }
+    ]
   },
   "channels": {
     "searched": [
@@ -545,8 +555,8 @@
     {
       "id": "ebay:117379841929",
       "title": "Ash 2XL \u2014 straight-set outline ALABAMA + UA seal in rope oval below",
-      "verdict": "live-cousin",
-      "why": "NEW BEST-GRAPHIC COUSIN: true ash, straight-set serif ALABAMA (not arched) with the real UA seal directly below. Misses: seal sits below the letters instead of rising behind them, no ALUMNI ribbon, size 2XL (one past the XL ceiling), blank unnamed. VTGLA, $9.99 ship",
+      "verdict": "off-target-size",
+      "why": "Ash, straight-set outline ALABAMA + real UA seal below it - the best graphic match found so far - but 2XL, which the 2026-09-03 L/XL-only rule rules out. Documentation of the straight-set layout only; watch for this print in a 42-44/L or XL.",
       "price": 34.99
     },
     {
@@ -587,8 +597,8 @@
     {
       "id": "ebay:407190049560",
       "title": "Pannill gray 2XL \u2014 ALABAMA + Big Al",
-      "verdict": "off-target",
-      "why": "mascot print, 2XL",
+      "verdict": "liked-print-wrong-size",
+      "why": "LIKED PRINT (Drew + Meridith): arched ALABAMA over the block A with the elephant on the crossbar, CRIMSON TIDE below, on true ash. Pannill by Hanes, MJTvintage, $39.99. Out on size only - 2XL. Find this print in L or XL and it is a real buy.",
       "price": 39.99
     },
     {
