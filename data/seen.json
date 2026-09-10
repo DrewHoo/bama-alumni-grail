@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-07",
+ "updated": "2026-09-10",
  "target": {
   "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
   "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
@@ -34,9 +34,9 @@
    "facebook-marketplace (shipping 500mi + local Alabama pickup)"
   ],
   "blocked": [
-   "facebook-marketplace (claude-in-chrome extension reported zero connected browsers on 2026-09-07; FB needs Drew's real signed-in Chrome)"
+   "facebook-marketplace (claude-in-chrome extension reported zero connected browsers on 2026-09-10 - third run in a row; FB needs Drew's real signed-in Chrome)"
   ],
-  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call."
+  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly."
  },
  "seen": [
   {
@@ -131,8 +131,8 @@
    "id": "homefield:vintage-university-of-alabama-seal-crewneck",
    "title": "Vintage UA Seal Crewneck Light Grey",
    "price": 68.0,
-   "verdict": "modern-fallback",
-   "why": "right color+seal; S-4XL in stock 2026-08-29"
+   "verdict": "modern-fallback-soldout",
+   "why": "right color+seal, but sold out in every size (S-4XL) as of 2026-09-10; Homefield restocks College Vault runs"
   },
   {
    "id": "universitysupplystore:20032",
@@ -146,7 +146,7 @@
    "title": "VTG 90s Russell Athletic UA Crimson Tide Sweatshirt Men L USA",
    "price": 47.99,
    "verdict": "live-cousin",
-   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI"
+   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI. Re-verified live 2026-09-10 - now the board leader."
   },
   {
    "id": "ebay:198514321395",
@@ -232,7 +232,7 @@
    "title": "Champion gray crew, arch ALABAMA + seal + CRIMSON TIDE banner, L (Birmingham AL)",
    "price": 35.0,
    "verdict": "live-cousin",
-   "why": "closest live: gray body, size L, all three graphic elements; banner says CRIMSON TIDE, letters arch, Champion not Jerzees; local pickup only"
+   "why": "closest live: gray body, size L, all three graphic elements; banner says CRIMSON TIDE, letters arch, Champion not Jerzees; local pickup only. LIVENESS UNVERIFIED since 2026-08-30 - Facebook has been unsweepable for three runs."
   },
   {
    "id": "fb:1336905075106119",
@@ -288,14 +288,14 @@
    "title": "Vintage 90s UA gray crewneck XL #3046 — arch ALABAMA + full-color seal",
    "price": 39.99,
    "verdict": "live-cousin",
-   "why": "best color match on the board (true ash) + full-color seal; no ALUMNI banner, blank unnamed, XL"
+   "why": "best color match on the board (true ash) + full-color seal; no ALUMNI banner, blank unnamed, XL. Re-verified live 2026-09-10."
   },
   {
    "id": "etsy:4461167693",
    "title": "Vintage 90s UA gray sweatshirt XL — arch ALABAMA + seal in laurel",
-   "price": 80.0,
+   "price": 72.0,
    "verdict": "live-cousin",
-   "why": "ash + seal in the right family but $80 and seller notes yellow staining; ranked last"
+   "why": "ash + seal in the right family, still live Sep 10; marked down $80 -> $72; seller still notes yellow staining. Ranked last."
   },
   {
    "id": "etsy:4544640765",
@@ -915,8 +915,8 @@
   {
    "id": "ebay:318838769762",
    "title": "Jerzees SUPER SWEATS L 42-44 charcoal - arch outline ALABAMA + real UA seal (Semmes AL)",
-   "verdict": "live-cousin",
-   "why": "NEW BEST COUSIN: exact blank (neck tag reads JERZEES SUPER SWEATS / L / 42-44 / MADE IN U.S.A.), exact size, real circular UA seal, charcoal. Misses: letters arch not straight-set, no ALUMNI ribbon. Same seller/town as the ended 318692814939 and $3 cheaper.",
+   "verdict": "sold-comp",
+   "why": "SOLD Sep 10 2026, three days after listing, at $18.06. Exact Jerzees Super Sweats 42-44 blank + real UA seal, charcoal. Second copy of this shirt from the same Semmes AL seller to sell out from under the board in eleven days.",
    "price": 18.06
   },
   {
@@ -1305,6 +1305,361 @@
    "verdict": "off-target",
    "why": "a henley shirt, not a sweatshirt; sold out",
    "price": 35.0
+  },
+  {
+   "id": "ebay:398373517464",
+   "title": "Vintage 90s UA sweatshirt L Made USA gray",
+   "verdict": "off-target",
+   "why": "white/gray body, arch BAMA + CRIMSON TIDE, no seal, no ALUMNI",
+   "price": 30.0
+  },
+  {
+   "id": "ebay:298499572782",
+   "title": "UA sweatshirt unisex XL gray, crimson letters",
+   "verdict": "off-target",
+   "why": "gray XL but a small script logo, no seal, no ALUMNI",
+   "price": 19.97
+  },
+  {
+   "id": "ebay:377484698852",
+   "title": "Vintage UA L Jerzees USA made 90s Roll Tide",
+   "verdict": "off-target-color",
+   "why": "red body with elephant graphic",
+   "price": 39.99
+  },
+  {
+   "id": "ebay:287577004852",
+   "title": "Vintage 1987 UA elephant crewneck made in USA",
+   "verdict": "off-target-color",
+   "why": "red/orange elephant print",
+   "price": 55.0
+  },
+  {
+   "id": "ebay:128069862782",
+   "title": "Vintage 90s Russell Athletic UA elephant XL",
+   "verdict": "off-target-color",
+   "why": "red body; elephant graphic, not the liked elephant-through-the-A print",
+   "price": 44.99
+  },
+  {
+   "id": "ebay:237056245909",
+   "title": "Vintage Logo 7 UA crewneck XL USA made",
+   "verdict": "off-target-color",
+   "why": "red ALABAMA CRIMSON TIDE spellout",
+   "price": 49.99
+  },
+  {
+   "id": "ebay:267781070679",
+   "title": "Alabama Crimson Tide Jerzees NCAA XL vintage",
+   "verdict": "off-target-color",
+   "why": "red arch ALABAMA CRIMSON TIDE",
+   "price": 27.99
+  },
+  {
+   "id": "ebay:307068116992",
+   "title": "Collegiate Colors spellout crewneck XL USA",
+   "verdict": "off-target-color",
+   "why": "white body with big block A",
+   "price": 100.0
+  },
+  {
+   "id": "ebay:178479974540",
+   "title": "VTG 80s/90s Crimson Tide crew XL (runs small)",
+   "verdict": "off-target-color",
+   "why": "crimson: CRIMSON TIDE circle + elephants + ALABAMA banner. Circle+banner architecture in the wrong color - documentation only",
+   "price": 28.75
+  },
+  {
+   "id": "ebay:377485085664",
+   "title": "Champion light gray UA crewneck L",
+   "verdict": "off-target",
+   "why": "gray L, but small crimson script A + ALABAMA; no seal, no ALUMNI, Champion blank",
+   "price": 29.99
+  },
+  {
+   "id": "ebay:406056072603",
+   "title": "Jansport UA crest embroidered sweatshirt L",
+   "verdict": "off-target-color",
+   "why": "maroon/purple body",
+   "price": 12.17
+  },
+  {
+   "id": "ebay:178459551653",
+   "title": "Vintage 2000s UA embroidered pullover XL",
+   "verdict": "off-target-color",
+   "why": "red with ALABAMA CRIMSON TIDE oval",
+   "price": 21.0
+  },
+  {
+   "id": "ebay:327351019163",
+   "title": "Jerzees embroidered Alabama mock neck L",
+   "verdict": "off-target-color",
+   "why": "red mock neck",
+   "price": 29.0
+  },
+  {
+   "id": "ebay:188901473494",
+   "title": "Vintage Starter UA crewneck L heavyweight",
+   "verdict": "off-target-color",
+   "why": "red Starter",
+   "price": 29.5
+  },
+  {
+   "id": "ebay:188901470105",
+   "title": "Vintage Starter UA fleece crewneck L",
+   "verdict": "off-target",
+   "why": "crimson/gray colorblock, small block A; no seal, no ALUMNI",
+   "price": 25.0
+  },
+  {
+   "id": "ebay:287378946366",
+   "title": "RARE UA Jerzees sweatshirt vtg crewneck 90s XL",
+   "verdict": "off-target-color",
+   "why": "white body with elephant",
+   "price": 28.0
+  },
+  {
+   "id": "ebay:318844990790",
+   "title": "Unisex XL University Of Alabama crewneck",
+   "verdict": "off-target",
+   "why": "ash gray XL and cheap, but arch ALABAMA alone - no seal, no ALUMNI ribbon",
+   "price": 3.5
+  },
+  {
+   "id": "ebay:227488878958",
+   "title": "UA Roll Tide Russell Athletic USA vtg 90 Small",
+   "verdict": "off-target-size",
+   "why": "Small - fails the L/XL gate",
+   "price": 34.99
+  },
+  {
+   "id": "ebay:366659036703",
+   "title": "Vintage Fruit of the Loom UA 1992 Champs L",
+   "verdict": "off-target-color",
+   "why": "white body",
+   "price": 45.0
+  },
+  {
+   "id": "ebay:188909015660",
+   "title": "Vintage 90s UA crewneck M colorblock USA",
+   "verdict": "off-target-size",
+   "why": "Medium - fails the L/XL gate",
+   "price": 45.0
+  },
+  {
+   "id": "ebay:398379574959",
+   "title": "Vintage Russell Athletic Alabama L red colorblock 90s USA",
+   "verdict": "off-target-color",
+   "why": "red colorblock",
+   "price": 39.99
+  },
+  {
+   "id": "ebay:366658411645",
+   "title": "Vintage Russell Athletic UA red XL USA made",
+   "verdict": "off-target-color",
+   "why": "red",
+   "price": 39.99
+  },
+  {
+   "id": "ebay:327349190341",
+   "title": "Vintage UA crewneck L red Russell",
+   "verdict": "off-target-color",
+   "why": "red",
+   "price": 32.99
+  },
+  {
+   "id": "ebay:820103431318",
+   "title": "Vintage UA 1992 National Champions crewneck 2XL gray",
+   "verdict": "off-target-size",
+   "why": "2XL - hard no on size since 2026-09-03",
+   "price": 35.0
+  },
+  {
+   "id": "ebay:116554866434",
+   "title": "Vintage UA Crimson Tide crewneck L made in USA",
+   "verdict": "off-target-color",
+   "why": "cream/ivory body, arch ALABAMA + elephant + stars - fails the gray gate (surfaced via WebSearch)"
+  },
+  {
+   "id": "ebay:394111388318",
+   "title": "Vintage UA crewneck red L university logo 90s",
+   "verdict": "off-target-color",
+   "why": "red; listing also already ended (surfaced via WebSearch)"
+  },
+  {
+   "id": "etsy:4542088385",
+   "title": "Vintage University of Alabama sweatshirt",
+   "verdict": "off-target-color",
+   "why": "crimson body with big U",
+   "price": 108.0
+  },
+  {
+   "id": "etsy:4504578800",
+   "title": "Vintage UNIVERSITY OF ALABAMA collegiate sweatshirt",
+   "verdict": "off-target-color",
+   "why": "maroon",
+   "price": 95.0
+  },
+  {
+   "id": "etsy:4567913202",
+   "title": "Vintage 90s UA crewneck pullover NCAA",
+   "verdict": "off-target-color",
+   "why": "red with elephant",
+   "price": 80.0
+  },
+  {
+   "id": "etsy:4457986690",
+   "title": "Vintage 90s UA crewneck pullover print L",
+   "verdict": "off-target-color",
+   "why": "white body",
+   "price": 57.0
+  },
+  {
+   "id": "etsy:4494076260",
+   "title": "Vintage 90s UA crewneck pullover print L",
+   "verdict": "off-target-color",
+   "why": "crimson",
+   "price": 57.0
+  },
+  {
+   "id": "etsy:4490642798",
+   "title": "Vintage 80s UA crewneck pullover print L",
+   "verdict": "off-target-color",
+   "why": "orange/red",
+   "price": 66.5
+  },
+  {
+   "id": "etsy:4450628646",
+   "title": "Vintage UA Crimson Tide crewneck sweater",
+   "verdict": "off-target-color",
+   "why": "white body, Big Al graphic",
+   "price": 50.0
+  },
+  {
+   "id": "etsy:1835240872",
+   "title": "Vintage 90s UA university crewneck L",
+   "verdict": "off-target-color",
+   "why": "maroon",
+   "price": 70.0
+  },
+  {
+   "id": "etsy:4570224867",
+   "title": "Vintage 80s/90s Alabama Space Camp crest sweatshirt XL",
+   "verdict": "off-target",
+   "why": "cream raglan, Space Camp crest - not the UA seal family",
+   "price": 26.4
+  },
+  {
+   "id": "etsy:4536963858",
+   "title": "Vintage UA grey sweatshirt L embroidered spell out",
+   "verdict": "off-target",
+   "why": "gray L but arch ALABAMA embroidered only, no seal, no ALUMNI",
+   "price": 44.65
+  },
+  {
+   "id": "etsy:4530302887",
+   "title": "Vintage UA sweatshirt in worn gray L",
+   "verdict": "off-target",
+   "why": "gray L, small Crimson Tide script, no seal",
+   "price": 38.0
+  },
+  {
+   "id": "etsy:4556333969",
+   "title": "Vintage UA crewneck pullover NCAA",
+   "verdict": "off-target",
+   "why": "gray body, script A + ALABAMA CRIMSON TIDE, no seal, no ALUMNI",
+   "price": 42.75
+  },
+  {
+   "id": "etsy:1842663465",
+   "title": "Vintage UNIVERSITY OF ALABAMA collegiate sweatshirt",
+   "verdict": "off-target-color",
+   "why": "white/cream",
+   "price": 95.0
+  },
+  {
+   "id": "etsy:4429002354",
+   "title": "Vintage UA NCAA sweatshirt XL printed",
+   "verdict": "off-target",
+   "why": "gray XL, script A + ALABAMA / CRIMSON TIDE, no seal",
+   "price": 42.3
+  },
+  {
+   "id": "etsy:4533376121",
+   "title": "Vintage 1992 UA National Champs crewneck",
+   "verdict": "off-target",
+   "why": "charcoal 1992 champs print, no seal, no ALUMNI",
+   "price": 55.0
+  },
+  {
+   "id": "etsy:4459099542",
+   "title": "1992 UA National SEC Champions sweatshirt XL",
+   "verdict": "off-target",
+   "why": "white/gray champs print, no seal",
+   "price": 80.0
+  },
+  {
+   "id": "etsy:4569813352",
+   "title": "Vintage Tee Jays UA elephant sweatshirt XL maroon USA",
+   "verdict": "off-target-color",
+   "why": "maroon",
+   "price": 44.0
+  },
+  {
+   "id": "etsy:1832765624",
+   "title": "Vintage 90s UA NCAA collegiate TSI graphic crewneck",
+   "verdict": "off-target-color",
+   "why": "navy",
+   "price": 29.74
+  },
+  {
+   "id": "grailed:102762609",
+   "title": "VINTAGE Russell Athletic UA sweatshirt L",
+   "verdict": "off-target-color",
+   "why": "orange/red body"
+  },
+  {
+   "id": "grailed:103834557",
+   "title": "Alabama Crimson Tide Fanatics Roll Tide sleeveless L",
+   "verdict": "off-target",
+   "why": "modern Fanatics sleeveless, red"
+  },
+  {
+   "id": "grailed:104190417",
+   "title": "Alabama Crimson Tide NCAA Fanatics crewneck L new",
+   "verdict": "off-target-color",
+   "why": "red modern Fanatics"
+  },
+  {
+   "id": "mercari:m12075973759",
+   "title": "Alabama Crimson Tide crewneck sweatshirt League",
+   "verdict": "off-target",
+   "why": "modern League crewneck, no seal/ALUMNI"
+  },
+  {
+   "id": "mercari:m62960213133",
+   "title": "Alabama crewneck",
+   "verdict": "off-target-color",
+   "why": "maroon 'roll tide' script"
+  },
+  {
+   "id": "mercari:m98241126639",
+   "title": "Alabama sweatshirt pullover crewneck Gildan",
+   "verdict": "off-target",
+   "why": "modern Gildan blank, no seal/ALUMNI"
+  },
+  {
+   "id": "depop:deni3bandit-vintage-alabama-crimson-tide",
+   "title": "Vintage Alabama Crimson Tide grey sweatshirt (photo 4440057875)",
+   "verdict": "off-target",
+   "why": "grey but no seal and no ALUMNI ribbon"
+  },
+  {
+   "id": "alabamavtg:vintage-alabama-x-russell-crimson-crest-crewneck-sweatshirt-large",
+   "title": "Vintage Alabama x Russell Crimson Crest Crewneck L",
+   "verdict": "off-target-color",
+   "why": "crimson crest on a Russell blank; right blank family, wrong color",
+   "price": 55.0
   }
  ]
 }
