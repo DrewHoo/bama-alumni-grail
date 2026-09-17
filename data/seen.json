@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-14",
+ "updated": "2026-09-17",
  "target": {
   "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
   "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
@@ -34,7 +34,7 @@
    "facebook-marketplace (shipping 500mi + local Alabama pickup)"
   ],
   "blocked": [],
-  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome."
+  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white."
  },
  "seen": [
   {
@@ -2331,6 +2331,324 @@
    "price": 5,
    "verdict": "off-target",
    "why": "a t-shirt, not a sweatshirt"
+  },
+  {
+   "id": "ebay:318879214363",
+   "title": "Vintage Alabama gray L, embroidered UNIVERSITY OF ALABAMA + elephant head, $23.95",
+   "verdict": "off-target",
+   "why": "gray and L but embroidered arch + elephant head — no seal, no ALUMNI, not the print family"
+  },
+  {
+   "id": "ebay:237069296289",
+   "title": "Crable Sportswear gray L chenille arch ALABAMA, $30",
+   "verdict": "off-target",
+   "why": "gray L but a chenille/knit arch spellout, no seal or banner"
+  },
+  {
+   "id": "ebay:128079967025",
+   "title": "1992 National Champions gray XL, $30",
+   "verdict": "off-target",
+   "why": "commemorative bowl print"
+  },
+  {
+   "id": "ebay:147482274022",
+   "title": "90s double-sided print gray L READ, $25.16",
+   "verdict": "off-target",
+   "why": "football graphic, not the seal family"
+  },
+  {
+   "id": "ebay:287589358379",
+   "title": "VTG 90s XL heavyweight boxy FLAW, $29.99",
+   "verdict": "off-target-color",
+   "why": "arch ALABAMA over the real university seal — right print family, but crimson"
+  },
+  {
+   "id": "ebay:267787435992",
+   "title": "Vintage Alabama crewneck 90s L, $20.75",
+   "verdict": "off-target-color",
+   "why": "red elephant + A"
+  },
+  {
+   "id": "ebay:158299594550",
+   "title": "Vintage Alabama L NCAA 90s, $29.99",
+   "verdict": "off-target-color",
+   "why": "faded red embroidered"
+  },
+  {
+   "id": "ebay:287591139792",
+   "title": "Big Al Russell 80s/90s USA, $49.95",
+   "verdict": "off-target-color",
+   "why": "maroon"
+  },
+  {
+   "id": "ebay:398403519686",
+   "title": "Russell Athletic crewneck XL, $22.04",
+   "verdict": "off-target-color",
+   "why": "navy"
+  },
+  {
+   "id": "ebay:800663950484",
+   "title": "Vtg 90s XL big graphic trench, $37",
+   "verdict": "off-target-color",
+   "why": "white"
+  },
+  {
+   "id": "ebay:168695433847",
+   "title": "Vintage 90s Big Al Mascot XL, $40",
+   "verdict": "off-target",
+   "why": "gray but CRIMSON TIDE TRADITION triangle print, not the seal family"
+  },
+  {
+   "id": "etsy:4573429382",
+   "title": "Ragstock 1990s Roll Tide elephant crew",
+   "verdict": "off-target-color",
+   "why": "maroon"
+  },
+  {
+   "id": "etsy:4516147763",
+   "title": "Y2K Gildan Alabama script-A spellout",
+   "verdict": "off-target-color",
+   "why": "washed navy/charcoal-blue, and a Gildan blank"
+  },
+  {
+   "id": "etsy:4550628522",
+   "title": "Vtg 90s Alabama faded S/M",
+   "verdict": "off-target-size",
+   "why": "S/M"
+  },
+  {
+   "id": "etsy:4491027388",
+   "title": "90s burgundy graphic crew",
+   "verdict": "off-target-color",
+   "why": "burgundy"
+  },
+  {
+   "id": "etsy:4574756743",
+   "title": "90s red made in USA M",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "etsy:4569599122",
+   "title": "Team Edition red L",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "etsy:4571276026",
+   "title": "Artex Snoopy Joe Cool maroon L",
+   "verdict": "off-target-color",
+   "why": "maroon"
+  },
+  {
+   "id": "etsy:4411389048",
+   "title": "90s 1992 Champs M",
+   "verdict": "off-target-size",
+   "why": "M"
+  },
+  {
+   "id": "etsy:4441081122",
+   "title": "Embroidered red M",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "etsy:4372183950",
+   "title": "University of Alabama crewneck S",
+   "verdict": "off-target-size",
+   "why": "S"
+  },
+  {
+   "id": "etsy:4412400725",
+   "title": "1970s Artex S-M",
+   "verdict": "off-target-size",
+   "why": "S/M"
+  },
+  {
+   "id": "etsy:4506696289",
+   "title": "60s Alabama sweat M, $250",
+   "verdict": "off-target-size",
+   "why": "M, and grail money"
+  },
+  {
+   "id": "etsy:4563259643",
+   "title": "Russell insulated windbreaker 2XL",
+   "verdict": "off-target-size",
+   "why": "2XL and not a crewneck"
+  },
+  {
+   "id": "etsy:4555412588",
+   "title": "Russell Athletics white XL USA",
+   "verdict": "off-target-color",
+   "why": "white"
+  },
+  {
+   "id": "etsy:4557555973",
+   "title": "90s Starter half-zip",
+   "verdict": "off-target",
+   "why": "half-zip, not a crewneck"
+  },
+  {
+   "id": "etsy:4559456636",
+   "title": "Red graphic print M",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "etsy:1327082031",
+   "title": "Sugar Bowl crew XXL",
+   "verdict": "off-target-size",
+   "why": "XXL"
+  },
+  {
+   "id": "poshmark:6aa88ce4f61f8134ef3e567f",
+   "title": "Gray THE UNIVERSITY OF ALABAMA embroidered crew",
+   "verdict": "off-target",
+   "why": "embroidered arch block, no seal or ALUMNI"
+  },
+  {
+   "id": "poshmark:6aa6a91bd0e93337bb561227",
+   "title": "Auburn University navy hoodie",
+   "verdict": "off-target",
+   "why": "wrong school, hoodie"
+  },
+  {
+   "id": "poshmark:6aa56385d47f7e4f3202acf5",
+   "title": "Orange TU hoodie",
+   "verdict": "off-target",
+   "why": "wrong school"
+  },
+  {
+   "id": "poshmark:6a8e0d8b7fd46ae7e8c3d2ab",
+   "title": "ROLL TIDE cream quarter-zip",
+   "verdict": "off-target-color",
+   "why": "cream, and a quarter-zip"
+  },
+  {
+   "id": "poshmark:6a8d9219a636165730a7afab",
+   "title": "Alabama Crimson Tide black/red zip hoodie",
+   "verdict": "off-target-color",
+   "why": "black"
+  },
+  {
+   "id": "poshmark:6a8c5f63f93b2a43c80c0fd4",
+   "title": "Olive hoodie with horse graphic",
+   "verdict": "off-target",
+   "why": "not Alabama"
+  },
+  {
+   "id": "poshmark:6a88766af086ed66fae34a27",
+   "title": "Gray TIGERS hoodie",
+   "verdict": "off-target",
+   "why": "wrong school"
+  },
+  {
+   "id": "poshmark:6a85955368414787f935aa9a",
+   "title": "Nike white quarter-zip",
+   "verdict": "off-target-color",
+   "why": "white, quarter-zip"
+  },
+  {
+   "id": "poshmark:6a7ee963f314c2706a54c793",
+   "title": "Crimson script Alabama hoodie",
+   "verdict": "off-target-color",
+   "why": "crimson"
+  },
+  {
+   "id": "mercari:m61949623860",
+   "title": "Nike gray football-icon crew M",
+   "verdict": "off-target-size",
+   "why": "M"
+  },
+  {
+   "id": "mercari:m61993377055",
+   "title": "Alabama State grey v-neck L",
+   "verdict": "off-target",
+   "why": "wrong school"
+  },
+  {
+   "id": "mercari:m86131454133",
+   "title": "Champion crimson Alabama hoodie",
+   "verdict": "off-target-color",
+   "why": "crimson"
+  },
+  {
+   "id": "mercari:m32987877450",
+   "title": "Captivating gray CRIMSON TIDE + script A crew",
+   "verdict": "off-target",
+   "why": "gray but no seal, no ALUMNI"
+  },
+  {
+   "id": "mercari:m76013906534",
+   "title": "Old Varsity Brand gray script-A 1831 XL",
+   "verdict": "off-target",
+   "why": "gray XL but a giant script A, not the seal print"
+  },
+  {
+   "id": "mercari:m44311884543",
+   "title": "Game Day white ALABAMA CRIMSON TIDE XL",
+   "verdict": "off-target-color",
+   "why": "white"
+  },
+  {
+   "id": "depop:jofflife-vintage-1990s-university-of-alabama-448e",
+   "title": "Fruit of the Loom white/red 1990s crew",
+   "verdict": "off-target-color",
+   "why": "white/red"
+  },
+  {
+   "id": "depop:heaters_gtg-vintage-rare-80s-university-of-6802",
+   "title": "Signal Sports red 80s crew",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "depop:deni3bandit-vintage-alabama-crimson-tide-sweatpants-9ef4",
+   "title": "Alabama Crimson Tide sweatpants",
+   "verdict": "off-target",
+   "why": "sweatpants"
+  },
+  {
+   "id": "depop:skyud_b56-gray-champion-university-of-alabama-795e",
+   "title": "Champion women's grey Alabama crew",
+   "verdict": "off-target",
+   "why": "women's cut, plain spellout, no seal"
+  },
+  {
+   "id": "grailed:105654749",
+   "title": "Vintage 80s University of Alabama white crew XL, $30",
+   "verdict": "off-target-color",
+   "why": "white"
+  },
+  {
+   "id": "grailed:106063766",
+   "title": "Alabama black/olive game day golf V-neck windshirt L",
+   "verdict": "off-target",
+   "why": "windshirt, not a crewneck"
+  },
+  {
+   "id": "grailed:106189744",
+   "title": "Stadium Athletics red hoodie M",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "grailed:105111821",
+   "title": "Nike red Alabama windbreaker M",
+   "verdict": "off-target-color",
+   "why": "red"
+  },
+  {
+   "id": "grailed:105760504",
+   "title": "Vintage 90s Alabama ash crew XL — elephant through the block A, CRIMSON TIDE ribbon, ALABAMA below. $60 + $10.99 ship, seller Area52 (814 reviews). Tagged 2XL, measures 22.5in p2p / 27in length so it wears XL.",
+   "verdict": "live-cousin-liked-print",
+   "why": "the liked elephant-through-the-A print, in true ash, second live example ever found"
+  },
+  {
+   "id": "alabamavtg:sweep-2026-09-17",
+   "title": "Full products.json sweep, 478 products, 13 alumni/seal/crest/Jerzees hits",
+   "verdict": "off-target",
+   "why": "every hit was crimson, a t-shirt, or a size M — no gray L/XL seal or ALUMNI crewneck"
   }
  ]
 }
