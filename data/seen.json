@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-28",
+ "updated": "2026-10-01",
  "target": {
   "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
   "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
@@ -34,7 +34,7 @@
    "facebook-marketplace (shipping 500mi + local Alabama pickup)"
   ],
   "blocked": [],
-  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up."
+  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up. | 2026-10-01: all channels swept (eBay 6 queries, Etsy x2, Poshmark x3, Mercari x2, Depop, Grailed, AlabamaVTG 559 products, FB shipping via Chrome, web index); zero blocked. Fast path that worked: from one ebay.com tab, same-origin fetch() each search URL and DOMParser the HTML - six queries in one call - with the seen ids stashed in localStorage (survives navigation, unlike window.*). Poshmark search pages fetch the same way. Etsy search via fetch only returns ~12 cards; navigate instead. Title-regex traps: /t-?shirt/ matches 'sweaTSHIRT', /champ/ matches 'Champion', and \\bs\\b matches the s in \"90's\"/\"Men's\" - each silently dropped most of the list. This run logged every title-screened id (not just opened ones) so the unseen pile should stop regrowing."
  },
  "seen": [
   {
@@ -130,7 +130,7 @@
    "title": "Vintage UA Seal Crewneck Light Grey",
    "price": 68,
    "verdict": "modern-fallback-instock",
-   "why": "right color+seal, but sold out in every size (S-4XL) as of 2026-09-10; Homefield restocks College Vault runs | Re-checked 2026-09-21 via products.json: still out of stock in all eight sizes XS-4XL. | 2026-09-24: BACK IN STOCK in S-4XL (XS out), $68, colorway now labelled Ash."
+   "why": "right color+seal, but sold out in every size (S-4XL) as of 2026-09-10; Homefield restocks College Vault runs | Re-checked 2026-09-21 via products.json: still out of stock in all eight sizes XS-4XL. | 2026-09-24: BACK IN STOCK in S-4XL (XS out), $68, colorway now labelled Ash. | 2026-10-01: still in stock S-4XL (XS out), $68."
   },
   {
    "id": "universitysupplystore:20032",
@@ -142,9 +142,9 @@
   {
    "id": "ebay:287514759556",
    "title": "VTG 90s Russell Athletic UA Crimson Tide Sweatshirt Men L USA",
-   "price": 47.99,
+   "price": 45.59,
    "verdict": "live-cousin",
-   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI. Re-verified live (InStock, $47.99) 2026-09-14. | Re-verified live (InStock, $47.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24."
+   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI. Re-verified live (InStock, $47.99) 2026-09-14. | Re-verified live (InStock, $47.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $45.59)."
   },
   {
    "id": "ebay:198514321395",
@@ -230,7 +230,7 @@
    "title": "Champion gray crew, arch ALABAMA + seal + CRIMSON TIDE banner, L (Birmingham AL)",
    "price": 35,
    "verdict": "live-cousin",
-   "why": "closest live cousin on architecture: gray body, Champion, size L, 'used - like new', all three graphic elements; banner says CRIMSON TIDE, letters arch, local pickup only in Birmingham AL. RE-VERIFIED LIVE 2026-09-14 at $35 after three runs of being unverifiable - Facebook was sweepable again. | Re-verified live 2026-09-21 at $35, now twelve weeks on the market. | Re-verified live 2026-09-24 at $35."
+   "why": "closest live cousin on architecture: gray body, Champion, size L, 'used - like new', all three graphic elements; banner says CRIMSON TIDE, letters arch, local pickup only in Birmingham AL. RE-VERIFIED LIVE 2026-09-14 at $35 after three runs of being unverifiable - Facebook was sweepable again. | Re-verified live 2026-09-21 at $35, now twelve weeks on the market. | Re-verified live 2026-09-24 at $35. | Re-verified live 2026-10-01 at $35 (13 weeks listed)."
   },
   {
    "id": "fb:1336905075106119",
@@ -286,14 +286,14 @@
    "title": "Vintage 90s UA gray crewneck XL #3046 — arch ALABAMA + full-color seal",
    "price": 39.99,
    "verdict": "live-cousin",
-   "why": "best color match on the board (true ash) + full-color seal; no ALUMNI banner, blank unnamed, XL. Re-verified live (InStock, $39.99) 2026-09-14. | Re-verified live (InStock, $39.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24."
+   "why": "best color match on the board (true ash) + full-color seal; no ALUMNI banner, blank unnamed, XL. Re-verified live (InStock, $39.99) 2026-09-14. | Re-verified live (InStock, $39.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $39.99)."
   },
   {
    "id": "etsy:4461167693",
    "title": "Vintage 90s UA gray sweatshirt XL — arch ALABAMA + seal in laurel",
    "price": 72,
    "verdict": "live-cousin",
-   "why": "ash + seal in the right family, still live Sep 14 at $72; seller still notes yellow staining. Ranked last. | Re-verified live 2026-09-21 at $72 - back down from the $80 ask. | Re-verified live 2026-09-24 at $72."
+   "why": "ash + seal in the right family, still live Sep 14 at $72; seller still notes yellow staining. Ranked last. | Re-verified live 2026-09-21 at $72 - back down from the $80 ask. | Re-verified live 2026-09-24 at $72. | Re-verified live 2026-10-01 at $72 - down from $80 again."
   },
   {
    "id": "etsy:4544640765",
@@ -1664,7 +1664,7 @@
    "title": "Hanes Beefy ash L USA - CRIMSON TIDE arch + block A with striding elephant + ALABAMA arch",
    "price": 30,
    "verdict": "live-cousin-liked-print",
-   "why": "THE LIKED ELEPHANT-THROUGH-THE-A DEVICE, FINALLY IN A WEARABLE SIZE. Ash gray, Hanes Beefy MADE IN U.S.A., size L, $30 OBO, live and verified InStock 2026-09-14. Same striding-elephant-across-the-block-A as the wanted print; the word order is inverted (CRIMSON TIDE arches above, ALABAMA arches below) and the A is outlined rather than solid. Not the grail print - no seal, no ALUMNI - but it clears both hard gates and it is the alternate Drew and Meridith asked to be flagged. Seller jordanchan5 (1886, 99.8%). | Re-verified live (InStock, $30.00) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24."
+   "why": "THE LIKED ELEPHANT-THROUGH-THE-A DEVICE, FINALLY IN A WEARABLE SIZE. Ash gray, Hanes Beefy MADE IN U.S.A., size L, $30 OBO, live and verified InStock 2026-09-14. Same striding-elephant-across-the-block-A as the wanted print; the word order is inverted (CRIMSON TIDE arches above, ALABAMA arches below) and the A is outlined rather than solid. Not the grail print - no seal, no ALUMNI - but it clears both hard gates and it is the alternate Drew and Meridith asked to be flagged. Seller jordanchan5 (1886, 99.8%). | Re-verified live (InStock, $30.00) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $30)."
   },
   {
    "id": "ebay:287583944476",
@@ -2642,7 +2642,7 @@
    "id": "grailed:105760504",
    "title": "Vintage 90s Alabama ash crew XL — elephant through the block A, CRIMSON TIDE ribbon, ALABAMA below. $60 + $10.99 ship, seller Area52 (814 reviews). Tagged 2XL, measures 22.5in p2p / 27in length so it wears XL.",
    "verdict": "live-cousin-liked-print",
-   "why": "the liked elephant-through-the-A print, in true ash, second live example ever found | Re-verified live 2026-09-21; asking price CUT from $60 to $48. | Re-verified live 2026-09-24; price back UP from $48 to $54."
+   "why": "the liked elephant-through-the-A print, in true ash, second live example ever found | Re-verified live 2026-09-21; asking price CUT from $60 to $48. | Re-verified live 2026-09-24; price back UP from $48 to $54. | Re-verified live 2026-10-01 at $54 (was $56)."
   },
   {
    "id": "alabamavtg:sweep-2026-09-17",
@@ -3102,31 +3102,31 @@
    "id": "ebay:820173144498",
    "title": "Galt Sand ash crew L — straight ALABAMA over seal",
    "verdict": "live-cousin",
-   "why": "ash, straight crimson ALABAMA + full seal below, CRIMSON TIDE cuff; no ALUMNI; grimy front; $40 (2026-09-28)"
+   "why": "ash, straight crimson ALABAMA + full seal below, CRIMSON TIDE cuff; no ALUMNI; grimy front; $40 (2026-09-28) | Re-verified live 2026-10-01 (InStock, $40)."
   },
   {
    "id": "alabamavtg:vintage-alabama-x-gear-grey-crewneck-sweatshirt-m-l",
    "title": "Gear for Sports charcoal crew M/L 22.5in pit",
    "verdict": "live-cousin",
-   "why": "charcoal, arch ALABAMA + small seal + CRIMSON TIDE; $45 (2026-09-28)"
+   "why": "charcoal, arch ALABAMA + small seal + CRIMSON TIDE; $45 (2026-09-28) | Re-verified live 2026-10-01 (available, $45)."
   },
   {
    "id": "poshmark:6a98a83656502bf982de30b4",
    "title": "Champion RW ash L — elephant-A chest logo",
    "verdict": "live-cousin-liked-print",
-   "why": "ash, elephant through crimson A + CRIMSON TIDE ribbon chest logo, no ALABAMA arch; like new $50 (2026-09-28)"
+   "why": "ash, elephant through crimson A + CRIMSON TIDE ribbon chest logo, no ALABAMA arch; like new $50 (2026-09-28) | Re-verified live 2026-10-01 at $50; also cross-listed as ebay:800603615566 at $55."
   },
   {
    "id": "mercari:m15008994832",
    "title": "FOTL Heavy L — embroidered elephant-A patch",
    "verdict": "live-cousin-liked-print",
-   "why": "light ash heather (seller says off-white), embroidered elephant-A patch; $29; cross-listed poshmark 6aac5dd2046d1f58732fe55d (2026-09-28)"
+   "why": "light ash heather (seller says off-white), embroidered elephant-A patch; $29; cross-listed poshmark 6aac5dd2046d1f58732fe55d (2026-09-28) | Re-verified live 2026-10-01 at $29."
   },
   {
    "id": "poshmark:6aac5dd2046d1f58732fe55d",
    "title": "FOTL Heavy L — embroidered elephant-A patch (Poshmark copy)",
    "verdict": "live-cousin-liked-print",
-   "why": "same item as mercari:m15008994832, $30 (2026-09-28)"
+   "why": "same item as mercari:m15008994832, $30 (2026-09-28) | Re-verified live 2026-10-01 at $30."
   },
   {
    "id": "ebay:820171777004",
@@ -3289,6 +3289,933 @@
    "title": "Vintage Alabama Crimson Tide Sweatshirt (Medium)",
    "verdict": "off-target-size",
    "why": "M (2026-09-28)"
+  },
+  {
+   "id": "poshmark:6ab93aa934fc5fa3fe9b2d3a",
+   "title": "Tultex ash raglan crew XL - arched ALABAMA over elephant-through-A, CRIMSON TIDE below",
+   "verdict": "live-cousin-liked-print",
+   "why": "THE LIKED PRINT IN THE REFERENCE WORD ORDER (ALABAMA arch above, CRIMSON TIDE below), true ash, Tultex, tagged XL but seller measures 24.25 x 28 so it wears big; \"light marks\"; $41, seller in_a_buttery, listed 2026-09-27 (2026-10-01)",
+   "price": 41
+  },
+  {
+   "id": "ebay:198674006896",
+   "title": "Lee Sport gray V-notch crew XL - arched ALABAMA + embroidered elephant-A medallion + CRIMSON TIDE ribbon",
+   "verdict": "live-cousin-liked-print",
+   "why": "heather gray, embroidered/applique arched ALABAMA over an oval TUSCALOOSA, ALABAMA medallion holding the elephant-through-A with a CRIMSON TIDE ribbon; V-notch collar with striped trim and striped cuffs; XL, $34.99, seller 100%, InStock (2026-10-01)",
+   "price": 34.99
+  },
+  {
+   "id": "ebay:800603615566",
+   "title": "Champion RW ash L - elephant-A (eBay copy)",
+   "verdict": "live-cousin-liked-print",
+   "why": "same item as poshmark:6a98a83656502bf982de30b4 (seller rackresets on both), $55 + $7.09 ship on eBay vs $50 on Poshmark; InStock (2026-10-01)",
+   "price": 55
+  },
+  {
+   "id": "ebay:112641464500",
+   "title": "Bama arch modern gray",
+   "verdict": "off-target",
+   "why": "Bama arch modern gray (2026-10-01)"
+  },
+  {
+   "id": "ebay:377466212323",
+   "title": "red 1996 Iron Bowl",
+   "verdict": "off-target-color",
+   "why": "red 1996 Iron Bowl (2026-10-01)"
+  },
+  {
+   "id": "ebay:298560080503",
+   "title": "embroidered crimson L",
+   "verdict": "off-target",
+   "why": "embroidered crimson L (2026-10-01)"
+  },
+  {
+   "id": "ebay:168632145049",
+   "title": "Iron Bowl print",
+   "verdict": "off-target",
+   "why": "Iron Bowl print (2026-10-01)"
+  },
+  {
+   "id": "ebay:318739287298",
+   "title": "red XL",
+   "verdict": "off-target-color",
+   "why": "red XL (2026-10-01)"
+  },
+  {
+   "id": "ebay:278423021091",
+   "title": "Pro Player maroon L",
+   "verdict": "off-target",
+   "why": "Pro Player maroon L (2026-10-01)"
+  },
+  {
+   "id": "ebay:147315699748",
+   "title": "2011 champs",
+   "verdict": "off-target",
+   "why": "2011 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:124467558859",
+   "title": "gray ALABAMA FOOTBALL oval",
+   "verdict": "off-target",
+   "why": "gray ALABAMA FOOTBALL oval (2026-10-01)"
+  },
+  {
+   "id": "ebay:287619281985",
+   "title": "forest green",
+   "verdict": "off-target-color",
+   "why": "forest green (2026-10-01)"
+  },
+  {
+   "id": "ebay:398448301720",
+   "title": "maroon TIDE print XL",
+   "verdict": "off-target",
+   "why": "maroon TIDE print XL (2026-10-01)"
+  },
+  {
+   "id": "ebay:377533935310",
+   "title": "white raglan",
+   "verdict": "off-target-color",
+   "why": "white raglan (2026-10-01)"
+  },
+  {
+   "id": "ebay:137796584142",
+   "title": "Gear gray, size S",
+   "verdict": "off-target",
+   "why": "Gear gray, size S (2026-10-01)"
+  },
+  {
+   "id": "ebay:820188040647",
+   "title": "Jerzees U of A, size M",
+   "verdict": "off-target-size",
+   "why": "Jerzees U of A, size M (2026-10-01)"
+  },
+  {
+   "id": "ebay:267799263614",
+   "title": "red Majestic",
+   "verdict": "off-target-color",
+   "why": "red Majestic (2026-10-01)"
+  },
+  {
+   "id": "ebay:189012200161",
+   "title": "white script Alabama XL",
+   "verdict": "off-target",
+   "why": "white script Alabama XL (2026-10-01)"
+  },
+  {
+   "id": "ebay:820186235922",
+   "title": "red BAMA script XL",
+   "verdict": "off-target",
+   "why": "red BAMA script XL (2026-10-01)"
+  },
+  {
+   "id": "ebay:168737744933",
+   "title": "red dyed",
+   "verdict": "off-target-color",
+   "why": "red dyed (2026-10-01)"
+  },
+  {
+   "id": "ebay:267798402226",
+   "title": "JanSport gray L ATHLETIC DEPT print, no seal",
+   "verdict": "off-target",
+   "why": "JanSport gray L ATHLETIC DEPT print, no seal (2026-10-01)"
+  },
+  {
+   "id": "ebay:128104033820",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:398441643932",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:267798283765",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:257771792220",
+   "title": "FOTL gray football print",
+   "verdict": "off-target",
+   "why": "FOTL gray football print (2026-10-01)"
+  },
+  {
+   "id": "ebay:137790523127",
+   "title": "1992 champs",
+   "verdict": "off-target",
+   "why": "1992 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:178536430345",
+   "title": "Gear M spellout",
+   "verdict": "off-target",
+   "why": "Gear M spellout (2026-10-01)"
+  },
+  {
+   "id": "ebay:189003818997",
+   "title": "Logo 7 gray, small chest logo, crimson trim",
+   "verdict": "off-target",
+   "why": "Logo 7 gray, small chest logo, crimson trim (2026-10-01)"
+  },
+  {
+   "id": "ebay:318929007044",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:327377618696",
+   "title": "crimson Team Edition",
+   "verdict": "off-target",
+   "why": "crimson Team Edition (2026-10-01)"
+  },
+  {
+   "id": "ebay:206586590598",
+   "title": "crimson Nutmeg",
+   "verdict": "off-target",
+   "why": "crimson Nutmeg (2026-10-01)"
+  },
+  {
+   "id": "ebay:366696272828",
+   "title": "white 1992 champs",
+   "verdict": "off-target-color",
+   "why": "white 1992 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:206586116323",
+   "title": "Northport town print",
+   "verdict": "off-target",
+   "why": "Northport town print (2026-10-01)"
+  },
+  {
+   "id": "ebay:800725006454",
+   "title": "1999 SEC champs",
+   "verdict": "off-target",
+   "why": "1999 SEC champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:278414883530",
+   "title": "crimson Nutmeg",
+   "verdict": "off-target",
+   "why": "crimson Nutmeg (2026-10-01)"
+  },
+  {
+   "id": "ebay:237093362652",
+   "title": "Alabama Theatre Myrtle Beach",
+   "verdict": "off-target",
+   "why": "Alabama Theatre Myrtle Beach (2026-10-01)"
+  },
+  {
+   "id": "ebay:307201732496",
+   "title": "white Jaycees",
+   "verdict": "off-target-color",
+   "why": "white Jaycees (2026-10-01)"
+  },
+  {
+   "id": "ebay:267796989351",
+   "title": "crimson Nutmeg",
+   "verdict": "off-target",
+   "why": "crimson Nutmeg (2026-10-01)"
+  },
+  {
+   "id": "ebay:820173274378",
+   "title": "gray Jerzees L, Crimson Tide Sports Network circle-A, no seal",
+   "verdict": "off-target",
+   "why": "gray Jerzees L, Crimson Tide Sports Network circle-A, no seal (2026-10-01)"
+  },
+  {
+   "id": "ebay:407245569464",
+   "title": "1994 Iron Bowl",
+   "verdict": "off-target",
+   "why": "1994 Iron Bowl (2026-10-01)"
+  },
+  {
+   "id": "ebay:287608479650",
+   "title": "Orange Beach souvenir",
+   "verdict": "off-target",
+   "why": "Orange Beach souvenir (2026-10-01)"
+  },
+  {
+   "id": "ebay:198665494197",
+   "title": "3X",
+   "verdict": "off-target-size",
+   "why": "3X (2026-10-01)"
+  },
+  {
+   "id": "ebay:820163789340",
+   "title": "red Sugar Bowl",
+   "verdict": "off-target-color",
+   "why": "red Sugar Bowl (2026-10-01)"
+  },
+  {
+   "id": "ebay:307195295519",
+   "title": "M",
+   "verdict": "off-target-size",
+   "why": "M (2026-10-01)"
+  },
+  {
+   "id": "ebay:278400903638",
+   "title": "red high school",
+   "verdict": "off-target-color",
+   "why": "red high school (2026-10-01)"
+  },
+  {
+   "id": "ebay:407234069459",
+   "title": "Law School, cream body, tiny chest print",
+   "verdict": "off-target",
+   "why": "Law School, cream body, tiny chest print (2026-10-01)"
+  },
+  {
+   "id": "ebay:307189681846",
+   "title": "red M",
+   "verdict": "off-target-color",
+   "why": "red M (2026-10-01)"
+  },
+  {
+   "id": "ebay:267790306833",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:168694774191",
+   "title": "gray L, ALABAMA / Jesus Is My King",
+   "verdict": "off-target",
+   "why": "gray L, ALABAMA / Jesus Is My King (2026-10-01)"
+  },
+  {
+   "id": "ebay:336792231224",
+   "title": "Shelton State",
+   "verdict": "off-target",
+   "why": "Shelton State (2026-10-01)"
+  },
+  {
+   "id": "ebay:147568611101",
+   "title": "maroon M",
+   "verdict": "off-target-color",
+   "why": "maroon M (2026-10-01)"
+  },
+  {
+   "id": "ebay:307169193524",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:800617372358",
+   "title": "Gulf Shores souvenir",
+   "verdict": "off-target",
+   "why": "Gulf Shores souvenir (2026-10-01)"
+  },
+  {
+   "id": "ebay:188879357542",
+   "title": "1993 champs",
+   "verdict": "off-target",
+   "why": "1993 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:237036651169",
+   "title": "crop top",
+   "verdict": "off-target",
+   "why": "crop top (2026-10-01)"
+  },
+  {
+   "id": "ebay:287537297610",
+   "title": "crimson ALABAMA CRIMSON TIDE L",
+   "verdict": "off-target",
+   "why": "crimson ALABAMA CRIMSON TIDE L (2026-10-01)"
+  },
+  {
+   "id": "ebay:168627752330",
+   "title": "white 1992 champs",
+   "verdict": "off-target-color",
+   "why": "white 1992 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:377426774159",
+   "title": "1992 champs",
+   "verdict": "off-target",
+   "why": "1992 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:327313521057",
+   "title": "red NuBlend",
+   "verdict": "off-target-color",
+   "why": "red NuBlend (2026-10-01)"
+  },
+  {
+   "id": "ebay:358923627517",
+   "title": "black",
+   "verdict": "off-target-color",
+   "why": "black (2026-10-01)"
+  },
+  {
+   "id": "ebay:298575573869",
+   "title": "white",
+   "verdict": "off-target-color",
+   "why": "white (2026-10-01)"
+  },
+  {
+   "id": "ebay:206479376762",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:307164325811",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:237082701052",
+   "title": "Galt Sand gray L, arched BAMA only, no seal",
+   "verdict": "off-target",
+   "why": "Galt Sand gray L, arched BAMA only, no seal (2026-10-01)"
+  },
+  {
+   "id": "ebay:327178059862",
+   "title": "red Galt Sand",
+   "verdict": "off-target-color",
+   "why": "red Galt Sand (2026-10-01)"
+  },
+  {
+   "id": "ebay:358090299329",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:376788440712",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:176233659048",
+   "title": "crimson puff print",
+   "verdict": "off-target",
+   "why": "crimson puff print (2026-10-01)"
+  },
+  {
+   "id": "ebay:366691681716",
+   "title": "red Sugar Bowl",
+   "verdict": "off-target-color",
+   "why": "red Sugar Bowl (2026-10-01)"
+  },
+  {
+   "id": "ebay:187873571060",
+   "title": "crimson cartoon jeep",
+   "verdict": "off-target",
+   "why": "crimson cartoon jeep (2026-10-01)"
+  },
+  {
+   "id": "ebay:298602356494",
+   "title": "V-neck embroidered, stains",
+   "verdict": "off-target",
+   "why": "V-neck embroidered, stains (2026-10-01)"
+  },
+  {
+   "id": "ebay:318480755144",
+   "title": "white, cartoon print",
+   "verdict": "off-target",
+   "why": "white, cartoon print (2026-10-01)"
+  },
+  {
+   "id": "ebay:397770549816",
+   "title": "red Iron Bowl",
+   "verdict": "off-target-color",
+   "why": "red Iron Bowl (2026-10-01)"
+  },
+  {
+   "id": "ebay:206577735115",
+   "title": "1992 champs",
+   "verdict": "off-target",
+   "why": "1992 champs (2026-10-01)"
+  },
+  {
+   "id": "ebay:327371294643",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:287545677823",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:198653814138",
+   "title": "red zip",
+   "verdict": "off-target-color",
+   "why": "red zip (2026-10-01)"
+  },
+  {
+   "id": "ebay:147577275168",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:147596341705",
+   "title": "red 4X",
+   "verdict": "off-target-color",
+   "why": "red 4X (2026-10-01)"
+  },
+  {
+   "id": "ebay:168702924522",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:287598095844",
+   "title": "white M",
+   "verdict": "off-target-color",
+   "why": "white M (2026-10-01)"
+  },
+  {
+   "id": "ebay:820146858500",
+   "title": "Russell M",
+   "verdict": "off-target-size",
+   "why": "Russell M (2026-10-01)"
+  },
+  {
+   "id": "ebay:820146735818",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:278385449904",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:168695440824",
+   "title": "black",
+   "verdict": "off-target-color",
+   "why": "black (2026-10-01)"
+  },
+  {
+   "id": "ebay:257742618138",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:237066409546",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:377480834989",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "ebay:256785276700",
+   "title": "web-index hit; OutOfStock/ended",
+   "verdict": "off-target",
+   "why": "web-index hit; OutOfStock/ended (2026-10-01)"
+  },
+  {
+   "id": "ebay:117303491198",
+   "title": "web-index hit, Delta gray L; OutOfStock/ended",
+   "verdict": "off-target",
+   "why": "web-index hit, Delta gray L; OutOfStock/ended (2026-10-01)"
+  },
+  {
+   "id": "ebay:257108566365",
+   "title": "web-index hit; solid red",
+   "verdict": "off-target-color",
+   "why": "web-index hit; solid red (2026-10-01)"
+  },
+  {
+   "id": "etsy:1778044231",
+   "title": "gray XL, ALABAMA FOOTBALL print",
+   "verdict": "off-target",
+   "why": "gray XL, ALABAMA FOOTBALL print (2026-10-01)"
+  },
+  {
+   "id": "etsy:4510464546",
+   "title": "gray, ALABAMA bar + script A, no seal",
+   "verdict": "off-target",
+   "why": "gray, ALABAMA bar + script A, no seal (2026-10-01)"
+  },
+  {
+   "id": "etsy:4570733377",
+   "title": "Galt Crew gray L, helmet football print",
+   "verdict": "off-target",
+   "why": "Galt Crew gray L, helmet football print (2026-10-01)"
+  },
+  {
+   "id": "etsy:4445991771",
+   "title": "crimson Jerzees",
+   "verdict": "off-target-color",
+   "why": "crimson Jerzees (2026-10-01)"
+  },
+  {
+   "id": "etsy:4515453143",
+   "title": "red seal print - comp only",
+   "verdict": "off-target-color",
+   "why": "red seal print - comp only (2026-10-01)"
+  },
+  {
+   "id": "etsy:1600118199",
+   "title": "crimson Russell UA",
+   "verdict": "off-target-color",
+   "why": "crimson Russell UA (2026-10-01)"
+  },
+  {
+   "id": "etsy:4578894304",
+   "title": "red UNIVERSITY OF / seal / ALABAMA, M - comp only",
+   "verdict": "off-target-color",
+   "why": "red UNIVERSITY OF / seal / ALABAMA, M - comp only (2026-10-01)"
+  },
+  {
+   "id": "etsy:4548296154",
+   "title": "cream cartoon print",
+   "verdict": "off-target",
+   "why": "cream cartoon print (2026-10-01)"
+  },
+  {
+   "id": "etsy:4582169437",
+   "title": "1992 champs 2XL",
+   "verdict": "off-target-size",
+   "why": "1992 champs 2XL (2026-10-01)"
+  },
+  {
+   "id": "etsy:4583983766",
+   "title": "white 1992 champs",
+   "verdict": "off-target-color",
+   "why": "white 1992 champs (2026-10-01)"
+  },
+  {
+   "id": "etsy:4553046412",
+   "title": "red Jerzees",
+   "verdict": "off-target-color",
+   "why": "red Jerzees (2026-10-01)"
+  },
+  {
+   "id": "etsy:4541156009",
+   "title": "1993 vs Miami",
+   "verdict": "off-target",
+   "why": "1993 vs Miami (2026-10-01)"
+  },
+  {
+   "id": "etsy:4547112872",
+   "title": "teddies print",
+   "verdict": "off-target",
+   "why": "teddies print (2026-10-01)"
+  },
+  {
+   "id": "etsy:1567899381",
+   "title": "70s red/white raglan",
+   "verdict": "off-target-color",
+   "why": "70s red/white raglan (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a70327bd78df1bc18031850",
+   "title": "RIGHT FAMILY (arch ALABAMA + seal in laurel, Logo Motion USA, L) but the body is white/gray STRIPED not solid gray, plus a hole and stains, $68",
+   "verdict": "off-target-color",
+   "why": "RIGHT FAMILY (arch ALABAMA + seal in laurel, Logo Motion USA, L) but the body is white/gray STRIPED not solid gray, plus a hole and stains, $68 (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6abbcb6abfa8f403d9cf9dd5",
+   "title": "ash XL, UNIVERSITY OF + script Alabama tail, no seal",
+   "verdict": "off-target",
+   "why": "ash XL, UNIVERSITY OF + script Alabama tail, no seal (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6aba8ed0014ea3e883ecf945",
+   "title": "maroon Signal Sports L",
+   "verdict": "off-target-color",
+   "why": "maroon Signal Sports L (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6aa715efd73373a060ab383c",
+   "title": "white script Alabama",
+   "verdict": "off-target-color",
+   "why": "white script Alabama (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6aa338429bca61a40433348a",
+   "title": "red ROLL TIDE",
+   "verdict": "off-target-color",
+   "why": "red ROLL TIDE (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6aa20bc63fce2bb4a2250c7f",
+   "title": "red 1987 elephant",
+   "verdict": "off-target-color",
+   "why": "red 1987 elephant (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a98817a3869379afabe355a",
+   "title": "white Big Al",
+   "verdict": "off-target-color",
+   "why": "white Big Al (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a980f0795154ffb2e1e1038",
+   "title": "gray XL block ALABAMA only",
+   "verdict": "off-target",
+   "why": "gray XL block ALABAMA only (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a865da7e15c91aadb39d394",
+   "title": "gray XL, black block A with ALABAMA bar, no elephant, no seal",
+   "verdict": "off-target",
+   "why": "gray XL, black block A with ALABAMA bar, no elephant, no seal (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a86155aa5cc5466b3751230",
+   "title": "white ALABAMA CRIMSON TIDE",
+   "verdict": "off-target-color",
+   "why": "white ALABAMA CRIMSON TIDE (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a7f6679cbbea51cd51f1d47",
+   "title": "crimson Russell L",
+   "verdict": "off-target-color",
+   "why": "crimson Russell L (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a71d46c4dfc81849f60e865",
+   "title": "gray L Big Al cartoon",
+   "verdict": "off-target",
+   "why": "gray L Big Al cartoon (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a5fc0b9842dd4c9c6d494a2",
+   "title": "white XL",
+   "verdict": "off-target-color",
+   "why": "white XL (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a5f9bd4ac1f76f22c449218",
+   "title": "gray L, small chest logo",
+   "verdict": "off-target",
+   "why": "gray L, small chest logo (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a27f9d28fa2074cc6da3da9",
+   "title": "red JanSport",
+   "verdict": "off-target-color",
+   "why": "red JanSport (2026-10-01)"
+  },
+  {
+   "id": "poshmark:69963b9bd09987920267a258",
+   "title": "maroon",
+   "verdict": "off-target-color",
+   "why": "maroon (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6986245be292aaec97f8a258",
+   "title": "gray Big Al baseball cartoon",
+   "verdict": "off-target",
+   "why": "gray Big Al baseball cartoon (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6933f1e7dff1f16e6db94bfb",
+   "title": "white cartoon",
+   "verdict": "off-target-color",
+   "why": "white cartoon (2026-10-01)"
+  },
+  {
+   "id": "poshmark:68ed67eec4e7b475d0490e0c",
+   "title": "1992 champs",
+   "verdict": "off-target",
+   "why": "1992 champs (2026-10-01)"
+  },
+  {
+   "id": "poshmark:68d194b5c4e7b48cc39fc88c",
+   "title": "Jerzees gray L, script Alabama CRIMSON TIDE, no seal, $68",
+   "verdict": "off-target",
+   "why": "Jerzees gray L, script Alabama CRIMSON TIDE, no seal, $68 (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6893a8b2bdcb043d9ad4f0fa",
+   "title": "maroon mascot",
+   "verdict": "off-target-color",
+   "why": "maroon mascot (2026-10-01)"
+  },
+  {
+   "id": "poshmark:688bf3b4f59cc485ffb96582",
+   "title": "maroon Jerzees",
+   "verdict": "off-target-color",
+   "why": "maroon Jerzees (2026-10-01)"
+  },
+  {
+   "id": "poshmark:68221e3bc4e7b439aff64d72",
+   "title": "maroon",
+   "verdict": "off-target-color",
+   "why": "maroon (2026-10-01)"
+  },
+  {
+   "id": "poshmark:67c4e4b7d90d212df02132b1",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "poshmark:677ad95d147b98353152fd08",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "poshmark:67777bab154600b729dc4d5a",
+   "title": "red",
+   "verdict": "off-target-color",
+   "why": "red (2026-10-01)"
+  },
+  {
+   "id": "poshmark:62e5895b8e7c64061e77990c",
+   "title": "red 1980s seal XL - comp only",
+   "verdict": "off-target-color",
+   "why": "red 1980s seal XL - comp only (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6aa427dd13a6474031159b3c",
+   "title": "M",
+   "verdict": "off-target-size",
+   "why": "M (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a57bb5f00154287335e650f",
+   "title": "XXL",
+   "verdict": "off-target-size",
+   "why": "XXL (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6a33d59a013d2acc874826a4",
+   "title": "XXL V-neck",
+   "verdict": "off-target-size",
+   "why": "XXL V-neck (2026-10-01)"
+  },
+  {
+   "id": "poshmark:6933f78449d8d8e99f8827cc",
+   "title": "2XLT",
+   "verdict": "off-target-size",
+   "why": "2XLT (2026-10-01)"
+  },
+  {
+   "id": "poshmark:698a337e05deb3bc0f5c60fc",
+   "title": "M",
+   "verdict": "off-target-size",
+   "why": "M (2026-10-01)"
+  },
+  {
+   "id": "poshmark:66ed85fc5af6e6ca7f37f8c5",
+   "title": "M",
+   "verdict": "off-target-size",
+   "why": "M (2026-10-01)"
+  },
+  {
+   "id": "mercari:m89240976232",
+   "title": "crimson Hanes crest print - comp only",
+   "verdict": "off-target-color",
+   "why": "crimson Hanes crest print - comp only (2026-10-01)"
+  },
+  {
+   "id": "mercari:m50763408131",
+   "title": "crimson Tee Jays",
+   "verdict": "off-target-color",
+   "why": "crimson Tee Jays (2026-10-01)"
+  },
+  {
+   "id": "mercari:m61964604170",
+   "title": "crimson Enough Said",
+   "verdict": "off-target-color",
+   "why": "crimson Enough Said (2026-10-01)"
+  },
+  {
+   "id": "mercari:m53588695767",
+   "title": "JT Sport gray L, ROLL TIDE athletic dept, no seal",
+   "verdict": "off-target",
+   "why": "JT Sport gray L, ROLL TIDE athletic dept, no seal (2026-10-01)"
+  },
+  {
+   "id": "mercari:m84198958906",
+   "title": "maroon Logo Athletic",
+   "verdict": "off-target-color",
+   "why": "maroon Logo Athletic (2026-10-01)"
+  },
+  {
+   "id": "mercari:m73321943130",
+   "title": "red Jerzees",
+   "verdict": "off-target-color",
+   "why": "red Jerzees (2026-10-01)"
+  },
+  {
+   "id": "mercari:m53626233217",
+   "title": "crimson Nutmeg",
+   "verdict": "off-target-color",
+   "why": "crimson Nutmeg (2026-10-01)"
+  },
+  {
+   "id": "mercari:m39395280827",
+   "title": "off-white 1994, $105",
+   "verdict": "off-target-color",
+   "why": "off-white 1994, $105 (2026-10-01)"
+  },
+  {
+   "id": "mercari:m36066713813",
+   "title": "Starter XL, same as poshmark 6a76ff58",
+   "verdict": "off-target",
+   "why": "Starter XL, same as poshmark 6a76ff58 (2026-10-01)"
+  },
+  {
+   "id": "mercari:m21788404242",
+   "title": "2XL",
+   "verdict": "off-target-size",
+   "why": "2XL (2026-10-01)"
+  },
+  {
+   "id": "depop:justadogovdepop-vintage-90s-collegiate-university-of-794a",
+   "title": "UVA seal gray XL tagged #alabama",
+   "verdict": "off-target",
+   "why": "University of Virginia seal, not Alabama (2026-10-01)"
+  },
+  {
+   "id": "grailed:106989897",
+   "title": "Jerzees 90s crew, XXL",
+   "verdict": "off-target-size",
+   "why": "Jerzees 90s crew, XXL (2026-10-01)"
+  },
+  {
+   "id": "grailed:107268225",
+   "title": "Jerzees Sugar Bowl XXL",
+   "verdict": "off-target-size",
+   "why": "Jerzees Sugar Bowl XXL (2026-10-01)"
+  },
+  {
+   "id": "grailed:106511704",
+   "title": "Russell XXL",
+   "verdict": "off-target-size",
+   "why": "Russell XXL (2026-10-01)"
+  },
+  {
+   "id": "grailed:107468535",
+   "title": "Russell red XXL",
+   "verdict": "off-target-size",
+   "why": "Russell red XXL (2026-10-01)"
+  },
+  {
+   "id": "alabamavtg:sweep-2026-10-01",
+   "title": "full products.json sweep",
+   "verdict": "off-target",
+   "why": "559 products; no new vintage since the 9-25 drop; every crest/seal hit is crimson (2026-10-01)"
   }
  ]
 }
