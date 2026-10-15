@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-12",
+ "updated": "2026-10-15",
  "target": {
   "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
   "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
@@ -33,8 +33,10 @@
    "google/bing web index",
    "facebook-marketplace (shipping 500mi + local Alabama pickup)"
   ],
-  "blocked": [],
-  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up. | 2026-10-01: all channels swept (eBay 6 queries, Etsy x2, Poshmark x3, Mercari x2, Depop, Grailed, AlabamaVTG 559 products, FB shipping via Chrome, web index); zero blocked. Fast path that worked: from one ebay.com tab, same-origin fetch() each search URL and DOMParser the HTML - six queries in one call - with the seen ids stashed in localStorage (survives navigation, unlike window.*). Poshmark search pages fetch the same way. Etsy search via fetch only returns ~12 cards; navigate instead. Title-regex traps: /t-?shirt/ matches 'sweaTSHIRT', /champ/ matches 'Champion', and \\bs\\b matches the s in \"90's\"/\"Men's\" - each silently dropped most of the list. This run logged every title-screened id (not just opened ones) so the unseen pile should stop regrowing. | 2026-10-05: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one tab, Etsy x3 (one DataDome blank fixed by homepage re-warm), Poshmark x3 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 598 products, FB shipping via Chrome, web index x2); zero blocked. Poshmark gotcha: every listing page contains the literal boilerplate 'Not For Sale' - liveness must be read from the JSON-LD availability field, never from innerText/banner regex; a sloppy regex marked three live cards SOLD this run before the availability check corrected it. Tultex XL reference-layout cousin dropped $41 to $29 on Poshmark. Etsy second search in a row returned a blank body (DataDome) - re-warm via homepage and use a fresh query string. | 2026-10-08: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one in-app tab, Etsy x3 by navigation, Poshmark x3 via fetch, Mercari x2 in-app, Depop + Grailed via Chrome, AlabamaVTG 599 products via curl, FB shipping radius=805 + radius=161 via Chrome, web index x2); zero blocked. Gotchas: (a) the in-app javascript_tool result is DOUBLE-encoded JSON when large (a JSON string containing JSON) and gets written to a tool-results file with a trailing \"(captured at origin ...)\" line - strip it before json.loads; (b) the Chrome extension javascript_tool truncates output around 600 chars - return ids only, in halves, and filter against the seen list inside the page; (c) localStorage is per-origin, so a seen-set stashed on ebay.com is invisible on etsy.com - re-inject per site; (d) curl to ebay.com/itm returns an Error Page even with a browser UA - liveness must go through a browser tab; (e) Etsy il_794xN image variants do not always exist, il_570xN always does; (f) AlabamaVTG products.json carries the available flag, the single-product .json does not. Four new gray cousins carded: Russell seal-in-A XL (eBay), Hanes Beefy elephant-A XL (Mercari), laurel-crest L and charcoal elephant-A XL (Poshmark). Dead this run: ash full-color seal XL (eBay 377279857609) and the AlabamaVTG Gear charcoal M/L. | 2026-10-12: all channels swept (eBay 6 queries via same-origin fetch from in-app tab, Etsy x3 by navigation, Poshmark x4 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 710 products via curl, FB shipping radius=805 via Chrome, web index x2); zero blocked. Gotchas: (a) the first in-app tab hung on ebay.com and every javascript_tool call timed out even for location.href - closing it and opening a fresh tab fixed it; (b) Promise.all of six eBay search fetches exceeds the 45s tool timeout if awaited - kick it off in setTimeout, write to localStorage, read back in a second call; (c) Poshmark search-card <img> src is lazy and empty in DOMParser output - pull og:image from each listing page via fetch instead; (d) a removed Poshmark listing returns the homepage title with an \"availability\":\"available\" string from unrelated page JSON - navigate and read \"no longer available\" rather than trusting a fetch regex; (e) chrome-extension localStorage on facebook.com came back null between calls - inline the seen list instead."
+  "blocked": [
+   "facebook-marketplace (2026-10-15: claude-in-chrome extension offline; needs real Chrome)"
+  ],
+  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up. | 2026-10-01: all channels swept (eBay 6 queries, Etsy x2, Poshmark x3, Mercari x2, Depop, Grailed, AlabamaVTG 559 products, FB shipping via Chrome, web index); zero blocked. Fast path that worked: from one ebay.com tab, same-origin fetch() each search URL and DOMParser the HTML - six queries in one call - with the seen ids stashed in localStorage (survives navigation, unlike window.*). Poshmark search pages fetch the same way. Etsy search via fetch only returns ~12 cards; navigate instead. Title-regex traps: /t-?shirt/ matches 'sweaTSHIRT', /champ/ matches 'Champion', and \\bs\\b matches the s in \"90's\"/\"Men's\" - each silently dropped most of the list. This run logged every title-screened id (not just opened ones) so the unseen pile should stop regrowing. | 2026-10-05: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one tab, Etsy x3 (one DataDome blank fixed by homepage re-warm), Poshmark x3 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 598 products, FB shipping via Chrome, web index x2); zero blocked. Poshmark gotcha: every listing page contains the literal boilerplate 'Not For Sale' - liveness must be read from the JSON-LD availability field, never from innerText/banner regex; a sloppy regex marked three live cards SOLD this run before the availability check corrected it. Tultex XL reference-layout cousin dropped $41 to $29 on Poshmark. Etsy second search in a row returned a blank body (DataDome) - re-warm via homepage and use a fresh query string. | 2026-10-08: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one in-app tab, Etsy x3 by navigation, Poshmark x3 via fetch, Mercari x2 in-app, Depop + Grailed via Chrome, AlabamaVTG 599 products via curl, FB shipping radius=805 + radius=161 via Chrome, web index x2); zero blocked. Gotchas: (a) the in-app javascript_tool result is DOUBLE-encoded JSON when large (a JSON string containing JSON) and gets written to a tool-results file with a trailing \"(captured at origin ...)\" line - strip it before json.loads; (b) the Chrome extension javascript_tool truncates output around 600 chars - return ids only, in halves, and filter against the seen list inside the page; (c) localStorage is per-origin, so a seen-set stashed on ebay.com is invisible on etsy.com - re-inject per site; (d) curl to ebay.com/itm returns an Error Page even with a browser UA - liveness must go through a browser tab; (e) Etsy il_794xN image variants do not always exist, il_570xN always does; (f) AlabamaVTG products.json carries the available flag, the single-product .json does not. Four new gray cousins carded: Russell seal-in-A XL (eBay), Hanes Beefy elephant-A XL (Mercari), laurel-crest L and charcoal elephant-A XL (Poshmark). Dead this run: ash full-color seal XL (eBay 377279857609) and the AlabamaVTG Gear charcoal M/L. | 2026-10-12: all channels swept (eBay 6 queries via same-origin fetch from in-app tab, Etsy x3 by navigation, Poshmark x4 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 710 products via curl, FB shipping radius=805 via Chrome, web index x2); zero blocked. Gotchas: (a) the first in-app tab hung on ebay.com and every javascript_tool call timed out even for location.href - closing it and opening a fresh tab fixed it; (b) Promise.all of six eBay search fetches exceeds the 45s tool timeout if awaited - kick it off in setTimeout, write to localStorage, read back in a second call; (c) Poshmark search-card <img> src is lazy and empty in DOMParser output - pull og:image from each listing page via fetch instead; (d) a removed Poshmark listing returns the homepage title with an \"availability\":\"available\" string from unrelated page JSON - navigate and read \"no longer available\" rather than trusting a fetch regex; (e) chrome-extension localStorage on facebook.com came back null between calls - inline the seen list instead. | 2026-10-15: eBay (6 queries via same-origin fetch+DOMParser from one in-app tab, 163 unseen ids), Etsy x3 by navigation, Poshmark x4 via fetch (106 unseen), Mercari x2 in-app, Depop (card alt text), Grailed, AlabamaVTG products.json via curl (now 330 products, down from 710 - catalog purged), web index x2. BLOCKED: Facebook - the claude-in-chrome extension reported not connected on two tries, so FB was not swept and the Birmingham Champion L is unverified. Gotchas: (a) the in-app pane reports innerWidth/innerHeight 0 from JS - size image grids in fixed px, never from the viewport; (b) Mercari thumbnail src is /photos/<id>_1.jpg - do not rewrite the suffix, it 404s; (c) Grailed listing pages give price, size and description from innerText after ~2s and the gallery <img> srcs are usable at /c_limit,w_800/; (d) a Poshmark fetch that returns the homepage og:title means the listing was removed (confirmed by navigation: 'no longer available'). Two liked-print cousins carded (charcoal Delta L on Poshmark $25, gray Russell L on Grailed $45) plus a gray Jerzees-by-Russell 42-44 USA plain-arch L on eBay $35 as a right-blank cousin. Dead: Galt Sand elephant-A back gray L (eBay + Poshmark) and the Lee Sport elephant-A XL."
  },
  "seen": [
   {
@@ -130,7 +132,7 @@
    "title": "Vintage UA Seal Crewneck Light Grey",
    "price": 68,
    "verdict": "modern-fallback-instock",
-   "why": "right color+seal, but sold out in every size (S-4XL) as of 2026-09-10; Homefield restocks College Vault runs | Re-checked 2026-09-21 via products.json: still out of stock in all eight sizes XS-4XL. | 2026-09-24: BACK IN STOCK in S-4XL (XS out), $68, colorway now labelled Ash. | 2026-10-01: still in stock S-4XL (XS out), $68."
+   "why": "right color+seal, but sold out in every size (S-4XL) as of 2026-09-10; Homefield restocks College Vault runs | Re-checked 2026-09-21 via products.json: still out of stock in all eight sizes XS-4XL. | 2026-09-24: BACK IN STOCK in S-4XL (XS out), $68, colorway now labelled Ash. | 2026-10-01: still in stock S-4XL (XS out), $68. | 2026-10-15: still in stock S-4XL (XS out), $68."
   },
   {
    "id": "universitysupplystore:20032",
@@ -144,7 +146,7 @@
    "title": "VTG 90s Russell Athletic UA Crimson Tide Sweatshirt Men L USA",
    "price": 45.59,
    "verdict": "live-cousin",
-   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI. Re-verified live (InStock, $47.99) 2026-09-14. | Re-verified live (InStock, $47.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $45.59). | live 2026-10-12 $45.59"
+   "why": "real UA seal printed large, Russell USA blank, size L; charcoal not ash and ribbon reads ALABAMA not ALUMNI. Re-verified live (InStock, $47.99) 2026-09-14. | Re-verified live (InStock, $47.99) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $45.59). | live 2026-10-12 $45.59 | live 2026-10-15 $45.59"
   },
   {
    "id": "ebay:198514321395",
@@ -230,7 +232,7 @@
    "title": "Champion gray crew, arch ALABAMA + seal + CRIMSON TIDE banner, L (Birmingham AL)",
    "price": 35,
    "verdict": "live-cousin",
-   "why": "closest live cousin on architecture: gray body, Champion, size L, 'used - like new', all three graphic elements; banner says CRIMSON TIDE, letters arch, local pickup only in Birmingham AL. RE-VERIFIED LIVE 2026-09-14 at $35 after three runs of being unverifiable - Facebook was sweepable again. | Re-verified live 2026-09-21 at $35, now twelve weeks on the market. | Re-verified live 2026-09-24 at $35. | Re-verified live 2026-10-01 at $35 (13 weeks listed)."
+   "why": "closest live cousin on architecture: gray body, Champion, size L, 'used - like new', all three graphic elements; banner says CRIMSON TIDE, letters arch, local pickup only in Birmingham AL. RE-VERIFIED LIVE 2026-09-14 at $35 after three runs of being unverifiable - Facebook was sweepable again. | Re-verified live 2026-09-21 at $35, now twelve weeks on the market. | Re-verified live 2026-09-24 at $35. | Re-verified live 2026-10-01 at $35 (13 weeks listed). | 2026-10-15: unverifiable - Chrome extension offline, Facebook not swept"
   },
   {
    "id": "fb:1336905075106119",
@@ -293,7 +295,7 @@
    "title": "Vintage 90s UA gray sweatshirt XL — arch ALABAMA + seal in laurel",
    "price": 72,
    "verdict": "live-cousin",
-   "why": "ash + seal in the right family, still live Sep 14 at $72; seller still notes yellow staining. Ranked last. | Re-verified live 2026-09-21 at $72 - back down from the $80 ask. | Re-verified live 2026-09-24 at $72. | Re-verified live 2026-10-01 at $72 - down from $80 again."
+   "why": "ash + seal in the right family, still live Sep 14 at $72; seller still notes yellow staining. Ranked last. | Re-verified live 2026-09-21 at $72 - back down from the $80 ask. | Re-verified live 2026-09-24 at $72. | Re-verified live 2026-10-01 at $72 - down from $80 again. | live 2026-10-15 $72 (eighth sweep at $72/$80)"
   },
   {
    "id": "etsy:4544640765",
@@ -1664,7 +1666,7 @@
    "title": "Hanes Beefy ash L USA - CRIMSON TIDE arch + block A with striding elephant + ALABAMA arch",
    "price": 30,
    "verdict": "live-cousin-liked-print",
-   "why": "THE LIKED ELEPHANT-THROUGH-THE-A DEVICE, FINALLY IN A WEARABLE SIZE. Ash gray, Hanes Beefy MADE IN U.S.A., size L, $30 OBO, live and verified InStock 2026-09-14. Same striding-elephant-across-the-block-A as the wanted print; the word order is inverted (CRIMSON TIDE arches above, ALABAMA arches below) and the A is outlined rather than solid. Not the grail print - no seal, no ALUMNI - but it clears both hard gates and it is the alternate Drew and Meridith asked to be flagged. Seller jordanchan5 (1886, 99.8%). | Re-verified live (InStock, $30.00) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $30)."
+   "why": "THE LIKED ELEPHANT-THROUGH-THE-A DEVICE, FINALLY IN A WEARABLE SIZE. Ash gray, Hanes Beefy MADE IN U.S.A., size L, $30 OBO, live and verified InStock 2026-09-14. Same striding-elephant-across-the-block-A as the wanted print; the word order is inverted (CRIMSON TIDE arches above, ALABAMA arches below) and the A is outlined rather than solid. Not the grail print - no seal, no ALUMNI - but it clears both hard gates and it is the alternate Drew and Meridith asked to be flagged. Seller jordanchan5 (1886, 99.8%). | Re-verified live (InStock, $30.00) 2026-09-21. | Re-verified live (InStock, same price) 2026-09-24. | Re-verified live 2026-10-01 (InStock, $30). | live 2026-10-15 $30"
   },
   {
    "id": "ebay:287583944476",
@@ -2642,7 +2644,8 @@
    "id": "grailed:105760504",
    "title": "Vintage 90s Alabama ash crew XL — elephant through the block A, CRIMSON TIDE ribbon, ALABAMA below. $60 + $10.99 ship, seller Area52 (814 reviews). Tagged 2XL, measures 22.5in p2p / 27in length so it wears XL.",
    "verdict": "live-cousin-liked-print",
-   "why": "the liked elephant-through-the-A print, in true ash, second live example ever found | Re-verified live 2026-09-21; asking price CUT from $60 to $48. | Re-verified live 2026-09-24; price back UP from $48 to $54. | Re-verified live 2026-10-01 at $54 (was $56)."
+   "why": "the liked elephant-through-the-A print, in true ash, second live example ever found | Re-verified live 2026-09-21; asking price CUT from $60 to $48. | Re-verified live 2026-09-24; price back UP from $48 to $54. | Re-verified live 2026-10-01 at $54 (was $56). | live 2026-10-15, now $40 (was $54)",
+   "price": 40.0
   },
   {
    "id": "alabamavtg:sweep-2026-09-17",
@@ -3102,7 +3105,7 @@
    "id": "ebay:820173144498",
    "title": "Galt Sand ash crew L — straight ALABAMA over seal",
    "verdict": "live-cousin",
-   "why": "ash, straight crimson ALABAMA + full seal below, CRIMSON TIDE cuff; no ALUMNI; grimy front; $40 (2026-09-28) | Re-verified live 2026-10-01 (InStock, $40)."
+   "why": "ash, straight crimson ALABAMA + full seal below, CRIMSON TIDE cuff; no ALUMNI; grimy front; $40 (2026-09-28) | Re-verified live 2026-10-01 (InStock, $40). | live 2026-10-15 $40"
   },
   {
    "id": "alabamavtg:vintage-alabama-x-gear-grey-crewneck-sweatshirt-m-l",
@@ -3114,19 +3117,19 @@
    "id": "poshmark:6a98a83656502bf982de30b4",
    "title": "Champion RW ash L — elephant-A chest logo",
    "verdict": "live-cousin-liked-print",
-   "why": "ash, elephant through crimson A + CRIMSON TIDE ribbon chest logo, no ALABAMA arch; like new $50 (2026-09-28) | Re-verified live 2026-10-01 at $50; also cross-listed as ebay:800603615566 at $55."
+   "why": "ash, elephant through crimson A + CRIMSON TIDE ribbon chest logo, no ALABAMA arch; like new $50 (2026-09-28) | Re-verified live 2026-10-01 at $50; also cross-listed as ebay:800603615566 at $55. | live 2026-10-15 $50"
   },
   {
    "id": "mercari:m15008994832",
    "title": "FOTL Heavy L — embroidered elephant-A patch",
    "verdict": "live-cousin-liked-print",
-   "why": "light ash heather (seller says off-white), embroidered elephant-A patch; $29; cross-listed poshmark 6aac5dd2046d1f58732fe55d (2026-09-28) | Re-verified live 2026-10-01 at $29. | price cut to $25 on 2026-10-08"
+   "why": "light ash heather (seller says off-white), embroidered elephant-A patch; $29; cross-listed poshmark 6aac5dd2046d1f58732fe55d (2026-09-28) | Re-verified live 2026-10-01 at $29. | price cut to $25 on 2026-10-08 | live 2026-10-15 $25"
   },
   {
    "id": "poshmark:6aac5dd2046d1f58732fe55d",
    "title": "FOTL Heavy L — embroidered elephant-A patch (Poshmark copy)",
    "verdict": "live-cousin-liked-print",
-   "why": "same item as mercari:m15008994832, $30 (2026-09-28) | Re-verified live 2026-10-01 at $30."
+   "why": "same item as mercari:m15008994832, $30 (2026-09-28) | Re-verified live 2026-10-01 at $30. | live 2026-10-15 $27"
   },
   {
    "id": "ebay:820171777004",
@@ -3300,15 +3303,15 @@
   {
    "id": "ebay:198674006896",
    "title": "Lee Sport gray V-notch crew XL - arched ALABAMA + embroidered elephant-A medallion + CRIMSON TIDE ribbon",
-   "verdict": "live-cousin-liked-print",
-   "why": "heather gray, embroidered/applique arched ALABAMA over an oval TUSCALOOSA, ALABAMA medallion holding the elephant-through-A with a CRIMSON TIDE ribbon; V-notch collar with striped trim and striped cuffs; XL, $34.99, seller 100%, InStock (2026-10-01)",
+   "verdict": "dead-cousin",
+   "why": "heather gray, embroidered/applique arched ALABAMA over an oval TUSCALOOSA, ALABAMA medallion holding the elephant-through-A with a CRIMSON TIDE ribbon; V-notch collar with striped trim and striped cuffs; XL, $34.99, seller 100%, InStock (2026-10-01) | OutOfStock 2026-10-15 (last $34.99) - GONE",
    "price": 34.99
   },
   {
    "id": "ebay:800603615566",
    "title": "Champion RW ash L - elephant-A (eBay copy)",
    "verdict": "live-cousin-liked-print",
-   "why": "same item as poshmark:6a98a83656502bf982de30b4 (seller rackresets on both), $55 + $7.09 ship on eBay vs $50 on Poshmark; InStock (2026-10-01)",
+   "why": "same item as poshmark:6a98a83656502bf982de30b4 (seller rackresets on both), $55 + $7.09 ship on eBay vs $50 on Poshmark; InStock (2026-10-01) | live 2026-10-15 $55",
    "price": 55
   },
   {
@@ -4221,7 +4224,7 @@
    "id": "ebay:257778070671",
    "title": "J&M Sportswear ash crest+wreath+ALABAMA banner XL (certifiedtreasurehunter)",
    "verdict": "live-cousin",
-   "why": "ash gray, laurel crest + red ALABAMA ribbon banner, XL, J&M USA, $49.98 free ship; crest not the circular seal, no ALUMNI (2026-10-05)"
+   "why": "ash gray, laurel crest + red ALABAMA ribbon banner, XL, J&M USA, $49.98 free ship; crest not the circular seal, no ALUMNI (2026-10-05) | live 2026-10-15 $49.98"
   },
   {
    "id": "ebay:407266505910",
@@ -6597,7 +6600,7 @@
    "id": "alabamavtg:10666633658508",
    "title": "Vintage Alabama X Jerzees Grey Crewneck Sweatshirt Large",
    "verdict": "live-cousin-liked-print",
-   "why": "grey Jerzees, arch THE UNIVERSITY OF ALABAMA + elephant-through-A + CRIMSON TIDE banner, L (24.5x25.5), $50, in stock, listed 2026-10-01 (2026-10-05)"
+   "why": "grey Jerzees, arch THE UNIVERSITY OF ALABAMA + elephant-through-A + CRIMSON TIDE banner, L (24.5x25.5), $50, in stock, listed 2026-10-01 (2026-10-05) | available 2026-10-15 $50"
   },
   {
    "id": "alabamavtg:10666808115340",
@@ -6662,7 +6665,7 @@
    "id": "ebay:237113377325",
    "title": "Vintage Alabama Crimson Tide Sweatshirt Mens XL Crewneck Russell Made USA",
    "verdict": "live-cousin",
-   "why": "ash Russell USA XL: arched UNIVERSITY OF ALABAMA, seal inside crimson block A, CRIMSON TIDE arch; $45+$10.99 (Chipley FL, VTG Vintage and Thrifted Gems 8013) — carded 2026-10-08",
+   "why": "ash Russell USA XL: arched UNIVERSITY OF ALABAMA, seal inside crimson block A, CRIMSON TIDE arch; $45+$10.99 (Chipley FL, VTG Vintage and Thrifted Gems 8013) — carded 2026-10-08 | live 2026-10-15 $45",
    "price": 45.0
   },
   {
@@ -8993,13 +8996,13 @@
    "id": "poshmark:6abe04cc4765b09d58d45e8f",
    "title": "(opened) ash L USA-made: arched ALABAMA over a laurel-wreath crest wi",
    "verdict": "live-cousin",
-   "why": "ash L USA-made: arched ALABAMA over a laurel-wreath crest with script A, shield-logo tag (Bay Shore NY); $49 — carded 2026-10-08"
+   "why": "ash L USA-made: arched ALABAMA over a laurel-wreath crest with script A, shield-logo tag (Bay Shore NY); $49 — carded 2026-10-08 | live 2026-10-15 $49"
   },
   {
    "id": "poshmark:6a96b169b9f4eaed1e1529e6",
    "title": "(opened) charcoal (possibly faded black) XL: circular ALABAMA CRIMSON",
    "verdict": "live-cousin",
-   "why": "charcoal (possibly faded black) XL: circular ALABAMA CRIMSON TIDE text around the elephant-through-the-A block A, CRIMSON TIDE banner; ~24in pit, small hole; $35 — carded 2026-10-08 with color caveat"
+   "why": "charcoal (possibly faded black) XL: circular ALABAMA CRIMSON TIDE text around the elephant-through-the-A block A, CRIMSON TIDE banner; ~24in pit, small hole; $35 — carded 2026-10-08 with color caveat | live 2026-10-15 $35"
   },
   {
    "id": "poshmark:6ab91aa232f934313f59fb38",
@@ -9509,7 +9512,7 @@
    "id": "mercari:m13404548397",
    "title": "Vintage 90s Alabama Crimson Tide Sweatshirt XL Hanes Beefy Made USA Gray",
    "verdict": "live-cousin",
-   "why": "ash Hanes Beefy USA XL: CRIMSON TIDE arch over the elephant-through-the-A, ALABAMA below — the second-target print in an XL; $58, seller 36 reviews — carded 2026-10-08",
+   "why": "ash Hanes Beefy USA XL: CRIMSON TIDE arch over the elephant-through-the-A, ALABAMA below — the second-target print in an XL; $58, seller 36 reviews — carded 2026-10-08 | live 2026-10-15 $58",
    "price": 58.0
   },
   {
@@ -9842,25 +9845,25 @@
    "id": "ebay:860027203100",
    "title": "Russell Athletic ash crew XL USA - UA seal over crimson-edged bars + ALABAMA ribbon banner",
    "verdict": "live-cousin",
-   "why": "true ash, real 1831 seal centered, ALABAMA ribbon below, Russell USA 50/50 XL; no outline wordmark, banner not ALUMNI; $24.99 OBO + $6.99, Lumadealz Jacksonville (2026-10-12)"
+   "why": "true ash, real 1831 seal centered, ALABAMA ribbon below, Russell USA 50/50 XL; no outline wordmark, banner not ALUMNI; $24.99 OBO + $6.99, Lumadealz Jacksonville (2026-10-12) | live 2026-10-15 $24.99"
   },
   {
    "id": "poshmark:6aca57eb83b26cf9063d6aab",
    "title": "Russell ash seal+ribbon XL (Poshmark copy of ebay:860027203100)",
    "verdict": "live-cousin",
-   "why": "same seller crosslist, $25 (2026-10-12)"
+   "why": "same seller crosslist, $25 (2026-10-12) | live 2026-10-15 $25"
   },
   {
    "id": "ebay:407283491105",
    "title": "Galt Sand gray crew L - BAMA front, elephant-A + CRIMSON TIDE ribbons on back, crimson shoulder yokes",
-   "verdict": "live-cousin-liked-print",
-   "why": "gray heather, L, elephant-A device on back; yokes + back placement make it a cousin not the print; $28 (2026-10-12)"
+   "verdict": "dead-cousin",
+   "why": "gray heather, L, elephant-A device on back; yokes + back placement make it a cousin not the print; $28 (2026-10-12) | OutOfStock 2026-10-15 (last $28); Poshmark copy also removed - GONE"
   },
   {
    "id": "poshmark:6acbf5231a24d04915790616",
    "title": "Galt Sand elephant-A back gray L (Poshmark copy of ebay:407283491105)",
-   "verdict": "live-cousin-liked-print",
-   "why": "crosslist $29 (2026-10-12)"
+   "verdict": "dead-cousin",
+   "why": "crosslist $29 (2026-10-12) | listing removed 2026-10-15 (\"no longer available\") - GONE with the eBay copy"
   },
   {
    "id": "fb:1011809285009547",
@@ -11991,6 +11994,3059 @@
    "title": "Facebook Marketplace sweep shipping radius=805",
    "verdict": "sweep-marker",
    "why": "13 new ids, none gray seal; Weatherproof seal crew is XS (2026-10-12)"
+  },
+  {
+   "id": "ebay:387296423631",
+   "title": "Vintage University Of Alabama Crewneck, Grey Russell, Size Large",
+   "verdict": "live-cousin",
+   "why": "opened 2026-10-15: Jerzees by Russell L 42-44 Made in USA, heather gray, plain arched crimson ALABAMA spellout and nothing else. Right blank, right size, right color, wrong graphic. $35 Sadansonii (327, 97.6%), InStock.",
+   "price": 35.0
+  },
+  {
+   "id": "ebay:325666343988",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: gray hoodie, arch ALABAMA + elephant"
+  },
+  {
+   "id": "ebay:267781088959",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:287392750159",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: navy"
+  },
+  {
+   "id": "ebay:358462837838",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red hoodie"
+  },
+  {
+   "id": "ebay:396982787503",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red hoodie"
+  },
+  {
+   "id": "ebay:297456544747",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:135108678660",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:940013841379",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:800792164000",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: white"
+  },
+  {
+   "id": "ebay:128134247204",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: black, Russell elephant XL"
+  },
+  {
+   "id": "ebay:377568822786",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:189056526446",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:116443184965",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:167740494257",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: cream/white"
+  },
+  {
+   "id": "ebay:156184227703",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red"
+  },
+  {
+   "id": "ebay:167280416634",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: tan hoodie"
+  },
+  {
+   "id": "ebay:407150337078",
+   "title": "eBay grid 2026-10-15",
+   "verdict": "off-target-color",
+   "why": "thumbnail grid 2026-10-15: red Oarsman embroidered"
+  },
+  {
+   "id": "ebay:128131279041",
+   "title": "Vintage Champion Reverse Weave Alabama Crimson Tide Gray Crewneck Sweatshirt XL",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: ash Champion RW XL $60, arched ALABAMA over script A, no seal, no elephant",
+   "price": 60.0
+  },
+  {
+   "id": "ebay:318281156117",
+   "title": "VTG Alabama Crimson Tide Sweatshirt Mens XL Gray Oversized Raglan Fleece 90s USA",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: gray raglan XL, big elephant cartoon art, no seal",
+   "price": 29.95
+  },
+  {
+   "id": "ebay:295618708660",
+   "title": "Men's Alabama Sweatshirt XL",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: ash XL, arched ALABAMA + script A, reads modern, no seal",
+   "price": 34.0
+  },
+  {
+   "id": "ebay:178542394790",
+   "title": "Alabama Crimson Tide Red Crewneck Sweatshirt NWT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:206519605667",
+   "title": "Gildan XL SEC Championship 2023 Grey",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:358321705558",
+   "title": "Alabama Crimson Tide Mens Large White USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:206023627961",
+   "title": "Alabama men's champion sweatshirt brand new",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:257280702436",
+   "title": "1992 Alabama vs Miami National Championship",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:365821408728",
+   "title": "Vintage Alabama Crewneck Women's",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:365784989771",
+   "title": "Y2K Red Crewneck XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:257019620318",
+   "title": "Woman's Large Alabama Sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:388572131080",
+   "title": "Vintage 90s USA UA American Football sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:376314739202",
+   "title": "UA Crimson Tide Sweatshirt Red XL USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:256920705875",
+   "title": "UA 3 Button snap Sweatshirt NWT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:156901654277",
+   "title": "Original League Collegiate Outfitters White Gray L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:176929347187",
+   "title": "Champion white L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:156650295736",
+   "title": "Women's Alabama Crimson Sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:186681782476",
+   "title": "Original League Collegiate Outfitters White Gray XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:235678277727",
+   "title": "Crimson Roll Tide National Champions",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:126551024415",
+   "title": "South Alabama Sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:116202780716",
+   "title": "Womens Small Athletes Sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:305539309174",
+   "title": "Red College Football Sweatshirt Men's L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:375293763524",
+   "title": "Where Legends Are Made Red XL NWOT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:256391532661",
+   "title": "Colosseum Red L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:355524846821",
+   "title": "black Alabama sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:155631050027",
+   "title": "Vintage UA National Champions Crewneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:314357924814",
+   "title": "Vintage Russell UA White XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:304708133560",
+   "title": "Vintage Crimson Tide USA Made XL Crimson",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:313783292656",
+   "title": "UA Sweatshirt NWT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820241244018",
+   "title": "Women's Natural Campus Vintage Wash Fleece",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287649539443",
+   "title": "Vintage Crimson Tide 1990s Crewneck Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:407291822245",
+   "title": "Dixieland Delight Sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:920040994464",
+   "title": "Jerzees 1992 National Champions L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:237124658978",
+   "title": "Vintage Hoodie Mens Large",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287649209260",
+   "title": "Vintage Crimson Tide Mens Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:137844990665",
+   "title": "Auburn vs Alabama Iron Bowl XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198715955985",
+   "title": "Track & Field Men's XL Gray Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198715955323",
+   "title": "Hoodie Men's Large Gray Embroidered",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:377571163023",
+   "title": "Nike Hoodie 3XL Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287648611251",
+   "title": "Looney Tunes Taz XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287648607382",
+   "title": "1992 National Champions XL USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:336844622457",
+   "title": "Hoodie Pullover",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:128135523539",
+   "title": "Hoodie Stadium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:840021637015",
+   "title": "Nike Team Heather Grey",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:257798693955",
+   "title": "Russell Red XL Y2K",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:117466586425",
+   "title": "Alabama State Russell XL Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307231016561",
+   "title": "Women's Natural Campus Vintage Wash",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287646652230",
+   "title": "Vtg 80s Medium American Sportswear",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:227566332418",
+   "title": "Red Oak Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:940012304857",
+   "title": "1992 National Champs Jerzees USA M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307229811687",
+   "title": "Russell Mens M Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:237122573035",
+   "title": "Country Music Crewneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:960062715034",
+   "title": "Nike XL USA 90s",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:900010924050",
+   "title": "Pro Edge Embroidered M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:900010891294",
+   "title": "Outback Bowl 1997 M Maroon",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800790788920",
+   "title": "Jansport 90s USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:168789915596",
+   "title": "XXL Red Embroidered",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287645585200",
+   "title": "XL Red 90s",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:137840075082",
+   "title": "Seal Lee Sports Crewneck Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198711698682",
+   "title": "Embroidered 90s USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287644794992",
+   "title": "UAB Birmingham",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:237121292752",
+   "title": "Mens Medium Gray Spellout",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:860037895738",
+   "title": "1980 Short Sleeve L White",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:128131400008",
+   "title": "Hoodie Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:920031498967",
+   "title": "Crimson Red Crewneck Vintage",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:147632576259",
+   "title": "Mens M Maroon JERZEES Super Sweats",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800492355942",
+   "title": "State View postcard",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:376509629634",
+   "title": "Graphic Long Sleeve",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:920033835674",
+   "title": "Red Oak Tshirt M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198568879419",
+   "title": "Y2K Crewneck LG",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800783260074",
+   "title": "Comfort Colors 2015 Champs",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:117465613714",
+   "title": "Nebraska Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:188026789052",
+   "title": "T-Shirt Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307154407503",
+   "title": "1995 Bowl game",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:336843129878",
+   "title": "Galt Sand Texas",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:267774303732",
+   "title": "Big Al Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:377528914762",
+   "title": "Galt Sand Oklahoma",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:860041901380",
+   "title": "Galt Sand North Carolina",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:960027422765",
+   "title": "Galt Sand Wildlife",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:117297076757",
+   "title": "PITT Big East",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820085168497",
+   "title": "Iron Bowl Back In The Saddle",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:227091888664",
+   "title": "1992 Nutmeg Large",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307179703266",
+   "title": "Kentucky tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:880008256666",
+   "title": "Notre Dame Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800784271397",
+   "title": "Michigan State Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800295590516",
+   "title": "Bike Brand Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820233002772",
+   "title": "Raiders Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:127941688993",
+   "title": "Sunkist Fiesta Bowl L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:147229985392",
+   "title": "Alabama fishing crewneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:327026028063",
+   "title": "Fiesta Bowl XL Saban",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:127709328046",
+   "title": "1993 Fred Flintstone L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:267584714192",
+   "title": "CSA 2XL NWT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:298005149037",
+   "title": "South Alabama Medicine",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:326986683989",
+   "title": "Bryant-Denny Stadium L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800786997966",
+   "title": "Signal Sports L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:147521380728",
+   "title": "SEC Champions 1992 L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198015173927",
+   "title": "Nike Red L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307231399336",
+   "title": "Nike Therma-Fit zip hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:227567269884",
+   "title": "CSA Red XL Elephant Logo",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820201874159",
+   "title": "Colosseum Hoodie Black",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198715461221",
+   "title": "Stadium Athletics Hoodie XL Gray",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:116473796801",
+   "title": "Distressed Red Russell L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198710397899",
+   "title": "Women's Hoodie XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:267641354892",
+   "title": "1994 Warner Bros Taz L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820231724714",
+   "title": "Colosseum Full Zip",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:236331294330",
+   "title": "Jerzees XL Red Y2K",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198710390907",
+   "title": "Nike Hoodie XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:147562995434",
+   "title": "Parke x 47 Mockneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:287647984227",
+   "title": "Retro Graphic M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:168778479108",
+   "title": "Gildan Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:820067274531",
+   "title": "1990 Nutmeg XL Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:127868506399",
+   "title": "Champion L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:117463973186",
+   "title": "Russell Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:257790557029",
+   "title": "Boys Hooded Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:327339298767",
+   "title": "Russell BAMA Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:407185277007",
+   "title": "80s Russell Large Crimson Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:188868169430",
+   "title": "Russell Mens L Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:307154415004",
+   "title": "Russell Gray Distressed S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:398340632690",
+   "title": "Russell Windbreaker 2XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:137675863026",
+   "title": "Russell Medium Red Quarter",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:188853757325",
+   "title": "Miami Dolphins Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:158219078994",
+   "title": "Hoodie Large 42/44 Gray",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:298604302256",
+   "title": "90s UA XL Red Russell USA",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:237016481716",
+   "title": "Hooded Pullover XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:147632422690",
+   "title": "Mens Small Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:137631677666",
+   "title": "XL Purple Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:366609583253",
+   "title": "Russell Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:198564435420",
+   "title": "Russell Roll Tide Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800491531351",
+   "title": "80s BAMA Russell Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:407116297900",
+   "title": "Russell L Gray Alabama Eagle",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:128015964021",
+   "title": "Russell Blank Red XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800469298538",
+   "title": "Russell L 2011 Champion Gray",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:117327542285",
+   "title": "Hoodie Medium Grey Russell",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:800390823812",
+   "title": "M Big Graphic Red Logo 7",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:257634386551",
+   "title": "Russell Hooded Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:407086558445",
+   "title": "M Russell $100",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:298505594436",
+   "title": "3XL Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:127968690538",
+   "title": "Medium fits small",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:336682181396",
+   "title": "Hoodie Medium Gray",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (eBay newest-first sweep): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "ebay:267472784809",
+   "title": "Alabama A&M Alumnus 2XL cream",
+   "verdict": "off-target-title",
+   "why": "web index 2026-10-15: wrong school/color/garment per title"
+  },
+  {
+   "id": "ebay:156760149158",
+   "title": "UA red zip hoodie L",
+   "verdict": "off-target-title",
+   "why": "web index 2026-10-15: wrong school/color/garment per title"
+  },
+  {
+   "id": "ebay:167720109996",
+   "title": "80s UA graphic crewneck red",
+   "verdict": "off-target-title",
+   "why": "web index 2026-10-15: wrong school/color/garment per title"
+  },
+  {
+   "id": "ebay:286520216963",
+   "title": "UA womens woven sweater S",
+   "verdict": "off-target-title",
+   "why": "web index 2026-10-15: wrong school/color/garment per title"
+  },
+  {
+   "id": "etsy:4594970946",
+   "title": "Vintage 90s Russell Athletic Alabama Crimson Tide Elephant Sweatshirt XL",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson body",
+   "price": 27.0
+  },
+  {
+   "id": "etsy:4409587186",
+   "title": "vintage 90s university Alabama sweatshirt crewneck",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: Russell crimson, ALABAMA + elephant-A + ROLL TIDE - liked layout but crimson, documentation only",
+   "price": 80.99
+  },
+  {
+   "id": "etsy:4444530322",
+   "title": "Vintage University of Alabama Sweatshirt",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: washed pink/maroon mascot print",
+   "price": 108.0
+  },
+  {
+   "id": "etsy:4592838289",
+   "title": "Vintage Alabama crewneck",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: gray, arched ALABAMA + small script, no seal, size unstated",
+   "price": 45.0
+  },
+  {
+   "id": "etsy:4593324135",
+   "title": "Vintage 90s Hanes Alabama Crimson Tide Sweatshirt Mens XL Maroon",
+   "verdict": "off-target-color",
+   "why": "title+thumb 2026-10-15: maroon",
+   "price": 64.99
+  },
+  {
+   "id": "etsy:4579290263",
+   "title": "70s 80s raglan Red XS Big Al",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4534328719",
+   "title": "1990s printed logo Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4563547364",
+   "title": "Russell Alexander City hoodie XL navy",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4501579721",
+   "title": "Starter jacket XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4589372018",
+   "title": "drawstring hoodie gray L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1869265149",
+   "title": "Champion M Portugal",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4591883936",
+   "title": "Champion MIT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4403316951",
+   "title": "Crimson Tide hoody",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4584843311",
+   "title": "UA Medium Bear graphic",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4588743976",
+   "title": "FOTL XL White Alabama Plaid",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4591303284",
+   "title": "West Virginia Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1171256639",
+   "title": "Bear USA Sport",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4396782768",
+   "title": "Pelle Pelle",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1775730552",
+   "title": "Genius Stuff hooded",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1870848237",
+   "title": "G-Star",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1392408320",
+   "title": "Upcycled steel grey",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4513625088",
+   "title": "Teddy Bears 2XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4514742790",
+   "title": "Ralph Lauren knit",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4542184007",
+   "title": "Arizona Hanes",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4591312748",
+   "title": "Adidas",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4491014599",
+   "title": "1995 Citrus Bowl white",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1783573955",
+   "title": "Disney 3XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4525238628",
+   "title": "Hobie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4531738786",
+   "title": "Polo hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4344089760",
+   "title": "Alabama vs Auburn M-L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4526850276",
+   "title": "AWS Alabama Waste Services XL red Jerzees",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4513649854",
+   "title": "Michigan Lighthouse",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4589242025",
+   "title": "Akron Galt Sand",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4578015800",
+   "title": "Aeronautica",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4584479216",
+   "title": "Woolrich",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4578987960",
+   "title": "Guess",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4575682346",
+   "title": "Comfort Colors lace tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1862316479",
+   "title": "Retro Alabama Football custom",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4364995210",
+   "title": "Alabama Bear crewneck new",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4566694432",
+   "title": "Big Al mock neck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4588147873",
+   "title": "Dixieland Delight",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4416114571",
+   "title": "Alabama country band",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1289608762",
+   "title": "Roll Tide flag",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4409940999",
+   "title": "Russell hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4444625262",
+   "title": "Tuscaloosa On My Mind Gildan",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4572623722",
+   "title": "Christmas bow",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4367984257",
+   "title": "Retro distressed new",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4567009153",
+   "title": "Kids elephant",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4428530853",
+   "title": "Selma tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4547993901",
+   "title": "Russell hoodie XL navy",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4587894389",
+   "title": "Yellowhammer souvenir",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4554812003",
+   "title": "Shes From Alabama",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4536362052",
+   "title": "Comfort Colors tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:1796158661",
+   "title": "Bow tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "etsy:4575205409",
+   "title": "Tides Gonna Roll new",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Etsy x3): wrong color/size/garment/era per title"
+  },
+  {
+   "id": "poshmark:6acce20eb552237712d2af3c",
+   "title": "Vintage Alabama Crimson Roll Tide Crewneck Sweatshirt Men’s Large Delta Tag Gray",
+   "verdict": "live-cousin-liked-print",
+   "why": "opened 2026-10-15: charcoal Delta fifty-fifty USA crew, size L (chest 24, length 27), straight-set crimson ALABAMA over a crimson block A with the elephant striding through it and a CRIMSON TIDE ribbon below - the liked elephant-A print, charcoal not ash, some letter cracking. $25 hdfaber, InStock.",
+   "price": 25.0
+  },
+  {
+   "id": "poshmark:6abd35451b613a754c166b2e",
+   "title": "Red Oak Mens Alabama Crimson Tide Sweatshirt XL Gray Preowned Stains Flaws",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: gray XL, small embroidered ALABAMA + script A, no seal, stains",
+   "price": 29.0
+  },
+  {
+   "id": "poshmark:6ab416fe30122a405262f269",
+   "title": "Vintage 1992 Alabama Crimson Tide Crable Sportswear Sweatshirt Mens XL Gray USA",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: ash XL, 1992 champs photo-collage A print",
+   "price": 30.0
+  },
+  {
+   "id": "poshmark:6ac04411353f0ac29885bcc1",
+   "title": "Alabama Crimson Tide Vintage Football Russell Athletic Sweatshirt L",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson",
+   "price": 59.0
+  },
+  {
+   "id": "poshmark:6ad068d59d7e088bd3606074",
+   "title": "Vintage Alabama Crimson Football Sweatshirt Size XL (Tee Jays)",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson",
+   "price": 29.0
+  },
+  {
+   "id": "poshmark:6aa0891f3cc1175493686eab",
+   "title": "Alabama Sweatshirt (Russell, M)",
+   "verdict": "off-target-size",
+   "why": "grid 2026-10-15: gray quarter-snap, size M",
+   "price": 12.0
+  },
+  {
+   "id": "poshmark:6acd26ef84874865de56ba0a",
+   "title": "Alabama Crimson Tide Mens Sweatshirt XL NWOT Colosseum",
+   "verdict": "off-target-hoodie",
+   "why": "grid 2026-10-15: modern Colosseum hoodie",
+   "price": 25.0
+  },
+  {
+   "id": "poshmark:6ac5b51525362151dac4a276",
+   "title": "Alabama (Russell, L)",
+   "verdict": "off-target",
+   "why": "grid 2026-10-15: t-shirt, not a sweatshirt",
+   "price": 14.0
+  },
+  {
+   "id": "poshmark:6ab23f6b345e38a67506a330",
+   "title": "Alabama Crimson Tide Football Sweatshirt (Kaity K, S)",
+   "verdict": "off-target-size",
+   "why": "grid 2026-10-15: size S, white helmet print",
+   "price": 39.0
+  },
+  {
+   "id": "poshmark:6a9e940c105c583fb14c0e51",
+   "title": "Auburn quarter zip",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6a3f63183fd8e7fa5da7a684",
+   "title": "Soffe red 2X",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:69a7a1b674cb474f1256f4a1",
+   "title": "Tommy Bahama Final Four",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6842615ce2ac0c8b3ca3530b",
+   "title": "90s crewneck Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:67fb112d0382916dd3986b7e",
+   "title": "80s sweatshirt Medium",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:67c30ffe842dd4e4d4f17c5c",
+   "title": "Army green hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:67c30f7d69ef1ae3928eab7e",
+   "title": "Army green hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:67de949806c2313cecdeb0af",
+   "title": "Alabama State hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:628ecf52cb23aa437d565262",
+   "title": "Alabama State Hornets Alumni Russell XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:65f7f4b4af7f47bdc27cef77",
+   "title": "UAB hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:63f5f3b0508d272e5538af5f",
+   "title": "Blackout hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acc201224cc87d7e4884b72",
+   "title": "Jansport Purple Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acedae69b24d09ee4954f80",
+   "title": "UNC Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab3574528951f6ea241c557",
+   "title": "UA Alumni tee M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acbdf764adcb323b308f8ea",
+   "title": "Alumni black green NWT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab84408f00c55c1621192a8",
+   "title": "BGSU Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ad02bc237ab172b627f562c",
+   "title": "Clemson Alumni M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acc6918b9dd70e57e871a7d",
+   "title": "Vermont Alumni hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6a96b5198cafcc3df5b31c87",
+   "title": "Hogwarts alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aa0ba9ae625d2b9876f5a8f",
+   "title": "Alumni polo",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfb9db88963f1471c7e6e9",
+   "title": "Gulf Shores",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac15cd828951f5bcf89d0f9",
+   "title": "KU Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac98b18192125ed2d3b51c0",
+   "title": "State of Mind graphic",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acf4873010be8733a24df7a",
+   "title": "Dodgers",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acdf7abf61f8118c4a9d470",
+   "title": "Boston alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acec01c6c3583d95fe0e303",
+   "title": "Florida Gators Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac3071bc5c2edc948bf4570",
+   "title": "Navy blue Alabama",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aadf7e7b3acde6bf8b664a8",
+   "title": "Fanatics Alumni tee M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acbe8b2221dcbda8fb19597",
+   "title": "Nike BCS team issued",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfb1bbc5c2edfe7597cd3b",
+   "title": "UK Alumni S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac5c48ea6e36a7ee6542961",
+   "title": "Iowa State Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:60e9d119ff8304143912156b",
+   "title": "Alumni belt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ad0b9be29572df814e81b8f",
+   "title": "Hogwarts hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab9e19af086edce15c83208",
+   "title": "Cal Poly Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acee8e06c358385a0e2f0b2",
+   "title": "Evergreen Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab912fb7049a1e592ad7e0a",
+   "title": "Alabama Gray Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab8324d31f0f6f3a5dc3212",
+   "title": "Red sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac90e1adb9420eee7b6ccf4",
+   "title": "Upper Iowa Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac8ee5580cb08de4d48d01b",
+   "title": "Minnesota Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6a81f6c3221dcbb736c43e24",
+   "title": "Tennessee Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acf20f9e15c91213242c87c",
+   "title": "WSU Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aca5b2330bbece57788ba6a",
+   "title": "Colosseum Women's S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfe28200a65a154b1f4762",
+   "title": "Steve & Barrys hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab6977b105c58016eb5c073",
+   "title": "South Alabama polo",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac548c7c9ddecc0a8411df2",
+   "title": "Clemson Alumni XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acf4b20149667c056208e58",
+   "title": "1992 champs retro",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acecb8a71a0035c2d9b9c66",
+   "title": "NWT Tuscaloosa Saturdays",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ad02a70648655b8288f39b8",
+   "title": "WVU Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac4476f885bca7265715105",
+   "title": "Berry Alumni",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac85afaf61f81e5835530dd",
+   "title": "Hogwarts",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aa440a0adedd1bcee3aa648",
+   "title": "Colosseum men's",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfceda37ab170f074ae9e7",
+   "title": "Hogwarts M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfcb7f70333f70520bfd90",
+   "title": "MV Sport Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfb8c424cc87ee250ed5b8",
+   "title": "Nike Team mid 2000",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ace7351014ea3f646f9f7d6",
+   "title": "Gulf Shores Jeep M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acdaed10c8b473008724ea6",
+   "title": "UAB L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acd5866046d1f0298ef620b",
+   "title": "Cutter & Buck argyle",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab8fc6efa43c19aab211b2f",
+   "title": "Y2K hoodie M Starter",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:69eede534a072b92ef795432",
+   "title": "Nascar hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:68b98876bbf9617e6aa565a0",
+   "title": "1993 champs L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abab76ca0b935e1f4ab1a19",
+   "title": "Black crewneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aba959d0d9adcd4be8f9b95",
+   "title": "Iron sweatshirt",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac1b4ddad242aa61ee3b26b",
+   "title": "XXL hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aac05c5e912b3fda748b65b",
+   "title": "Champion Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aceedd730122a6d31dd957b",
+   "title": "lanyard",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab6d082221dcb679ca281ae",
+   "title": "Alabama Shakes",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acdf5b82aa9c3caed358e78",
+   "title": "SEC Georgia",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ace2413eeedbe28848085db",
+   "title": "Champion Red Tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac50266721f586fbd6e9e5e",
+   "title": "Jerzees Small",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aa2e926b9dd70535d7dab57",
+   "title": "Red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abd31ed946da2541f428c2f",
+   "title": "Red hoodie M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abd0451adedd1bedeb81596",
+   "title": "Jostens 1992 champs",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aba8d55fae8af9161f6b7cd",
+   "title": "Retro style",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acfe2eb106eeb00a9ce4b50",
+   "title": "Starter XXL red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aba755c97098844e01140d2",
+   "title": "1999 SEC champs",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac19e981921250ca582f69a",
+   "title": "Columbia hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ace05312aa9c3c4bb35a053",
+   "title": "Auburn vs Alabama",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6a9d757670333f00fdbbcda6",
+   "title": "Alabama Shakes",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac5fe868d409cc05f94244e",
+   "title": "Black/red hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abe8ac1221dcb5bfc592a59",
+   "title": "Gray & Red National Champs",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ad0aa8fb9f4eafed173ef57",
+   "title": "Campus hoodie XS",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abd7262a0b9353978b5adf5",
+   "title": "Colosseum hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6acebe6edb942021ec1b16c1",
+   "title": "Colosseum full zip",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac447e637ab17fdd9093fc3",
+   "title": "Drawstring hoodie gray L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac439766b7a0e01b642a758",
+   "title": "Colosseum quarter zip",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ac22cc7d721de2b58705a20",
+   "title": "Nike XS",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abddc2fc1c79ef7c51485f8",
+   "title": "Floribama fishing",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abd7ec978e01d3adc5a2f1e",
+   "title": "cap",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abcddcd42b6ad85a721f291",
+   "title": "Gear for Sports S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6abae3956bb7d6b1092aa8bf",
+   "title": "Women hoodie XS/S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab93a73721f58fc323cc32f",
+   "title": "Champion womens M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab803c3f09fc89a270ba8a1",
+   "title": "Gear for Sports M spellout",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab7e51037ab17ddf44acdcb",
+   "title": "Champion hoodie L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab405b73dfc00c5e77d2c16",
+   "title": "Old Varsity hoodie S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab1d13fa2c5406d35d75e5c",
+   "title": "Pro Player hoodie XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6ab039a5f314c2fc2ac3aedd",
+   "title": "Duke Russell M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "poshmark:6aafbfdbed364e24755d5ae2",
+   "title": "Russell 1/4 zip XL gray",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Poshmark x4, Men, newest): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m82098084473",
+   "title": "Vintage Alabama Roll Tide Tee Jays Sweatshirt mens L",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson ROLL TIDE ROLL",
+   "price": 32.0
+  },
+  {
+   "id": "mercari:m67235430398",
+   "title": "Vintage Alabama Crimson Tide 70s 80s crewneck",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: gray, football player cartoon print",
+   "price": 38.0
+  },
+  {
+   "id": "mercari:m53252148407",
+   "title": "Fancy oversized fleeces",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m70395727433",
+   "title": "Colosseum XL NWOT",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m95767127954",
+   "title": "Colosseum windbreaker",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m26145325048",
+   "title": "Nike hoodie L red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m66516543933",
+   "title": "Dolphin Island",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m84092931147",
+   "title": "Boys Nike hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m88364272118",
+   "title": "Starter hoodie L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m60030528447",
+   "title": "Youth L 1989",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m23613801802",
+   "title": "Tailgate hoodie XL gray seal",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m63644572240",
+   "title": "gulf shores navy",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m75523000716",
+   "title": "Russell bulldogs XXL red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m36970327120",
+   "title": "2000 Orange Bowl XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m12391921209",
+   "title": "Red Oak hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m79758034712",
+   "title": "White crewneck L/XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m30701533065",
+   "title": "Rivalry hoodie M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m34858411276",
+   "title": "Hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m90298188175",
+   "title": "waffle knit",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m43521148836",
+   "title": "Womens Alyssa Milano",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m95560575297",
+   "title": "country band vest",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m78567419015",
+   "title": "Alabama State Tultex 2XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m34918565122",
+   "title": "Jerzees purple 2X",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m62303074626",
+   "title": "Salem tee",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m29484692577",
+   "title": "Johnnie-O 1/4 zip",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "mercari:m54399710649",
+   "title": "OSU",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Mercari x2, in-app): wrong school/color/size/garment per title"
+  },
+  {
+   "id": "depop:ashleys_vintage-vintage-university-of-alabama-grey-d90e",
+   "title": "Vintage University of Alabama grey crewneck",
+   "verdict": "off-target-print",
+   "why": "opened 2026-10-15: oatmeal/light gray, UA block logo with lines, no seal, size unstated"
+  },
+  {
+   "id": "depop:melgichelle1980-alabama-crimson-tide-crewneck-sweatshirt-0834",
+   "title": "Alabama Crimson Tide crewneck sweatshirt Size XXL",
+   "verdict": "off-target-size",
+   "why": "opened 2026-10-15: gray/crimson raglan, arched ALABAMA + elephant + CRIMSON TIDE (liked family) but XXL - hard no"
+  },
+  {
+   "id": "depop:propezlane-vintage-90s-alabama-crimson-tide-1c79",
+   "title": "Vintage 90s Alabama Crimson Tide National Champions Crewneck L",
+   "verdict": "off-target-print",
+   "why": "opened 2026-10-15: 1992 champs striped print"
+  },
+  {
+   "id": "depop:f0undvaujt-1980s-vintage-university-of-alabama-b2cf",
+   "title": "1980s vintage university of alabama b2cf",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:sophi_516g-vintage-red-alabama-crewneck-sweatshirt-3a53",
+   "title": "vintage red alabama crewneck sweatshirt 3a53",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:retrohappineds-the-vintage-alabama-crimson-tide-5322",
+   "title": "the vintage alabama crimson tide 5322",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:cristians_c7oset-vintage-alabama-state-university-diehard-3a66",
+   "title": "vintage alabama state university diehard 3a66",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:sxwat-red-champion-alabama-crewneck-sweatshirt-6a12",
+   "title": "red champion alabama crewneck sweatshirt 6a12",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:jansybla4r_closet-red-alabama-crimson-tide-crewneck-3602",
+   "title": "red alabama crimson tide crewneck 3602",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:gavinsbewie-red-alabama-hoodie-embroidered-college-f924",
+   "title": "red alabama hoodie embroidered college f924",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:apjnl_400-vintage-russell-athletic-alabama-crimson-9c1c",
+   "title": "vintage russell athletic alabama crimson 9c1c",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:johnz531-red-alabama-crewneck-sweatshirt-with-c104",
+   "title": "red alabama crewneck sweatshirt with c104",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:19thrift-champion-alabama-crimson-tide-red-8ff3",
+   "title": "champion alabama crimson tide red 8ff3",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:c5ipnifty-vintage70s-80s-alabama-crimson-2391",
+   "title": "vintage70s 80s alabama crimson 2391",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:kasthenry89-red-alabama-crewneck-sweatshirt-with-37dc",
+   "title": "red alabama crewneck sweatshirt with 37dc",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:alexi8_nicole-alabama-sweatshirt-small-06ba",
+   "title": "alabama sweatshirt small 06ba",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:acabi-alabama-crimson-tide-crewneck-sweatshirt-01be",
+   "title": "alabama crimson tide crewneck sweatshirt 01be",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:emma_sziler_shop-alabama-crimson-tide-red-crewneck-d729",
+   "title": "alabama crimson tide red crewneck d729",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:chartmwn18-alabama-crimson-tide-hoodie-with-c1b2",
+   "title": "alabama crimson tide hoodie with c1b2",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:asrzw-red-alabama-crewneck-sweatshirt-with-ef98",
+   "title": "red alabama crewneck sweatshirt with ef98",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:gabw203-vintage-burgundy-alabama-crewneck-sweatshirt-355c",
+   "title": "vintage burgundy alabama crewneck sweatshirt 355c",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:djcuqlen-nike-alabama-crimson-tide-hoodie-40ac",
+   "title": "nike alabama crimson tide hoodie 40ac",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:doewiiibd-red-alabama-hoodie-with-white-96f8",
+   "title": "red alabama hoodie with white 96f8",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:destinxyfm-super-comfy-university-of-alabama-eceb",
+   "title": "super comfy university of alabama eceb",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:heartsillevan-large-vintage-alabama-crimson-tide",
+   "title": "large vintage alabama crimson tide",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:tsmnllsvtg-vintage-90s-alabama-crimson-tide-c3de",
+   "title": "vintage 90s alabama crimson tide c3de",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:schjedeke23-alabama-crimson-tide-hoodie-with-4600",
+   "title": "alabama crimson tide hoodie with 4600",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:mallicast-vintage-1991-university-of-alabama-0da1",
+   "title": "vintage 1991 university of alabama 0da1",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:katlkenn-red-alabama-hoodie-size-m-a100",
+   "title": "red alabama hoodie size m a100",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:zeuscloset-vintage-90s-alabama-crimson-tide-5fd3",
+   "title": "vintage 90s alabama crimson tide 5fd3",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:jayleemarie23-champion-red-alabama-sweatshirt-size-c8f0",
+   "title": "champion red alabama sweatshirt size c8f0",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:08czm-red-alabama-crimson-tide-hoodie-c889",
+   "title": "red alabama crimson tide hoodie c889",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:joiemacksonn-red-and-white-alabama-crimson-ebc1",
+   "title": "red and white alabama crimson ebc1",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:sierra_dawy1-red-alabama-crewneck-size-medium-0ced",
+   "title": "red alabama crewneck size medium 0ced",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:vivos9vault-colosseum-red-alabama-crimson-tide-45ec",
+   "title": "colosseum red alabama crimson tide 45ec",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:makiahjade215-red-champion-university-of-alabama",
+   "title": "red champion university of alabama",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:luccacollective-vintage-alabama-crewneck-sweatshirt-with-3dce",
+   "title": "vintage alabama crewneck sweatshirt with 3dce",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:natnat200203-red-alabama-crimson-tide-crewneck-c7da",
+   "title": "red alabama crimson tide crewneck c7da",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:summertimethrift3-vintage-university-of-alabama-sweatshirt-56ff",
+   "title": "vintage university of alabama sweatshirt 56ff",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:se5idailythreads-g5-alabama-crimson-tide-embroidered-4091",
+   "title": "g5 alabama crimson tide embroidered 4091",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:quien_855-red-alabama-hoodie-with-white-7965",
+   "title": "red alabama hoodie with white 7965",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:closotmilitia-90s-alabama-crimson-tide-crewneck-35fa",
+   "title": "90s alabama crimson tide crewneck 35fa",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:kelseyacruz-mv-sport-alabama-crimson-tide-a03a",
+   "title": "mv sport alabama crimson tide a03a",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:aidybshop-vintage-colosseum-auburn-tigers-orange-57b6",
+   "title": "vintage colosseum auburn tigers orange 57b6",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:850clothmng-boxercraft-ncaa-university-of-alabama-fc13",
+   "title": "boxercraft ncaa university of alabama fc13",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:abbaryv-red-alabama-crimson-tide-crewneck-ea10",
+   "title": "red alabama crimson tide crewneck ea10",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:thptgameguyvintage-alabama-crimson-tide-sweatshirt-2xl-290a",
+   "title": "alabama crimson tide sweatshirt 2xl 290a",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:giugiuq32-red-oversized-alabama-crewneck-sweatshirt-9894",
+   "title": "red oversized alabama crewneck sweatshirt 9894",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:krrstinagggg-red-alabama-crewneck-sweatshirt-with-34e2",
+   "title": "red alabama crewneck sweatshirt with 34e2",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:drakelorer1201-red-alabama-crimson-tide-crewneck-5942",
+   "title": "red alabama crimson tide crewneck 5942",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:plzgvery-red-champion-alabama-crimson-tide-381e",
+   "title": "red champion alabama crimson tide 381e",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:ghbi_z-mv-sport-alabama-crimson-tide-eb83",
+   "title": "mv sport alabama crimson tide eb83",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:kennedycrkss4-alabama-crimson-tide-crewnecksweatshirt-in-299c",
+   "title": "alabama crimson tide crewnecksweatshirt in 299c",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:buttdwuttas-alabama-crimson-tide-bama-t-shirt-93d2",
+   "title": "alabama crimson tide bama t shirt 93d2",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:dlpu_archives-red-y2k-alabama-hoodie-collegiate-f363",
+   "title": "red y2k alabama hoodie collegiate f363",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:calibypnes-alabama-crimson-tide-red-crewneck-6234",
+   "title": "alabama crimson tide red crewneck 6234",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:perfeccion101-vintage-alabama-crimson-tide-hoodie-95bd",
+   "title": "vintage alabama crimson tide hoodie 95bd",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:w0itneyamron-the-victory-alabama-crimson-tide-2d5b",
+   "title": "the victory alabama crimson tide 2d5b",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:ai7ynshop-vintage-auburn-tigers-navy-hoodie-64a8",
+   "title": "vintage auburn tigers navy hoodie 64a8",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:macyystruvberg-colosseum-alabama-crimson-tide-hoodie-c352",
+   "title": "colosseum alabama crimson tide hoodie c352",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:avamartocci-alabama-crimson-tide-crewneck-sweatshirt",
+   "title": "alabama crimson tide crewneck sweatshirt",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:vintagwtheory0-vintage-jerzees-uab-university-alabama-ad2f",
+   "title": "vintage jerzees uab university alabama ad2f",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:mel_b_vintage-vintage-80s-alabama-crimson-tide",
+   "title": "vintage 80s alabama crimson tide",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:michaelderidi-vintage-univeristy-of-alabama-crimson-a1e9",
+   "title": "vintage univeristy of alabama crimson a1e9",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:bth8buyer20-alabama-crimson-tide-black-zip-8aed",
+   "title": "alabama crimson tide black zip 8aed",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:kannanvtg-90s-perfectly-distressed-university-of-cda0",
+   "title": "90s perfectly distressed university of cda0",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:grea6findsbetterprices1-red-alabama-crimson-tide-hoodie-ca96",
+   "title": "red alabama crimson tide hoodie ca96",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:mello_123-stadium-athletic-alabama-crimson-tide-618c",
+   "title": "stadium athletic alabama crimson tide 618c",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:tamoymmh-red-and-white-alabama-hoodie-d8bc",
+   "title": "red and white alabama hoodie d8bc",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:auireylund-russell-athletic-red-alabama-crewneck-9a57",
+   "title": "russell athletic red alabama crewneck 9a57",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:hammhaul-vintage-alabama-crimson-tide-y2k",
+   "title": "vintage alabama crimson tide y2k",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "depop:madim_254-alabama-hoodie-size-l-some-5a7e",
+   "title": "alabama hoodie size l some 5a7e",
+   "verdict": "off-target-title",
+   "why": "card alt 2026-10-15 (Depop): red/burgundy/navy/black, hoodie, women’s or wrong school per card text"
+  },
+  {
+   "id": "grailed:89585629",
+   "title": "Vintage 90s Russell Crimson Tide Alabama sweatshirt size L",
+   "verdict": "live-cousin-liked-print",
+   "why": "opened 2026-10-15: heather gray Russell Athletic made-in-USA crew, L (chest 25, length 29), elephant-through-the-block-A with CRIMSON TIDE ribbon as a mid-chest logo, no ALABAMA text. $45 BongM (102 reviews) ships from Singapore. Listed ~7 months.",
+   "price": 45.0
+  },
+  {
+   "id": "grailed:77140703",
+   "title": "Super sick vintage Alabama crewneck (Multi Sportswear, XL)",
+   "verdict": "off-target-print",
+   "why": "opened 2026-10-15: ash XL (chest 24), big BAMA block print with ALABAMA/CRIMSON TIDE and a small seal accent top-left - seal is decorative, print is BAMA. $30",
+   "price": 30.0
+  },
+  {
+   "id": "grailed:96880082",
+   "title": "VINTAGE Hanes Alabama Sweatshirt Crewneck XL Gray Logo",
+   "verdict": "off-target-print",
+   "why": "opened 2026-10-15: ash XL, big AL block letters only. $61",
+   "price": 61.0
+  },
+  {
+   "id": "grailed:107761425",
+   "title": "Vintage UA crewneck XL",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson Russell script"
+  },
+  {
+   "id": "grailed:108778793",
+   "title": "Tultex 90s Alabama crewneck XL",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: ash, UNIVERSITY OF Alabama script, no seal"
+  },
+  {
+   "id": "grailed:107680766",
+   "title": "University of ALABAMA sweatshirt vintage L",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson"
+  },
+  {
+   "id": "grailed:83167883",
+   "title": "Tultex Vintage UA sweatshirt XL",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: maroon"
+  },
+  {
+   "id": "grailed:88905166",
+   "title": "Jerzees Vintage UA Crewneck XL",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: Back in the saddle cartoon"
+  },
+  {
+   "id": "grailed:95141972",
+   "title": "Alabama sweatshirt vintage L",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: gray, football graphic"
+  },
+  {
+   "id": "grailed:92693554",
+   "title": "Russell 90s Alabama XL flaws",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: Iron Bowl print"
+  },
+  {
+   "id": "grailed:92643089",
+   "title": "Vintage 80s UA Crewneck L",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: plaid-fill ALABAMA + badge, no seal"
+  },
+  {
+   "id": "grailed:99135745",
+   "title": "Jerzees NuBlend Alabama XL",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: navy"
+  },
+  {
+   "id": "grailed:89173293",
+   "title": "Tultex 90s Alabama crewneck XL",
+   "verdict": "off-target-print",
+   "why": "grid 2026-10-15: ash, UNIVERSITY OF Alabama script"
+  },
+  {
+   "id": "grailed:103949303",
+   "title": "Russell 90s Alabama XL",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: navy"
+  },
+  {
+   "id": "grailed:95248729",
+   "title": "VINTAGE UA Mens Sweatshirt L",
+   "verdict": "off-target-color",
+   "why": "grid 2026-10-15: crimson"
+  },
+  {
+   "id": "grailed:100848898",
+   "title": "Vintage UA Sweatshirt Crewneck M",
+   "verdict": "off-target-size",
+   "why": "grid 2026-10-15: size M"
+  },
+  {
+   "id": "grailed:108587442",
+   "title": "Champion RW Snoopy M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:104786106",
+   "title": "Cactus Jack S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107381774",
+   "title": "Hanes L red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107535458",
+   "title": "Nike jacket XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:98836488",
+   "title": "League triblend M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:72447769",
+   "title": "Russell M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107728638",
+   "title": "Nike hoodie S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:102352809",
+   "title": "hoodie M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:72725944",
+   "title": "S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:103998856",
+   "title": "white M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107181962",
+   "title": "Jerzees navy Gulf Shores M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:88905484",
+   "title": "Hanes XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:101925564",
+   "title": "Hangout fest hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:103165893",
+   "title": "1994 red L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:101311629",
+   "title": "Pacific & Co Gulf Shores",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107975053",
+   "title": "Shores streetwear XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:108164663",
+   "title": "Nike Therma Fit L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:103649283",
+   "title": "Russell M red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:90841354",
+   "title": "Russell M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:106554496",
+   "title": "Tultex M red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:101081345",
+   "title": "Russell M red",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:89489690",
+   "title": "red L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:91987470",
+   "title": "FOTL 1991 XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:106445888",
+   "title": "MV Sport hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:100772420",
+   "title": "Alabama State",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:105699959",
+   "title": "UAH Lancers",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107964496",
+   "title": "hoodie XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:100378577",
+   "title": "band cutoff S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:94717987",
+   "title": "Champion S grey",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:84111794",
+   "title": "band crewneck",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:93542735",
+   "title": "red XXL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:73573945",
+   "title": "Prolific pennant",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:73573942",
+   "title": "Prolific pennant",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:73573936",
+   "title": "Prolific pennant",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:73526701",
+   "title": "Prolific pennant",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:106444853",
+   "title": "MV Sport hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:105891296",
+   "title": "MV Sport hoodie",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:72292697",
+   "title": "Citronelle Hanes",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:101258066",
+   "title": "Gear hoodie S",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:96901340",
+   "title": "Orange Bowl XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107956418",
+   "title": "hoodie red XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:94096117",
+   "title": "Nike Therma",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:108462054",
+   "title": "Russell L white",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:78133394",
+   "title": "Delta M",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:108173181",
+   "title": "hoodie red XL",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:96440234",
+   "title": "concert XS",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:96992302",
+   "title": "JanSport L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:107218535",
+   "title": "hoodie waffle L",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "grailed:106927187",
+   "title": "South Alabama",
+   "verdict": "off-target-title",
+   "why": "title screen 2026-10-15 (Grailed): wrong color/size/garment/school per title"
+  },
+  {
+   "id": "alabamavtg:10709493940364",
+   "title": "AlabamaVTG Russell Crimson Crewneck Large $60",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10666631659660",
+   "title": "AlabamaVTG Russell Crimson Crewneck Medium",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10614125297804",
+   "title": "AlabamaVTG Russell Crimson Crewneck XL $50",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10614125166732",
+   "title": "AlabamaVTG Russell Crimson Hoodie Small",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10614125035660",
+   "title": "AlabamaVTG Russell Crimson Crewneck Medium",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10613931573388",
+   "title": "AlabamaVTG Russell Spellout Crimson Medium",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10611819708556",
+   "title": "AlabamaVTG Russell Crimson Crewneck Small",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10493522968716",
+   "title": "AlabamaVTG Russell Spellout Hoodie 3XL",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10221305200780",
+   "title": "AlabamaVTG Angry Big Al Russell Crimson L",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:10221094961292",
+   "title": "AlabamaVTG U of A Russell Crimson L",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9810126307468",
+   "title": "AlabamaVTG 1970s Bama Russell Hoodie M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9809753702540",
+   "title": "AlabamaVTG Russell Crimson A Crewneck L",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9668754833548",
+   "title": "AlabamaVTG Russell Crimson Graphic L",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9506147958924",
+   "title": "AlabamaVTG 1970s Bama Russell White Hoodie M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9488461693068",
+   "title": "AlabamaVTG Russell Crimson Crewneck M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9412335206540",
+   "title": "AlabamaVTG Russell Lightweight Hoodie XL",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9169061347468",
+   "title": "AlabamaVTG Bama Russell Hoodie M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:9068279693452",
+   "title": "AlabamaVTG 1980s Bama Russell Crimson M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:8788848771212",
+   "title": "AlabamaVTG Bama Russell Hoodie XL",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
+  },
+  {
+   "id": "alabamavtg:8413141827724",
+   "title": "AlabamaVTG 1980s Alabama Russell Hoodie M",
+   "verdict": "off-target-color",
+   "why": "products.json sweep 2026-10-15 (330 products): crimson/white or hoodie per title+colorway"
   }
  ]
 }
