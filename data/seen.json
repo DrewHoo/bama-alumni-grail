@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29",
+ "updated": "2026-11-02",
  "target": {
   "graphic": "Straight-set serif ALABAMA (charcoal-heather fill, crimson outline) + circular University of Alabama seal rising behind letters + charcoal ALUMNI ribbon banner below",
   "color": "MUST be a shade of gray. Ash / light heather ideal; charcoal viable. Hard pass on red/crimson, white, cream/ivory, oatmeal, sand/tan, black — color is gated before graphic.",
@@ -34,9 +34,9 @@
    "facebook-marketplace (shipping 500mi + local Alabama pickup)"
   ],
   "blocked": [
-   "facebook-marketplace (2026-10-29: claude-in-chrome not connected)"
+   "facebook-marketplace (2026-11-02: claude-in-chrome not connected)"
   ],
-  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up. | 2026-10-01: all channels swept (eBay 6 queries, Etsy x2, Poshmark x3, Mercari x2, Depop, Grailed, AlabamaVTG 559 products, FB shipping via Chrome, web index); zero blocked. Fast path that worked: from one ebay.com tab, same-origin fetch() each search URL and DOMParser the HTML - six queries in one call - with the seen ids stashed in localStorage (survives navigation, unlike window.*). Poshmark search pages fetch the same way. Etsy search via fetch only returns ~12 cards; navigate instead. Title-regex traps: /t-?shirt/ matches 'sweaTSHIRT', /champ/ matches 'Champion', and \\bs\\b matches the s in \"90's\"/\"Men's\" - each silently dropped most of the list. This run logged every title-screened id (not just opened ones) so the unseen pile should stop regrowing. | 2026-10-05: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one tab, Etsy x3 (one DataDome blank fixed by homepage re-warm), Poshmark x3 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 598 products, FB shipping via Chrome, web index x2); zero blocked. Poshmark gotcha: every listing page contains the literal boilerplate 'Not For Sale' - liveness must be read from the JSON-LD availability field, never from innerText/banner regex; a sloppy regex marked three live cards SOLD this run before the availability check corrected it. Tultex XL reference-layout cousin dropped $41 to $29 on Poshmark. Etsy second search in a row returned a blank body (DataDome) - re-warm via homepage and use a fresh query string. | 2026-10-08: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one in-app tab, Etsy x3 by navigation, Poshmark x3 via fetch, Mercari x2 in-app, Depop + Grailed via Chrome, AlabamaVTG 599 products via curl, FB shipping radius=805 + radius=161 via Chrome, web index x2); zero blocked. Gotchas: (a) the in-app javascript_tool result is DOUBLE-encoded JSON when large (a JSON string containing JSON) and gets written to a tool-results file with a trailing \"(captured at origin ...)\" line - strip it before json.loads; (b) the Chrome extension javascript_tool truncates output around 600 chars - return ids only, in halves, and filter against the seen list inside the page; (c) localStorage is per-origin, so a seen-set stashed on ebay.com is invisible on etsy.com - re-inject per site; (d) curl to ebay.com/itm returns an Error Page even with a browser UA - liveness must go through a browser tab; (e) Etsy il_794xN image variants do not always exist, il_570xN always does; (f) AlabamaVTG products.json carries the available flag, the single-product .json does not. Four new gray cousins carded: Russell seal-in-A XL (eBay), Hanes Beefy elephant-A XL (Mercari), laurel-crest L and charcoal elephant-A XL (Poshmark). Dead this run: ash full-color seal XL (eBay 377279857609) and the AlabamaVTG Gear charcoal M/L. | 2026-10-12: all channels swept (eBay 6 queries via same-origin fetch from in-app tab, Etsy x3 by navigation, Poshmark x4 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 710 products via curl, FB shipping radius=805 via Chrome, web index x2); zero blocked. Gotchas: (a) the first in-app tab hung on ebay.com and every javascript_tool call timed out even for location.href - closing it and opening a fresh tab fixed it; (b) Promise.all of six eBay search fetches exceeds the 45s tool timeout if awaited - kick it off in setTimeout, write to localStorage, read back in a second call; (c) Poshmark search-card <img> src is lazy and empty in DOMParser output - pull og:image from each listing page via fetch instead; (d) a removed Poshmark listing returns the homepage title with an \"availability\":\"available\" string from unrelated page JSON - navigate and read \"no longer available\" rather than trusting a fetch regex; (e) chrome-extension localStorage on facebook.com came back null between calls - inline the seen list instead. | 2026-10-15: eBay (6 queries via same-origin fetch+DOMParser from one in-app tab, 163 unseen ids), Etsy x3 by navigation, Poshmark x4 via fetch (106 unseen), Mercari x2 in-app, Depop (card alt text), Grailed, AlabamaVTG products.json via curl (now 330 products, down from 710 - catalog purged), web index x2. BLOCKED: Facebook - the claude-in-chrome extension reported not connected on two tries, so FB was not swept and the Birmingham Champion L is unverified. Gotchas: (a) the in-app pane reports innerWidth/innerHeight 0 from JS - size image grids in fixed px, never from the viewport; (b) Mercari thumbnail src is /photos/<id>_1.jpg - do not rewrite the suffix, it 404s; (c) Grailed listing pages give price, size and description from innerText after ~2s and the gallery <img> srcs are usable at /c_limit,w_800/; (d) a Poshmark fetch that returns the homepage og:title means the listing was removed (confirmed by navigation: 'no longer available'). Two liked-print cousins carded (charcoal Delta L on Poshmark $25, gray Russell L on Grailed $45) plus a gray Jerzees-by-Russell 42-44 USA plain-arch L on eBay $35 as a right-blank cousin. Dead: Galt Sand elephant-A back gray L (eBay + Poshmark) and the Lee Sport elephant-A XL. | 2026-10-19: all channels swept, zero blocked - Facebook back (claude-in-chrome connected, profile signed in; FB javascript_tool href extraction worked this time, so ids came straight from a[href*='/marketplace/item/'] with the seen list inlined). eBay 6 queries (574 ids, 140 unseen) via same-origin fetch+DOMParser in setTimeout -> localStorage, read back after 20s. Poshmark 4 queries x (Men, all) via fetch (111 unseen). Etsy x3 by navigation; Mercari x2 in-app; Depop via same-origin fetch of /products/<slug>/ for og:image + meta description (size/price only on the rendered page - screenshot it); Grailed; AlabamaVTG products.json via curl (491 products, logged all 457 unseen ids this run so the pile stops regrowing). Gotchas: (a) the in-app pane is ~800px wide - image grids wider than ~6x128px get cut off on the right; (b) the eBay J&M crest cousin 257778070671 went OutOfStock and reappeared as relist 257802791600 at the same price - a cousin 'dying' can be a relist, search the title before moving it to sold; (c) Depop search sort=newlyListed is ignored in the URL (redirects to relevance) - nearly all 24 results were unseen anyway. | 2026-10-22: all channels except Facebook swept (Chrome extension not connected on three tries). New fast path for getting big extractor output into Python: the in-app javascript_tool saves any result over the token limit to a tool-results file, so return JSON.stringify(data)+'#PAD#'+'x'.repeat(180000) and parse the file (outer JSON string, strip the '(captured at origin' trailer, split on #PAD#) - no need to inline the seen list into the page. A localhost CORS server does NOT work: ebay.com's CSP blocks fetch to 127.0.0.1. Dead this run: the Depop Lee Sport seal+ribbon L (eBay copy 960077349003 still live). Grailed Russell elephant-A L 89585629 dropped $45->$40; Etsy laurel XL 4461167693 back to $72. | 2026-10-29: Etsy search returned a bare 429 on the first try even after a homepage warm-up; a second homepage visit then the search (without order=date_desc) worked. Depop P10.jpg thumbs are tiny - swap to P0.jpg (1280px) for eyeballing. eBay item specifics are readable from a same-origin fetch via DOMParser '.ux-labels-values' (brand/size/color) - quicker than navigating."
+  "notes": "Facebook Marketplace unblocked 2026-08-30 when Drew signed the Chrome profile into Facebook. FB relevance collapses under sortBy=creation_time_descend — use default (suggested) sort, and sweep local pickup separately from shipping. | 2026-08-31: FB image srcs are unreadable from JS (blocked) — screenshot the results grid instead. Etsy/eBay/Depop/Grailed/Poshmark grids are best eyeballed by injecting a labeled <img> grid into a live marketplace tab (file:// previews render as static snapshots and never load images). | 2026-09-03: Mercari DID render in the in-app Claude Browser this run (item titles live in the card <img alt>, not the anchor text) — the 'real Chrome only' note is no longer absolute. Facebook was the only blocked channel. Verify eBay liveness with the JSON-LD schema.org availability string, NOT innerText phrase matching — eBay's inline scripts contain both 'This listing has ended' and 'Buy It Now' on every page and produce false positives either way. | 2026-09-07: Mercari, Depop, Grailed, Poshmark and Etsy all rendered fine in the in-app Claude Browser; only Facebook was blocked (extension offline). Image-grid eyeballing must render at scrollY 0 in ONE viewport - the in-app pane does not paint below the fold and returns blank screenshots, and computer{action:'zoom'} region-cropping is not supported there, so magnify by rendering a single <img> oversized inside an overflow:hidden div instead. Search-result thumbnails desaturate: etsy:4538672718 read gray in the grid and is maroon at full size. eBay liveness via a cross-origin fetch of the item page + regex on the JSON-LD availability string works and is cheap - seven ids in one call. | 2026-09-10: eBay, Etsy, Poshmark, Mercari, Depop, Grailed and the AlabamaVTG products.json sweep all rendered in the in-app Claude Browser; only Facebook was blocked. Two gotchas re-confirmed: (a) an injected extractor function does NOT survive navigation, so inline the whole extractor in every javascript_tool call rather than stashing it on window; (b) Etsy listing pages cannot be read by cross-origin fetch (returns an ~800-byte stub) - navigate to the listing to check liveness, while eBay JSON-LD availability via cross-origin fetch works fine and checked five ids in one call. eBay 318838769762 went OutOfStock three days after listing, so the correct blank at ~$18 sells inside a week: sweep newest-first more often than twice weekly. | 2026-09-14: FACEBOOK UNBLOCKED for the first time since Aug 30 - the claude-in-chrome extension reported one connected local browser and the Chrome profile was still signed in to Facebook, so shipping (radius=805) and local-pickup (radius=161) both swept clean. Two FB gotchas: (a) a /marketplace/search URL without an explicit radius silently collapses to the profile's home city within 60 mi and returns 'No listings found' even for queries that have hits - always pass radius; (b) the empty-state copy keeps saying 'within 60 miles' even after the radius filter visibly updates, so trust the filter rail, not the message. Also: an Etsy search URL with &order=date_desc can return a hard zero for a query that returns 64 results without it - drop the sort before concluding a term is dead. All ten channels rendered in the in-app Claude Browser except Facebook, which needs real Chrome. | 2026-09-17: eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG and Facebook (both shipping radius=805 and local pickup radius=161) all swept - zero blocked channels for the second run running. Three gotchas worth keeping: (a) a cross-origin fetch of an eBay item page only works from a tab whose origin IS ebay.com - the same call from a grailed.com tab throws on every id, so navigate to an eBay page before batch-checking liveness; (b) Depop search thumbnails come back as blurry lazy-load placeholders and the P0.jpg full-size variant 404s, so judge Depop off the card alt text (it states color and gender) or open the listing, never off the grid image; (c) the in-app pane needs ~3-4s after injecting an image grid before the screenshot has pixels in it - screenshotting immediately returns labels on white. | 2026-09-21: eBay/Etsy/Poshmark/Mercari/Depop/Grailed/AlabamaVTG all rendered in the in-app Claude Browser. Facebook is signed in and sweepable for SHIPPING, but the account's Marketplace location is set to Hamden CT - the /marketplace/birmingham/ slug resolves to Birmingham UK and /marketplace/tuscaloosa/ silently falls back to Hamden, so the Alabama LOCAL-PICKUP sweep is not reachable by URL. Changing it means editing the account's location setting, which this run did not do. FB search-grid JS extraction returns {} (blocked) - use find{query} to get a ref and click through for ids, and read tiles off a full-resolution screenshot, not a 0.6 scale one. eBay liveness via cross-origin fetch only works from an ebay.com origin tab; curl is blocked outright. | 2026-09-24: all channels swept (eBay, Etsy, Poshmark, Mercari, Depop, Grailed, AlabamaVTG, FB shipping via Chrome, web index); zero blocked. eBay _ipg=120 pulls ~500 unseen older ids across six queries because previous runs only logged opened listings - filter by title regex (gray/seal/russell/jerzees, drop tees/hoodies/2XL) before eyeballing. Homefield's product .js endpoint (/products/<handle>.js) answers cross-origin and gives per-variant availability in one call. FB 'vintage alabama alumni sweatshirt' returned zero with shipping radius 805; the broader 'vintage alabama sweatshirt' is the useful FB query. | 2026-09-28: all channels swept (eBay 6 queries incl. 'russell alabama sweatshirt', Etsy x2, Poshmark x2, Mercari x2, Depop, Grailed, AlabamaVTG 557 products, FB shipping via Chrome, web index); zero blocked. Poshmark search-card images lazy-load blank and JSON-LD isn't present on listing HTML via fetch — use og:image from a same-origin fetch of each listing instead. Poshmark 'vintage alabama crewneck' + department=Men is far more useful than the 'alumni' query. Seller color words cut both ways: the FOTL elephant-A patch was listed 'off white' and reads light ash heather in the close-up. | 2026-10-01: all channels swept (eBay 6 queries, Etsy x2, Poshmark x3, Mercari x2, Depop, Grailed, AlabamaVTG 559 products, FB shipping via Chrome, web index); zero blocked. Fast path that worked: from one ebay.com tab, same-origin fetch() each search URL and DOMParser the HTML - six queries in one call - with the seen ids stashed in localStorage (survives navigation, unlike window.*). Poshmark search pages fetch the same way. Etsy search via fetch only returns ~12 cards; navigate instead. Title-regex traps: /t-?shirt/ matches 'sweaTSHIRT', /champ/ matches 'Champion', and \\bs\\b matches the s in \"90's\"/\"Men's\" - each silently dropped most of the list. This run logged every title-screened id (not just opened ones) so the unseen pile should stop regrowing. | 2026-10-05: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one tab, Etsy x3 (one DataDome blank fixed by homepage re-warm), Poshmark x3 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 598 products, FB shipping via Chrome, web index x2); zero blocked. Poshmark gotcha: every listing page contains the literal boilerplate 'Not For Sale' - liveness must be read from the JSON-LD availability field, never from innerText/banner regex; a sloppy regex marked three live cards SOLD this run before the availability check corrected it. Tultex XL reference-layout cousin dropped $41 to $29 on Poshmark. Etsy second search in a row returned a blank body (DataDome) - re-warm via homepage and use a fresh query string. | 2026-10-08: all channels swept (eBay 6 queries via same-origin fetch+DOMParser from one in-app tab, Etsy x3 by navigation, Poshmark x3 via fetch, Mercari x2 in-app, Depop + Grailed via Chrome, AlabamaVTG 599 products via curl, FB shipping radius=805 + radius=161 via Chrome, web index x2); zero blocked. Gotchas: (a) the in-app javascript_tool result is DOUBLE-encoded JSON when large (a JSON string containing JSON) and gets written to a tool-results file with a trailing \"(captured at origin ...)\" line - strip it before json.loads; (b) the Chrome extension javascript_tool truncates output around 600 chars - return ids only, in halves, and filter against the seen list inside the page; (c) localStorage is per-origin, so a seen-set stashed on ebay.com is invisible on etsy.com - re-inject per site; (d) curl to ebay.com/itm returns an Error Page even with a browser UA - liveness must go through a browser tab; (e) Etsy il_794xN image variants do not always exist, il_570xN always does; (f) AlabamaVTG products.json carries the available flag, the single-product .json does not. Four new gray cousins carded: Russell seal-in-A XL (eBay), Hanes Beefy elephant-A XL (Mercari), laurel-crest L and charcoal elephant-A XL (Poshmark). Dead this run: ash full-color seal XL (eBay 377279857609) and the AlabamaVTG Gear charcoal M/L. | 2026-10-12: all channels swept (eBay 6 queries via same-origin fetch from in-app tab, Etsy x3 by navigation, Poshmark x4 via fetch, Mercari x2 in-app, Depop, Grailed, AlabamaVTG 710 products via curl, FB shipping radius=805 via Chrome, web index x2); zero blocked. Gotchas: (a) the first in-app tab hung on ebay.com and every javascript_tool call timed out even for location.href - closing it and opening a fresh tab fixed it; (b) Promise.all of six eBay search fetches exceeds the 45s tool timeout if awaited - kick it off in setTimeout, write to localStorage, read back in a second call; (c) Poshmark search-card <img> src is lazy and empty in DOMParser output - pull og:image from each listing page via fetch instead; (d) a removed Poshmark listing returns the homepage title with an \"availability\":\"available\" string from unrelated page JSON - navigate and read \"no longer available\" rather than trusting a fetch regex; (e) chrome-extension localStorage on facebook.com came back null between calls - inline the seen list instead. | 2026-10-15: eBay (6 queries via same-origin fetch+DOMParser from one in-app tab, 163 unseen ids), Etsy x3 by navigation, Poshmark x4 via fetch (106 unseen), Mercari x2 in-app, Depop (card alt text), Grailed, AlabamaVTG products.json via curl (now 330 products, down from 710 - catalog purged), web index x2. BLOCKED: Facebook - the claude-in-chrome extension reported not connected on two tries, so FB was not swept and the Birmingham Champion L is unverified. Gotchas: (a) the in-app pane reports innerWidth/innerHeight 0 from JS - size image grids in fixed px, never from the viewport; (b) Mercari thumbnail src is /photos/<id>_1.jpg - do not rewrite the suffix, it 404s; (c) Grailed listing pages give price, size and description from innerText after ~2s and the gallery <img> srcs are usable at /c_limit,w_800/; (d) a Poshmark fetch that returns the homepage og:title means the listing was removed (confirmed by navigation: 'no longer available'). Two liked-print cousins carded (charcoal Delta L on Poshmark $25, gray Russell L on Grailed $45) plus a gray Jerzees-by-Russell 42-44 USA plain-arch L on eBay $35 as a right-blank cousin. Dead: Galt Sand elephant-A back gray L (eBay + Poshmark) and the Lee Sport elephant-A XL. | 2026-10-19: all channels swept, zero blocked - Facebook back (claude-in-chrome connected, profile signed in; FB javascript_tool href extraction worked this time, so ids came straight from a[href*='/marketplace/item/'] with the seen list inlined). eBay 6 queries (574 ids, 140 unseen) via same-origin fetch+DOMParser in setTimeout -> localStorage, read back after 20s. Poshmark 4 queries x (Men, all) via fetch (111 unseen). Etsy x3 by navigation; Mercari x2 in-app; Depop via same-origin fetch of /products/<slug>/ for og:image + meta description (size/price only on the rendered page - screenshot it); Grailed; AlabamaVTG products.json via curl (491 products, logged all 457 unseen ids this run so the pile stops regrowing). Gotchas: (a) the in-app pane is ~800px wide - image grids wider than ~6x128px get cut off on the right; (b) the eBay J&M crest cousin 257778070671 went OutOfStock and reappeared as relist 257802791600 at the same price - a cousin 'dying' can be a relist, search the title before moving it to sold; (c) Depop search sort=newlyListed is ignored in the URL (redirects to relevance) - nearly all 24 results were unseen anyway. | 2026-10-22: all channels except Facebook swept (Chrome extension not connected on three tries). New fast path for getting big extractor output into Python: the in-app javascript_tool saves any result over the token limit to a tool-results file, so return JSON.stringify(data)+'#PAD#'+'x'.repeat(180000) and parse the file (outer JSON string, strip the '(captured at origin' trailer, split on #PAD#) - no need to inline the seen list into the page. A localhost CORS server does NOT work: ebay.com's CSP blocks fetch to 127.0.0.1. Dead this run: the Depop Lee Sport seal+ribbon L (eBay copy 960077349003 still live). Grailed Russell elephant-A L 89585629 dropped $45->$40; Etsy laurel XL 4461167693 back to $72. | 2026-10-29: Etsy search returned a bare 429 on the first try even after a homepage warm-up; a second homepage visit then the search (without order=date_desc) worked. Depop P10.jpg thumbs are tiny - swap to P0.jpg (1280px) for eyeballing. eBay item specifics are readable from a same-origin fetch via DOMParser '.ux-labels-values' (brand/size/color) - quicker than navigating. | 2026-11-02: Poshmark search tiles are now .tiles_container__tile--redesign with data-et-prop-listing_id on the anchor and lazy <source srcset> images (most null until scrolled) - pull og:image per listing via same-origin fetch of /listing/x-<id> instead. Mercari same-origin fetch of /search returns no item anchors (client-rendered) - navigate each query. ebaydesc.com description fetch is blocked from the ebay.com tab."
  },
  "seen": [
   {
@@ -597,8 +597,8 @@
   {
    "id": "ebay:407190049560",
    "title": "Pannill gray 2XL — ALABAMA + Big Al",
-   "verdict": "liked-print-wrong-size",
-   "why": "LIKED PRINT (Drew + Meridith): arched ALABAMA over the block A with the elephant on the crossbar, CRIMSON TIDE below, on true ash. Pannill by Hanes, MJTvintage, $39.99. Was out on size (2XL) - and SOLD/ended by 2026-09-14. The device turned up in a Large the same day as ebay:176905881050.",
+   "verdict": "dead",
+   "why": "LIKED PRINT (Drew + Meridith): arched ALABAMA over the block A with the elephant on the crossbar, CRIMSON TIDE below, on true ash. Pannill by Hanes, MJTvintage, $39.99. Was out on size (2XL) - and SOLD/ended by 2026-09-14. The device turned up in a Large the same day as ebay:176905881050. | 2026-11-02: OutOfStock.",
    "price": 39.99
   },
   {
@@ -24701,6 +24701,2568 @@
    "title": "sweep marker",
    "verdict": "sweep-marker",
    "why": "2026-10-29: eBay 6q (556 ids, 196 unseen), Poshmark 5q (108 unseen), Etsy 1q (first attempt 429 rate-limited, retry after homepage warm-up worked), Mercari 2q, Depop 2q, Grailed, AlabamaVTG 360 products (29 unseen), web index 2q; eBay dossier cards re-verified via JSON-LD (Russell seal 287514759556 now OutOfStock -> sold tier); Poshmark/Mercari/Etsy/Grailed/Homefield cards NOT re-verified; FB BLOCKED (claude-in-chrome not connected)"
+  },
+  {
+   "id": "ebay:206668591863",
+   "title": "Vintage 80s University of Alabama Crimson Tide Sweatshirt Sz XL Gray Raglan Cut $49.99 OBO",
+   "verdict": "cousin",
+   "why": "2026-11-02: opened + eyeballed — ash raglan XL, outline arched ALABAMA with CRIMSON TIDE ribbon across it, full 1831 university seal in laurel below; tag cut out, faint small stains on lower front; upnextvintage (176). Closest live layout yet; carded."
+  },
+  {
+   "id": "ebay:840084596007",
+   "title": "VTG Alabama Sweatshirt Mens L Gray 90s Made in USA Crewneck Crimson Tide $49 OBO",
+   "verdict": "live-cousin",
+   "why": "2026-11-02: eBay copy of poshmark:6abe04cc4765b09d58d45e8f (laurel-wreath crest ash L), same title/price, Fate Finds (943). Noted on that card."
+  },
+  {
+   "id": "etsy:4604581311",
+   "title": "Vintage University of Alabama Grey Sweatshirt XL (Russell) $58.90 + $28 ship",
+   "verdict": "cousin",
+   "why": "2026-11-02: opened + eyeballed — Russell Athletic ash, arched charcoal-fill crimson-outline ALABAMA over the full university seal, tag XL fits L, 23.5in p2p x 26in, no holes/stains; BlixVintage (FedEx intl). No ALUMNI banner. Carded."
+  },
+  {
+   "id": "poshmark:6a754a0a98bbf365d5f15d38",
+   "title": "Vintage 1980s Alabama Crimson Tide Jerzees Russell Gray Sweatshirt XL $150",
+   "verdict": "cousin",
+   "why": "2026-11-02: opened — Jerzees (Russell) gray XL, stacked ALABAMA / CRIMSON TIDE spellout with elephant, no seal/ALUMNI; listed Aug 6 at $150. Right-blank cousin, overpriced. Carded."
+  },
+  {
+   "id": "poshmark:6ae5efd2721f58711630cd79",
+   "title": "Alabama Crimson Tide Sweatshirt Mens XL Gray (Gameday Couture) $35",
+   "verdict": "off-target-modern",
+   "why": "2026-11-02: charcoal elephant-A ring print but brand Gameday Couture = modern."
+  },
+  {
+   "id": "alabamavtg:10840882905228",
+   "title": "Vintage Alabama X Russell Grey Sweatshirt Oversized XL $60",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: already sold; grey V-neck with small embroidered A logo."
+  },
+  {
+   "id": "ebay:840081296585",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:287690280031",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:206661460172",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:960133031617",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:128157805646",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:880066380482",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:128166668612",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:800852285306",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:920088683852",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:168827249503",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:236439487951",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:327429354842",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:407333633497",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:820293701010",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:198755683565",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:227584555224",
+   "title": "ebay image-grid screen",
+   "verdict": "off-target-print",
+   "why": "2026-11-02: eyeballed in image grid; no seal/ALUMNI or wrong color"
+  },
+  {
+   "id": "ebay:880069700468",
+   "title": "Champion Alabama Crimson Tide Alumni Red Crewneck Sweatshirt Size LOpens in a new window or tab $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800857406258",
+   "title": "Alabama Alumni Men's 2XL Sweatshirt Red Crewneck 3145Opens in a new window or tab $36.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287690363299",
+   "title": "Nike Alabama Crimson Tide Red Therma Fit Crewneck Sweatshirt Sz XL FootballOpens in a new window or  $19.98",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198748372977",
+   "title": "Pressbox Alabama Crimson Tide Raglan Crop SweatshirtOpens in a new window or tab $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860106079448",
+   "title": "New Listing2009 Alabama Crimson Tide Sweatshirt Mens Sz L National Champions HoodedOpens in a new wi $16.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:366777482645",
+   "title": "New ListingVintage Alabama Crimson Tide Sweatshirt Mens Sz Large Crewneck Red Made In USAOpens in a  $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:257826913335",
+   "title": "Nike Alabama Crimson Tide Red Pullover Perforated Sweatshirt Men's Size LargeOpens in a new window o $27.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:227589531748",
+   "title": "University of Alabama Bama Applique Sweatshirt Black Size M Cute Gameday PreppyOpens in a new window $28.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128164941805",
+   "title": "Alabama Crimson Tide Vantage 2XL Gray Quarter Zip Pullover Sweatshirt NCAAOpens in a new window or t $23.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237147801641",
+   "title": "Mens Alabama Crimson Tide Red Pullover Hoodie Sweatshirt Adult Size XLOpens in a new window or tab $17.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820304895370",
+   "title": "New ListingAlabama Crimson Tide Men's Hoodie Colosseum Athletics Black Size XLOpens in a new window  $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:900056862276",
+   "title": "New ListingUniversity of Alabama Crimson Tide Hoodie XL RedOpens in a new window or tab $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237153010406",
+   "title": "University of Alabama Women's Crewneck SweatshirtOpens in a new window or tab $3.50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:389435138129",
+   "title": "Cotton Exchange Alabama Shirt Crimson Tide Gray Sweatshirt Size Medium USA MadeOpens in a new window $19.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:257825093616",
+   "title": "Vintage 90s Alabama Crimson Tide Teddy Bears Spell Out College Sweatshirt Sz 2XLOpens in a new windo $200.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117498878037",
+   "title": "New ListingGildan Alabama Crimson Tide Gray Crewneck Sweatshirt Mascot GraphicOpens in a new window  $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:147660884224",
+   "title": "New ListingAlabama Crimson Tide \"A\" Pullover Hoodie Sweatshirt - Red/GrayOpens in a new window or ta $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128169768889",
+   "title": "New ListingVintage Alabama Crimson Tide Wins 1993  Sweatshirt 2XL FootballOpens in a new window or t $49.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117499053143",
+   "title": "New ListingAlabama Crimson Tide Sweatshirt Womens Medium Red Nike Therma Fit HoodieOpens in a new wi $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800847870092",
+   "title": "Alabama Crimson Tide Hoodie Mens M Black Embroidered Pullover Sweatshirt NCAAOpens in a new window o $24.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860095658380",
+   "title": "Alabama Crimson Tide Nike Hoodie Mens M Gray Military Pullover Lightweight NEWOpens in a new window  $28.48",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198748371733",
+   "title": "League Alabama Crimson Tide Women's Oatmeal Crew SweatshirtOpens in a new window or tab $18.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860096010735",
+   "title": "Alabama Crimson Tide Crewneck Sweatshirt Size M White Russell Athletic VintageOpens in a new window  $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128168349125",
+   "title": "New ListingAlabama ”Crimson Tide” Nike Jacket Mens Size Large NCAA Football Opens in a new window or $34.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198651244544",
+   "title": "Alabama Crimson Tide Sweatshirt Men's Large Gray Nike Dri-FIT On-Field FootballOpens in a new window $27.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:407332750138",
+   "title": "New ListingVintage Alabama Crimson Tide Elephant Roll Tide Autographed Sweatshirt Size LOpens in a n $149.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117495375118",
+   "title": "Colosseum Athletics Alabama Crimson Tide Hoodie Men’s Large Black Red PulloverOpens in a new window  $16.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377611188562",
+   "title": "Alabama Crimson Tide Sweatshirt Mens Medium Crimson NCAA Proedge FleeceOpens in a new window or tab $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:307250562068",
+   "title": "Colosseum Athletics Alabama Crimson Tide Red/White Pullover Hoodie, Size MOpens in a new window or t $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237152954850",
+   "title": "Alabama Crimson Tide Women's Crewneck SweatshirtOpens in a new window or tab $4.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:900038190549",
+   "title": "Alabama Crimson Tide Gray Pullover Hoodie Sweatshirt Embroidered XLOpens in a new window or tab $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:307259009037",
+   "title": "Vintage 1994 Alabama Crimson Tide Iron Bowl Sweatshirt XL Tee Jays Bama CrewneckOpens in a new windo $38.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800753776437",
+   "title": "Alabama Crimson Tide Colosseum Hoodie Sweatshirt Mens M Black NCAA FootballOpens in a new window or  $12.72",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198572415973",
+   "title": "Alabama Crimson Tide Nike Legacy Stitched Logo Pullover Hoodie Men's Size LOpens in a new window or  $79.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:127972495257",
+   "title": "Alabama Crimson Tide Sweatshirt Mens Red NCAA Football Cotton Exchange HoodieOpens in a new window o $24.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:236933164227",
+   "title": "NWT University Of Alabama Alumni 1/4 Zip Vest - Shirt Shop - XLOpens in a new window or tab $69.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237147727080",
+   "title": "Nike Alabama Crimson Tide Sweatshirt Medium Camo Military Appreciation PulloverOpens in a new window $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:236960412130",
+   "title": "VINTAGE Alabama Crimson Tide Sweatshirt Mens XL Red Black Football Crewneck SECOpens in a new window $33.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860101051446",
+   "title": "Red Alabama Crimson TideOpens in a new window or tab $26.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:366762627403",
+   "title": "Alabama Hoodie Medium Adult Crimson Tide Sweatshirt Red NCAA PocketsOpens in a new window or tab $13.37",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117493010196",
+   "title": "COLOSSEUM ATHLETICS-ALABAMA CRIMSON TIDE-Men’s Sz.M-1/4 Zip Sweatshirt-Black/RedOpens in a new windo $11.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137890231338",
+   "title": "Women's Concepts Sport White Alabama Crimson Tide Sienna Notch ...Opens in a new window or tab $35.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:188830221075",
+   "title": "Champion Men's White Alabama Crimson Tide Team Fleece Pullover SweatshirtOpens in a new window or ta $32.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128160118869",
+   "title": "Vtg 90s Red Oak Alabama Crimson Tide Embroidered Mock Neck Shirt Ladies L NCAAOpens in a new window  $16.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128170388739",
+   "title": "New ListingVintage 90s Alabama Crimson Tide Sweatshirt Men XL Iron Bowl Graphic Double SideOpens in  $79.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:168832421127",
+   "title": "New ListingGribble Alabama Crimson Tide Sweatshirt Maroon Mens Medium Vintage Made in USAOpens in a  $54.14",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:206668645006",
+   "title": "New ListingVintage 90s Sweatshirt University of Alabama National Title Sugar Bowl 1993Opens in a new $49.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:307260815796",
+   "title": "New ListingVintage 1991 Fiesta Bowl Alabama Vs Louisville College Football Sweatshirt XLOpens in a n $39.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:880072604032",
+   "title": "New ListingVintage 90s Alabama Auburn Tennessee Sweatshirt Large Tee Jays The Good Bad UglyOpens in  $49.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800863614750",
+   "title": "New ListingVintage 90s Alabama State University Crewneck Sweatshirt SSI Mens XL Black GoldOpens in a $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:407331457285",
+   "title": "New ListingVintage 80s Russell Athletic Alabama Bama Sweatshirt Large Crimson Red USA MadeOpens in a $17.10",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:840081845971",
+   "title": "New ListingVintage 90s Red Oak Alabama Crimson Tide College Sweatshirt Size Large Opens in a new win $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237155820200",
+   "title": "Alabama Crimson Tide BAMA Sweatshirt Adult Medium Gear For Sports Red VTGOpens in a new window or ta $24.69",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137892274317",
+   "title": "VINTAGE GEAR FOR SPORTS ALABAMA EMBROIDERED CREW SWEATSHIRT ( MENS L )Opens in a new window or tab $16.80",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820302919952",
+   "title": "Women's  Natural Alabama Crimson Tide Campus Vintage Wash Fleece SweatshirtOpens in a new window or  $74.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920093043047",
+   "title": "Alabama Nike Sweatshirt Mens XL Red V Neck Center Swoosh RARE Y2K VTG 90sOpens in a new window or ta $30.22",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:327432910162",
+   "title": "Vintage Alabama Crimson Tide 1990 Sugar Bowl 1989 SEC Champions Sweatshirt LOpens in a new window or $46.75",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800860339202",
+   "title": "VTG 1993 Sugar Bowl Sweatshirt USF&G National Championship Miami vs. Alabama XLOpens in a new window $38.69",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920091662680",
+   "title": "VTG 2000s Alabama Crimson Tide spell out hoodie sweatshirt red LargeOpens in a new window or tab $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117496022762",
+   "title": "Vintage 90s Tultex Alabama Crimson Tide Sweatshirt Crewneck 3XL Maroon Spellout Opens in a new windo $32.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137888682135",
+   "title": "Vintage Alabama Crimson Tide Gray Crewneck Sweatshirt Medium 90s USA Beefy HanesOpens in a new windo $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920085372009",
+   "title": "Vintage Alabama Crimson Tide Hoodie Mens XL Red NCAA Football Sweatshirt 90sOpens in a new window or $10.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920085373446",
+   "title": "VTG 1990s Alabama Crimson Tide Graphic Crewneck Tee Jays Size XXL College USAOpens in a new window o $10.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237153414935",
+   "title": "Vintage South Alabama Jaguars Sweatshirt Mens 2XL College Soffe Fleece CrewneckOpens in a new window $19.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:147658603019",
+   "title": "Vintage University of Alabama Crimson Tide SEC Champions 1992 Sweatshirt Size LOpens in a new window $69.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287692788382",
+   "title": "Vintage 1992 Alabama National Champions Sweatshirt Dixie's Pride Crimson TideOpens in a new window o $39.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128164986956",
+   "title": "Vintage 1980s Alabama - Teddies are Bama Fans Too! - Graphic Sweatshirt.Opens in a new window or tab $60.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:307257432766",
+   "title": "Vintage Alabama Crimson Tide Sweatshirt Mens M Red NCAA Team Crewneck SweaterOpens in a new window o $24.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377608510494",
+   "title": "Vintage Gulf Shores Longboards Sweatshirt Size Large Tan Alabama Surfer CrewneckOpens in a new windo $12.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:840075218438",
+   "title": "VTG Tultex Women's Alabama Crimson Tide Sweatshirt Crewneck Gray Sz XXL USAOpens in a new window or  $25.89",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137886464933",
+   "title": "Vintage Gear for Sports Sweater Men S University of Alabama Roll Tide Fleece 90sOpens in a new windo $34.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800853610865",
+   "title": "Vintage Alabama Crimson Tide Crewneck Sweatshirt Woman Size L Silver TultexOpens in a new window or  $42.77",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820293407425",
+   "title": "Vtg Nike Team Alabama Crimson Tide Center Swoosh Hoodie Small FLAWS THRASHEDOpens in a new window or $39.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:366769552853",
+   "title": "Vintage Orange Beach Alabama Sweatshirt Mens XL Crewneck Embroidered USA MadeOpens in a new window o $22.49",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137884576242",
+   "title": "Vtg Y2K  Alabama Crimson Tide Starter XL quarter zip Pullover Fleece SweatshirtOpens in a new window $40.66",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800852369951",
+   "title": "Alabama Birmingham Blazers 50/50 Blended 8-Ounce Vintage Crewneck SweatshirtOpens in a new window or $35.68",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137884128773",
+   "title": "Vintage Alabama Crimson Tide Sweatshirt Mens 2XL Red Crewneck Roll Tide NCAA 90sOpens in a new windo $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860094825873",
+   "title": "Vintage Alabama Crimson Tide Victory Hoodie Mens M Red Logo Pullover SportyOpens in a new window or  $23.67",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:960128793906",
+   "title": "Vintage 2009 Alabama Crimson Tide Allstate Sugar Bowl Sweatshirt / LargeOpens in a new window or tab $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:880061451170",
+   "title": "Vintage Boys Starter Alabama 2pc Red Fleece Sweatsuit Set  Size 6/7 Roll TideOpens in a new window o $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128159969059",
+   "title": "Vintage 90s Alabama Crimson Tide Energizer Bunny Graphic Sweatshirt Gray LargeOpens in a new window  $53.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:267824584853",
+   "title": "Vintage Alabama Crimson Tide Salem Sportswear Sweatshirt Men’s Medium 90’s USAOpens in a new window  $59.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377597585203",
+   "title": "Alabama Tide Sweatshirt Mens Large Red Nike Quarter Zip Vintage Pockets FootballOpens in a new windo $34.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:227590000702",
+   "title": "VTG 90s Jerzees University of North Alabama Lions Sweatshirt 2X Mens GrayOpens in a new window or ta $21.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:146968604670",
+   "title": "Alabama Crimson Tide Sweatshirt Mens Large Red NCAA Football Crewneck PulloverOpens in a new window  $20.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:960138138991",
+   "title": "Galt Sand Harvard Crimson Red Crewneck Sweatshirt XL Made in USAOpens in a new window or tab $40.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287692275644",
+   "title": "Vintage White Alabama Crimson Tide T Shirt Size MOpens in a new window or tab $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:147657009583",
+   "title": "Vintage Notre Dame Galt Sand Crew Neck Sweatshirt Pullover Fighting Irish LargeOpens in a new window $32.94",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:940050050935",
+   "title": "Alabama Crimson Tide Elephant Sweatshirt WomenS Gray Football Bow Graphic LG NEWOpens in a new windo $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:168825360775",
+   "title": "Vintage Galt Sand Polo Team Graphic T-Shirt Green LOpens in a new window or tab $20.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:168828799224",
+   "title": "Vintage 90s Galt Sand Indiana University Hoosiers Football Jersey Tee Large IUOpens in a new window  $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:960120287480",
+   "title": "Vintage Galt Sand Notre Dame Fighting Irish Crewneck Sweatshirt Mens XL NavyOpens in a new window or $26.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:840082501687",
+   "title": "New ListingVintage USF University of South Florida Galt Sand T Shirt Mens Large GreenOpens in a new  $21.47",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:168831311915",
+   "title": "New ListingGalt Sand Sweatshirt Mens Medium White Bachrach Polo Team Graphic FleeceOpens in a new wi $27.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198762782438",
+   "title": "New ListingVintage 90s Alabama Crimson Tide Team Apparel Windbreaker Pullover Jacket MOpens in a new $28.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:336870544503",
+   "title": "Galt Sand 90s Vintage Temple University Crewneck Sweatshirt Mens L DistressedOpens in a new window o $23.74",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:158216215408",
+   "title": "Vintage Alabama Crimson Tide Flintstones T-Shirt Large Made In USA Football 1994Opens in a new windo $64.93",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:147661154999",
+   "title": "New ListingComfort Colors TuskWear University of Alabama Crimson Tide Gray Pocket T-ShirtOpens in a  $10.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:336873614691",
+   "title": "New ListingVTG Galt Sand ST JOHNS RED STORM Mens XL Sweatshirt College Crew NeckOpens in a new windo $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920083230724",
+   "title": "TuskWear Collection Alabama Crimson Tide Gray/White Striped Polo Shirt Size LOpens in a new window o $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117427919873",
+   "title": "Vintage 90s Galt Sand University Michigan Collegiate Crest Crewneck USA LargeOpens in a new window o $39.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860104904810",
+   "title": "New ListingArkansas Razorbacks T-Shirt Red Galt Sand Large Made in USAOpens in a new window or tab $22.54",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:137893556041",
+   "title": "New ListingGalt Sand Yale Bulldogs Blue Crewneck Pullover Sweatshirt Thick and CozyOpens in a new wi $39.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:407332304467",
+   "title": "New ListingVintage Alabama Crimson Tide Shirt Mens Large 1992 National Champs 50/50 JerzeesOpens in  $17.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:147368148512",
+   "title": "Vintage 80s Alabama Crimson Tide Block A Elephant T Shirt Made by Russell in USAOpens in a new windo $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:407331629703",
+   "title": "New ListingSouthern Tide Auburn Tigers Gray Embroidered Logo Crew Neck Sweatshirt Size LOpens in a n $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:840076273618",
+   "title": "Vintage Galt Sand Notre Dame Fighting Irish Crewneck Sweatshirt X-LargeOpens in a new window or tab $16.28",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920092584223",
+   "title": "Vintage Galt Sand Notre Dame Fighting Irish Crewneck Sweatshirt LargeOpens in a new window or tab $33.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:278148210415",
+   "title": "Vtg Galt Sand American Eagle Outfitters Sweatshirt Golden Retriever Dog MediumOpens in a new window  $42.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:860087691742",
+   "title": "VTG 90s Jerzees Alabama Crimson Tide Open Cardigan USA L Stained Ribbon Big AlOpens in a new window  $17.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:117495495360",
+   "title": "Vintage 1980s University of Indiana Basketball Big 10 Champs L Galt Sand T ShirtOpens in a new windo $44.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:960137260738",
+   "title": "VINTAGE Michigan Wolverines Sweatshirt Mens Medium Galt Sand Crewneck NCAA 90sOpens in a new window  $39.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:189061509304",
+   "title": "Vintage Galt Sand Shirt Mens Large Brown Safari India Bengal Tiger Graphic TeeOpens in a new window  $26.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:336771962121",
+   "title": "Orvis Galt Sand Fly Fishing Sweatshirt Mens Large Green Graphic Fleece CrewneckOpens in a new window $31.58",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:366641013250",
+   "title": "Vintage Alabama Crimson Tide Sweatshirt Mens Medium Red NCAA Football Logo 7Opens in a new window or $28.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:237152936714",
+   "title": "Alabama Women's Crewneck SweatshirtOpens in a new window or tab $4.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:800450321063",
+   "title": "VTG Alabama Crimson Tide Hoodie Mens Large Red Hooded Sweatshirt NCAA FootballOpens in a new window  $9.98",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:366666837719",
+   "title": "University Of Alabama Sweatshirt Womens Size Large Gray Embroidered SweaterOpens in a new window or  $14.44",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820305104226",
+   "title": "New ListingVintage 90s Alabama Roll Tide T Shirt Mens XL Red Russell Athletic Made In USA Opens in a $37.46",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:880072124905",
+   "title": "New ListingAlabama Crimson Tide Team Starter Vintage Gray Long Sleeve T-Shirt Size 2XLOpens in a new $34.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128164892688",
+   "title": "Vintage University of Tennessee Vs Alabama Graphic T Shirt XL 90s Single Stitch Opens in a new windo $49.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920087917526",
+   "title": "Vintage Alabama Crimson Tide Football T Shirt Large Red Graphic Tee MenOpens in a new window or tab $17.93",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287663280714",
+   "title": "Alabama Crimson Tide Jersey Youth M Artex Nylon / Polyester 80s Retro VintageOpens in a new window o $14.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820261310653",
+   "title": "Rare Vintage 90s Alabama Crimson Tide Shirt Faded Big Graphic Savvy Mens XL Opens in a new window or $29.70",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820261310651",
+   "title": "Vintage Alabama Crimson Tide Pocket T Shirt Mens XL Red Big Logo Elephant USAOpens in a new window o $21.60",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287658854735",
+   "title": "VTG 90s Starter university of Alabama crimson tide Xl XXL USAOpens in a new window or tab $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:960083760648",
+   "title": "Vintage University of Alabama Crimson Tide T-Shirt Bama Football Graphic Tee LOpens in a new window  $15.92",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:920049398211",
+   "title": "Vtg Elert Men's University Of Alabama T-Shirt Roll Tide Graphic Gray USA Size LOpens in a new window $24.79",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:840031479481",
+   "title": "Vintage Alabama museum of Natural History Auburn university 1998 Mens XL BlueOpens in a new window o $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377575865287",
+   "title": "Vintage 90s Russell Athletic University Of Alabama Roll Tide T-Shirt - LOpens in a new window or tab $49.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377571275104",
+   "title": "Vintage 90s Jansport University of Alabama Mom Embroidered Crewneck Size MOpens in a new window or t $27.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287648667478",
+   "title": "Vintage Alabama Crimson Tide Single Stitch Jerzees T Shirt Large University Opens in a new window or $10.80",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:900013793061",
+   "title": "Vintage Alabama Crimson Tide Nutmeg Sweater Mens XL White Cotton Knit Opens in a new window or tab $55.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:940014374382",
+   "title": "Vintage 2000s Alabama Crimson Tide T Shirt Mens Large Red Roll Tide CollegeOpens in a new window or  $22.80",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:307231411747",
+   "title": "Vintage Alabama Crimson Tide Terry Apparel Gray Knit Sweater Elephant USA XLOpens in a new window or $59.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:206622937361",
+   "title": "Vintage Russell Athletic Alabama Crimson Tide \"BAMA\" T-Shirt Men's Large RedOpens in a new window or $20.46",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:287623919022",
+   "title": "VINTAGE Bama Basketball University of Alabama Shirt Mens XL RedOpens in a new window or tab $21.15",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:267802295576",
+   "title": "University of Alabama Vintage Red Elephant  Mens M Pocket T-Shirt Crew NeckOpens in a new window or  $15.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:128111837259",
+   "title": "Vintage University of Alabama Sweater Mens XL Red Steve & Barrys Crimson TideOpens in a new window o $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377537525029",
+   "title": "VTG University of Alabama Crimson Tide 1990 Sugar Bowl T Shirt L Red Vintage Opens in a new window o $35.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377535239826",
+   "title": "Vintage Russell University Of Alabama Sweater Mens XXL Crewneck Pullover GraphicOpens in a new windo $34.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:227546921650",
+   "title": "Vintage 1990s Y2K University Alabama Roll Tide Mascot Art T-Shirt XL Barely WornOpens in a new windo $37.50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:377534663197",
+   "title": "Vintage Alabama Roll Tide Shirt Size Medium Gray University Logo College NCAAOpens in a new window o $19.95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:198678592944",
+   "title": "VTG 1998 Alabama A&M University Homecoming Tee LargeOpens in a new window or tab $59.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:820190637322",
+   "title": "Vintage Alabama University T-Shirt College Tee size XL with quoteOpens in a new window or tab $14.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:227545918288",
+   "title": "Vintage The University Of Alabama Shirt Mens Size Small Gray Graphic Roll TideOpens in a new window  $16.40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:178537097393",
+   "title": "vintage university of alabama roll tide russell athletics hoodie size xlOpens in a new window or tab $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:257770024149",
+   "title": "VTG 1990s Nike University Of Alabama Athletic Dept. Large Tshirt Made In USAOpens in a new window or $20.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:168730958352",
+   "title": "Vintage 90’s Alabama Crimson Tide University Retro 2XL Comfy Crewneck SweatshirtOpens in a new windo $20.88",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:327376083337",
+   "title": "VTG 90s University of Alabama Roll Tide Tultex White T Shirt Men's Size XLOpens in a new window or t $19.97",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:178527294245",
+   "title": "Vintage Alabama Crimson Tide Starter Sweatshirt 3XL (fit 2XL) Crewneck EmbroiderOpens in a new windo $26.62",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "ebay:178526330017",
+   "title": "Vintage 1992 Alabama SEC Football Championship Sweatshirt Gray Crewneck JH 92Opens in a new window o $117.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae52f1ec840d3c7481537bb",
+   "title": "Alabama-Alumni-Mens-2XL-Sweatshirt-Red-Crewneck-3145 $38",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae3ad9c09c3e3ce5025e47d",
+   "title": "Alabama-Crimson-Tide-Hoodie-Mens-M-Pro-Weave-Pullover-Sweatshirt-Reverse-Weave $27",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae391efed364ee2527611f4",
+   "title": "Champion-Eco-University-of-Montevallo-Crewneck-Sweatshirt-Mens-L-Charcoal-Grey $35",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae268cf78e01d01ef65e4f3",
+   "title": "Jansport-Alabama-Crimson-Tide-Hoodie-Small-Red-White-Bama-Elephant-Pullover $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6d363721f586255ab43b9",
+   "title": "University-of-Alabama-A-Pullover-Black-ScubaKnit-Quarter-Zip-Aemi-Co-NWT-L $50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae88296c5c2ed12e4ae9011",
+   "title": "Vintage-Alabama-Crewneck-Sweatshirt-Grey-Block-Letter-Classic $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae877a91a166deda84c8616",
+   "title": "Vintage-Alabama-Crimson-Tide-Sweatshirt-Men-XXL-Crewneck-Cut-Off-Sleeveless-Vest $18",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85f4dd95f1d1ed658c702",
+   "title": "Vintage-Russell-Athletic-Sweatshirt-Mens-Medium-Green-Crewneck-Blank-90s-Casual $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85d97f260b958fe16dc7c",
+   "title": "Vintage-1992-Alabama-CrimsonTide-National-Champions-Sweatshirt-Retro-College $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85d7247042638f0d073ee",
+   "title": "Alabama-CrimsonTide-Sweatshirt-RollTide-Football-Crewneck-Cute-Game-shirt-HJ45 $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85c59567fd8fd942a8b24",
+   "title": "1992-Alabama-vs-florida-sweet-revenge-Sweatshirt-shirt $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85c07f260b9b7be16d84b",
+   "title": "Alabama-CrimsonTide-Alabama-NCAA-Alabama-mickey-goofy-Sweatshirt-white $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85baf567fd809512a88a8",
+   "title": "Crimson-Tide-Alabama-1892-Sweatshirt-shirt-sand $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae85d5847042675f8d073c1",
+   "title": "Alabama-crimson-tide-Crewneck-Sweatshirt-Tshirt-1892-Retro-Football $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae83d6dd3de659840d56f26",
+   "title": "Vintage-Alabama-Crimson-Tide-Wins-1993-Sweatshirt-2XL-Football $50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae7b1bb3738535bad5b6977",
+   "title": "Vintage-90s-Tultex-University-of-Alabama-Pullover-Crewneck $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae79a6337385351194d2942",
+   "title": "Vintage-1991-Fiesta-Bowl-Alabama-Vs-Louisville-College-Football-Sweatshirt-XL $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae78b02c1c79e32e7469a86",
+   "title": "Fruit-of-the-Loom-Sweatshirt-Womens-L-Gray-Alabama-Crimson-Tide-1993-Sugar-Bowl $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae785b8f314c215cc80f9f1",
+   "title": "Travis-Scott-x-Mitchell-Ness-Alabama-Crewneck-Sweatshirt-NWT-L-Tan-Pump-Cover $95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae77c8b98bbf3a367fc73be",
+   "title": "Nike-Sweatshirt-S-Alabama-Crimson-Tide-Crewneck-Heather-Gray-Pullover-Vintage $24",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae7753be625d281c67f8a58",
+   "title": "Vintage-90s-Made-in-USA-Russell-Athletic-VNotch-Sweatshirt-Large-Red $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae76f8a875d65a2b44d7f64",
+   "title": "Champion-Auburn-University-Sweatshirt-Gray-Heather-Crewneck-Pullover-S-War-Eagle $17",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6f7e85551aafa9d108fc6",
+   "title": "VINTAGE-Russell-Athletic-Alabama-Crimson-Tide-Red-Crewneck-Sweatshirt $95",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6bf44e6776ce705df0916",
+   "title": "Comfort-Colors-The-Hangout-Gulf-Shores-Alabama-Quarter-Zip-Pullover-Black-XL $24",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6b571260ae2970a54fdad",
+   "title": "Vintage-80s-Alabama-Crimson-Tide-sweatshirt $24",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae68f6d17a3c42493a2ce2a",
+   "title": "Alabama-Crimson-Hoodie-Sweatshirt-Women $18",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae63f4cd776bd30b1257b4d",
+   "title": "Vintage-JanSport-Alabama-Crimson-Tide-Hoodie-Red-Y2K-Women-Medium $22",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6297fb5522313f86ceee2",
+   "title": "Retro-Vintage-Alabama-Crewneck-Sweatshirt $27",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae610881ae900336546739d",
+   "title": "Vintage-80s-Russell-Athletic-Alabama-Bama-Sweatshirt-Large-Crimson-Red-USA-Made $19",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae5d43d9ea6e20a655a8641",
+   "title": "Vintage-90s-Alabama-Crimson-Tide-Sweatshirt-Mens-S-Crewneck-Red-Made-In-USA $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae5c256ead45fbb2f6b988e",
+   "title": "Alabama-Crimson-Tide-14-Zip-Fleece-Mens-Large-Maroon-Pullover-Colosseum $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae47709f61f8141017959cf",
+   "title": "Champion-Alabama-Crimson-Tide-Sweatshirt-Mens-XL-White-Football-Helmet-Graphic $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae537edde4883c144234c0a",
+   "title": "Y2K-2000s-Nike-Team-Alabama-Crimson-Tide-Vintage-Crewneck-Sweatshirt-Size-Small $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae52f0830122a6b2262b4ae",
+   "title": "Gildan-Sweatshirt-Men-Small-Red-Gulf-Shores-AL-Fish-Graphic-Pullover-01974 $13",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae5244242b6ad330576beb4",
+   "title": "vintage-university-of-alabama-football-crimson-tide-russell-athletics-crewneck $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae51c0656502bf151321e02",
+   "title": "VINTAGE-Alabama-Sweatshirt-Crimson-Tide-Football-Game-Day-Spirit-Size-Medium $155",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae506e79d7e08cee7752402",
+   "title": "Y2K-University-of-Alabama-Roll-Tide-Hoodie-Crimson-Pro-Player-Embroidered-Large $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae503e456502b85fe3103ee",
+   "title": "Vintage-1992-Alabama-National-Champions-Sweatshirt-Dixies-Pride-Crimson-Tide $39",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae4e5a01a24d0c5b65e1731",
+   "title": "Russell-Athletic-Alabama-AM-University-Hoodie-Sz-XL-Youth-Gray-Bulldogs-Graphic $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae485ac71a0035e35272db9",
+   "title": "Vintage-Y2K-Old-Varsity-Brand-Alabama-Hoodie-Unisex-S-Black-Crimson-Tide-NCAA $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae41651839f7ae38d28e749",
+   "title": "Vintage-Alabama-Hoodie-Sweatshirt-Sz-L-Country-Music-Band-Tour-Maroon-Fit-Small $100",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae3ec807049a170782b8519",
+   "title": "Vintage-Alabama-Crimson-Tide-Crewneck-Woman-Size-Large-Silver-Boulder-Tultex $65",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae3bcb0eeedbe3c4760c8e8",
+   "title": "Vtg-Alabama-Crimson-Tide-Sweatshirt-L-Pullover-Made-In-USA-Nutmeg-READ $19",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae38c2a684147c12f793452",
+   "title": "Vintage-00s-Gray-Alabama-Crimson-Tide-hoodie-College-embroidered-size-large $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae389538091ef7cfa33d441",
+   "title": "Vintage-Alabama-Crimson-Tide-Starter-Crewneck-Sweatshirt $34",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae36dfe43ca2bf8df47448c",
+   "title": "Vintage-MV-Sport-Alabama-Crimson-Tide-NCAA-College-Football-Crewneck-Sweatshirt $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae62659d721dee794cfeca7",
+   "title": "Alabama-Crimson-Tide-Red-Crewneck-Sweatshirt-AlabamaNew-with-tags $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae77d1ca0b9358dac745c6d",
+   "title": "Nike-Crimson-Red-Alabama-Sweatshirt $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae7b6a24985e8821a078fb1",
+   "title": "Alabama-Crimson-Red-Hooded-Sweatshirt $8",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae7882931f0f6a5428fce71",
+   "title": "Jansport-Red-Alabama-Graphic-Crewneck-Sweatshirt $35",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae825cf72e62486de3e15b8",
+   "title": "Champion-Alabama-Crimson-Tide-2XL-Gray-Sweatshirt $18",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae376b268414747ac6c45e1",
+   "title": "Barbie-University-Cheerleader-Alabama-Crimson-Tide-1996-Sealed-19170 $97",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6f5b517a3c471cfa55cf9",
+   "title": "Jerzees-Blue-Gulf-Shores-Alabama-Crewneck-Sweatshirt $15",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae4a69e1b53fe05258cf8bb",
+   "title": "Champion-Alabama-Crimson-Tide-Reverse-Weave-Crewneck-Sweatshirt-Gray-Sweatshirt $20",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae656b0046d1fba3b9f48cc",
+   "title": "Alabama-Crimson-Tide-Womens-Small-Red-Sweatshirt-Crewneck $24",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae743ff260ae2e1d9836be0",
+   "title": "Alabama-Crimson-Tide-Hoodie-Mens-M-Red-2011-BCS-National-Champions-NCAA-Football $17",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6abbe7bddc94350f0caf96fa",
+   "title": "Vintage-90s-Alabama-Crimson-Tide-Jerzees-Hoodie-XL-Red-College-NCAA $36",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6abaf42000a65ab835b6b7f3",
+   "title": "VTG-90s-Alabama-Crimson-Tide-Sugar-Bowl-Crewneck-Sweatshirt-XXL-23x30 $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aafc18cdb942061bce8d21b",
+   "title": "Vintage-1992-Alabama-Crimson-Tide-National-Champs-Sweatshirt-Jerzees-USA-M $80",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aaf26b96b7a0e1b8ee51aa1",
+   "title": "Jerzees-Sweatshirt-Mens-L-Red-Alabama-Crimson-Tide-Bleach-Wash-Vintage-90s-USA $37",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aaaed158974d08eab94fd43",
+   "title": "Vintage-90s-Hoodie-Jerzees-Little-Devil-Zip-Up-Mens-M-Made-In-USA-Russell-80s $500",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aa782f92fc9f8cf8a5701c6",
+   "title": "Alabama-Crimson-Tide-Sweatshirt-Crop-Top $11",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aa40e5476de0035585b74de",
+   "title": "VTG-Jerzees-Nublend-Alabama-Crimson-Tide-Hoodie-Mens-2XL-Gray-Sporty-Streetwear $51",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aa2e321d733737ed4bad385",
+   "title": "Size-2XL-Mens-Orange-Beach-Alabama-Anchor-Compass-Graphic-Crewneck-Sweatshirt $18",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae210df3dfc000338d42a25",
+   "title": "Vintage-1987-Alabama-Crimson-Tide-Elephant-Crewneck-Sweatshirt-Made-in-USA $55",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a9a10ce1e28d3af8cbe11da",
+   "title": "Vintage-Alabama-Crimson-Roll-Tide-Sweatshirt-Crewneck-Large-Red-Football-Jerzees $26",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a8dc02f05ce575e99f7aed4",
+   "title": "Jerzees-Dark-Gray-Orange-Beach-Alabama-Nautical-Crewneck-Sweatshirt $12",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a8cc913353534512627f728",
+   "title": "Vintage-Jerzees-Sweatshirt-Mens-3XL-Gray-Fleece-Pullover-USA-Crew-Neck $29",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a86d8098d409cc283def008",
+   "title": "Vintage-Jerzees-Sweatshirt-Womens-Large-Blue-Snowmen-Melt-Your-Heart-Fleece-80s $27",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a8327b6cf8005172b1c845d",
+   "title": "Vintage-Alabama-Crimson-Tide-Sweatshirt-Mens-Medium-Red-NCAA-Football-JERZEES $19",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6aca2cb413a64716e4456fb3",
+   "title": "Limited-Edition-Notre-Dame-Championship-Hoodie $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac64c791b7e509db90cb56b",
+   "title": "Alabama-AM-Bulldogs-Sweatshirt-Mens-Large-Gray-NCAA-Football-Jerzees-Crewneck $19",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a736f55c6e38a81097113ef",
+   "title": "CHEAHA-STATE-PARK-ALABAMA-Quarter-Zip-Pullover-Large-Green-Vintage-Sweatshirt $60",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac2c00f0ef1433002e4e6d3",
+   "title": "Jerzees-Vtg-90s-Bama-Alabama-Crewneck-Sweatshirt-Unisex-XL-Crimson-Tide-USA-Flaw $20",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ab50564aa5c23ce8158cf52",
+   "title": "Auburn-Tigers-Sweater-Men-M-Navy-Blue-NCAA-College-Football-Pullover-Alabama $15",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a754ddbd0e933f6f8f0a298",
+   "title": "Vintage-80s-Galt-Sand-Auburn-University-Tigers-Est-1856-Sweatshirt-Youth-XL-20 $85",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6acb528a3ae6c15964bde18b",
+   "title": "Vintage-Alabama-Crimson-Tide-Shirt-Mens-Medium-Red-Long-Sleeve-NCAA-Football $32",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a4ce886a6bb7695718afe41",
+   "title": "Vintage-Alabama-Crimson-Tide-Sweatshirt-mens-large-red-crewneck-galt-sand-1990s $45",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad1750f721f58d73c5ee90f",
+   "title": "University-of-Alabama-Crimson-Tide-crewneck-sweatshirt-Galt-Sand-1990s-vintage $28",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:699cd187a9510560a67b4d92",
+   "title": "Vintage-90s-Galt-Sand-University-of-Alabama-Crimson-Tide-Crest-Sweatshirt-Sz-M $50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:684b02029f034c3c4595a529",
+   "title": "Galt-Sand-Large-Alabama-Mens-Maroon-Sweatshirt $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ab2e02343ca2b7050595796",
+   "title": "Galt-Sand-sweatshirt $12",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae47a5b7625b1eac15a16ef",
+   "title": "Galt-Sand-ALASKA-CREWNECK-SWEATSHIRT-VINTAGE $44",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ada27a2192125e28bd75cc2",
+   "title": "Galt-Sand-Vintage-1990s-Galt-Sand-Ohio-State-Buckeyes-Red-Crewneck-Sweatshirt $65",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae742e13ae6c1ea9d35790e",
+   "title": "Galt-Sand-NFL-Embroidered-SF-49ers-Sweatshirt $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad117849b24d0719c98df73",
+   "title": "Galtsand-Mens-Navy-and-Blue-Sweatshirt $70",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6adb4b52253621c079f8e5d1",
+   "title": "Vintage-Galt-Sand-Steelers-Black-and-Yellow-Sweater $50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6acd0d08ecc4f6337a29134b",
+   "title": "Galt-Sand-Gray-Florida-Gators-Henley-Sweatshirt $22",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad6375b17a3c475152b9f52",
+   "title": "Marshall-University-Green-Crewneck-Sweatshirt-Large-Galt-Sand $32",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae61a7e4dfc81c80793407e",
+   "title": "Galt-Sand-KSU-Wildcats-Sweatshirt-Cotton-Poly-Sz-XL-UnisexCrewneckOliveGreen $32",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ab71747571a7e1bff975403",
+   "title": "Vintage-Oregon-Ducks-Sweatshirt-by-Galt-Sand $45",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae39268cf80053954e88d33",
+   "title": "Vintage-Republic-Of-Ireland-Crewneck-Sweatshirt-Galt-Sand-Small-Green-90s $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac819e0b9dd70e18f5d91b4",
+   "title": "90s-Galt-Sands-Native-American-Graphic-Sweatshirt $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ade195388963fd053680742",
+   "title": "Galt-Sand-University-of-Hawaii-sweatshirt-Color-Block-Crewneck-Sweatshirt $119",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae3ca3829572d3533109bcc",
+   "title": "Vintage-Galt-Sand-Polo-Team-Graphic-TShirt-Green-L $20",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae80db0dc943510366f0d29",
+   "title": "Vintage-University-of-Wisconsin-Badgers-Crewneck-Sweatshirt-Galt-Sand-Red-Mens-L $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae68cba78e01df2b31bbcdf",
+   "title": "Vintage-Galt-Sand-Notre-Dame-Fighting-Irish-Crewneck-Sweatshirt-Mens-XL $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac58622ef676cc9399f084d",
+   "title": "GALT-SAND-Mens-Vintage-Sweatshirt-Size-XL $22",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad033ac655f6357d0f98f45",
+   "title": "1997-Packers-Vs-Panthers-T-Shirt-Galt-Sand $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae69babaa5c23e358894241",
+   "title": "Vintage-90s-Galt-Sand-Notre-Dame-Fighting-Irish-Sweatshirt-Navy-L $66",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6a77757083b26c9fa87932d8",
+   "title": "Galt-Sand-Native-sweater $55",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae49de95551aa0738fb87aa",
+   "title": "Vintage-90s-Galt-Sand-Washington-Huskies-Football-Sweatshirt-XL-Double-Sided $60",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6add0275ad242a3e19dee9df",
+   "title": "Vintage-90s-Galt-Sand-US-Army-Crewneck-collectors-item $100",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6adb5f085551aadc304de5e9",
+   "title": "Galt-Sand-Long-Sleeve-Henley-in-Gray-Size-Medium-Like-New $15",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6adcf80783b26ce984b77eab",
+   "title": "Vintage-Yale-University-Crewneck-Sweatshirt-Galt-Sand-USA-Made-Large $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae79c2400a65a0b6d15526c",
+   "title": "Vintage-Galt-Sand-Maryland-Hoodie-Sweater-Mens-L-Red-Collegiate-USA-Made $30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae6681e839f7ae7db3c5511",
+   "title": "Vintage-90s-Memphis-Tigers-Galt-Sand-Sweatshirt-Men-XL-Blue-Graphic-Crewneck $45",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad106a341ae66126cd24968",
+   "title": "Galt-Sand-Mens-Teal-Miami-Dolphins-VNeck-Sweatshirt $60",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae7ce1938693741719b558c",
+   "title": "Vintage-Galt-Sand-Patriotic-Sweatshirt-XL-Blue-90s-USA-American-Flag-Pullover $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae0e6c918ac604564fc1032",
+   "title": "Vintage-90s-Galt-Sand-Florida-Gators-Embroidered-Logo-Henley-Sweatshirt-XL $59",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac299090b34bb9b92d26feb",
+   "title": "Galt-Sand-Vintage-Mens-XL-Ohio-State-Sweater $20",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae3d614b9f4ea8e087931fb",
+   "title": "Don-Rondo-White-Silver-SandsStars-Fell-on-Alabama-45rpm-VG-R94 $11",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae36bc9260ae20382282db6",
+   "title": "Vintage-Wisconsin-Badgers-90s-Galt-Sand-Mascot-Pullover-Sweatshirt-Football-XL $25",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad84db1fa6ace88c8553d07",
+   "title": "Vintage-Northwestern-University-90s-Galt-Sand-Crewneck-Sweatshirt-Size-Small $40",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad8943e00a65adb965fca4b",
+   "title": "Vintage-Galt-Sand-St-Andrews-Sweatshirt-Maroon-Embroidered-XL-Distressed $35",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ac69d2d1a24d0fa47fc1e70",
+   "title": "Vintage-Sand-Island-Alabama-Lighthouse-Figurine-7-Nautical $12",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6acc6bbbef676cfed2215516",
+   "title": "90s-Mens-Galt-Sand-University-of-Colorado-Buffaloes-Sweatshirt-Large $36",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae5c781c6e38acfc5164825",
+   "title": "Vintage-Notre-Dame-Navy-Blue-Galt-Sand-Sweatshirt-XL-USA-Distressed-College $35",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ad6f247c24ea6758bb26163",
+   "title": "Vintage-90s-University-of-Colorado-Boulder-Buffaloes-Buffs-Sweatshirt-Galt-Sand $35",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ab3dd959c93e0806aa8da54",
+   "title": "Vintage-Galt-Sand-Endangered-Crewneck-Size-L $75",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6adb74d2f09fc8b281c2bafb",
+   "title": "Vtg-Galt-Sand-Stanford-University-Red-Sweatshirt-Sz-M-Medium $31",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ab2705332f9340f1f07a512",
+   "title": "GALT-SANDS-University-of-Florida-Football-Gators-Shirt $50",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "poshmark:6ae515ba43ca2b350fbf5d4b",
+   "title": "Vtg-90s-Galt-Sand-Georgetown-University-Sweatshirt-Healy-Hall-Made-in-USA-L $101",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4460220095",
+   "title": "Preview seller ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4557568507",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4605950096",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4607957674",
+   "title": "Preview seller ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4593526203",
+   "title": "Preview seller ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:926701373",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:1649965390",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:1891347399",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4605738310",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4530507941",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4384116286",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "etsy:4593831121",
+   "title": " ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m60158197134",
+   "title": "Vintage Alabama vs Minnesota football hoodie - American Vintage $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m96229119009",
+   "title": "Alabama Crimson Tide Adult Mens S Red Crewneck Sweatshirt NCAA - Gildan $15.30",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m27334501142",
+   "title": "Vintage Alabama Sweater $38.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m72919669472",
+   "title": "The Alabama Crimson Tide Crewneck Sweatshirt Mens XXL Red Pullover - Victory $14.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m36305173972",
+   "title": "Vintage Retro Gray Stillman College Sweater Sweatshirt Pullover Crewneck HBCU S - Russell Athletic $13.54",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m30072432453",
+   "title": "Vintage Alabama Football Longsleeve - Delta Pro Weight $14.71",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m52849049585",
+   "title": "Alabama Sweatshirt Large Gray Excellent Collegiate Applique NCAA School - Champion $23.27",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m27071464073",
+   "title": "Alabama Crimson Tide Sweater Mens Large Gray Crewneck Sweatshirt NCAA - MV Sport $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m89707726808",
+   "title": "VTG Alabama Crimson Tide Sweatshirt NCAA Football Mens S Gray - GEAR FOR SPORTS $15.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m20078784565",
+   "title": "Vintage 90s Arkansas Razorbacks Crewneck Sweatshirt Grey Red Mens XL - LOGO 7 $24.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m60709538427",
+   "title": "vintage university of alabama crimson tide grey collegiate crewneck size large - NCAA $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m66957878885",
+   "title": "Vintage Fredonia State Sweatshirt Gray Size M - Russell Athletic $25.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m97918140735",
+   "title": "Bama Alabama Grey Sweatshirt Women's size Small - Gildan $16.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m57591814219",
+   "title": "Alabama Crimson Tide Gray Crewneck Sweatshirt womens small - MV Sport $12.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m51682007409",
+   "title": "Y2K 2000s Team Alabama Crimson Tide Vintage Crewneck Sweatshirt Size Small - Nike $33.24",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m91581223616",
+   "title": "Vintage Gray Alabama Crimson Tide Sweatshirt Sweater size XL - Logo Athletic $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m11244799223",
+   "title": "Alabama Crimson Tide Chenille Spellout Crewneck Sweatshirt Gray Red L Roll Ride - MV Sport $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m36509114366",
+   "title": "Vintage Alabama Crimson Tide Sweatshirt Gray Mens Medium Pro-Weave - MV Sport $49.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m96884094596",
+   "title": "Sweatshirt Youth Size L Gray Georgia Bulldogs Reverse Weave Crewneck - Champion $28.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m79011699077",
+   "title": "Alabama Crimson Tide Sweatshirt Mens Medium Gray Football Bama - MV Sport $27.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m73855605074",
+   "title": "Vintagge Distressed Gray Alabama Sweatshirt Size XL - Champs $20.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m33522654692",
+   "title": "Vintage Y2K Alabama Crimson Tide Sweatshirt Gray 2XL College - Champion $29.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m41122855332",
+   "title": "Vintage Arizona State Sun Devils Grey Crewneck Sweatshirt Men’s Large - JERZEES $19.99",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m77376517312",
+   "title": "Vintage Reverse Weave Ohio State Sweatshirt Grey XL - Champion $149.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m23210269705",
+   "title": "Vintage Alabama Baseball Gray Crewneck Sweatshirt - Embroidered Size 2X - Hanes $22.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "mercari:m56889272793",
+   "title": "Duray Arkansas Razorbacks Gray Crewneck Sweatshirt $30.00",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "depop:acbryab-vintage-red-alabama-crewneck-sweatshirt-9999",
+   "title": "Men's red and burgundy sweatshirt ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "depop:closetoycess-alabama-crewneck-sweatshirt-smoke-free-a771",
+   "title": "Chicka-d men's red sweatshirt ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "depop:kcrothes04-red-alabama-crimson-tide-crewneck-9bb6",
+   "title": "Champion men's red sweatshirt ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "depop:nolan14h-red-alabama-hoodie-college-sweatshirt-2456",
+   "title": "Csa men's red and burgundy hoodie ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "depop:jrdtn-alabama-crimson-tide-crewneck-sweatshirt-86c6",
+   "title": "Champion women's red and pink sweatshirt ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "grailed:105124789",
+   "title": "about 1 month ago  (about 2 months)  VINTAGE  L  VINTAGE Midwest Embroidery Alabama Crimson Tide Hoo ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "grailed:109768771",
+   "title": "10 days ago  JERZEES  XL  Vintage Alabama crewneck ",
+   "verdict": "off-target",
+   "why": "2026-11-02 sweep: title/thumb screened, not on target"
+  },
+  {
+   "id": "alabamavtg:10842648248460",
+   "title": "Vintage Nutmeg X Alabama Rugby Type Sweatshirt Large $75.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840906399884",
+   "title": "Alabama X Nike Team Issued Basketball Gym Shorts XL $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840906301580",
+   "title": "Alabama X Nike Basketball Gym Shorts Medium $25.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840906236044",
+   "title": "Vintage Alabama X Castaways Crimson T-Shirt Oversized XL $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840906104972",
+   "title": "Vintage Alabama X Castaways Crimson T-Shirt Oversized XL $25.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840906039436",
+   "title": "1983 Bear Bryant \"The Legend Lives On\" Crimson T-Shirt Youth Small $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840905547916",
+   "title": "2012 BCS National Championship Crimson Long Sleeve Shirt Medium $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840905318540",
+   "title": "1999 Iron Bowl Crimson T-Shirt XL $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840905089164",
+   "title": "2001 Iron Bowl Crimson \"Bad Hare Day\" T-Shirt Medium $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840904827020",
+   "title": "Vintage Alabama X The Game Windbreaker Pullover XL $60.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840904597644",
+   "title": "Vintage Alabama \"The Good, Bad, and Ugly\" Crimson Crewneck Sweatshirt Small $60.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840903188620",
+   "title": "Vintage Alabama X Soffe Crest Crimson T-Shirt Large $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840901288076",
+   "title": "Vintage Alabama X Genuine Stuff Crimson Windbreaker Pullover XL $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840899846284",
+   "title": "2009 National Champs Crimson Skeleton T-Shirt XL $25.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840898732172",
+   "title": "2012 National Champs \"Beat the Irish\" Long Sleeve Shirt XL $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840897683596",
+   "title": "Alabama Football X Soffe Grey Two Tone Hoodie Sweatshirt Boxy Large $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840896471180",
+   "title": "Vintage Alabama X Logo 7 David Palmer Jersey Medium $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840894668940",
+   "title": "1982 Bear's Last Game Liberty Bowl Long Sleeve Shirt Boxy Medium $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840893063308",
+   "title": "1991 Iron Bowl White \"Here Kitty Kitty\" Game Day T-Shirt Medium $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840890900620",
+   "title": "Vintage Iron Bowl \"Auburn Sucks\" White Vulgar T-Shirt Large $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840887591052",
+   "title": "1993 Iron Bowl White Campus Designs T-Shirt Large $25.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840885952652",
+   "title": "1994 Iron Bowl White Red Oak Game Day Crewneck Sweatshirt Small $65.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840884412556",
+   "title": "Alabama Y2K Grey Women's Shirt Small $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840881463436",
+   "title": "1990 Iron Bowl \"The Tide is Back\" White T-Shirt Large $60.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840879726732",
+   "title": "1994 Iron Bowl X Crimson Tide Cleaners White T-Shirt Large $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840878514316",
+   "title": "Vintage Alabama X Jansport Grey Polo Shirt Boxy Large $25.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840874057868",
+   "title": "1994 Iron Bowl White Long Sleeve Shirt Medium $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840871108748",
+   "title": "Vintage Alabama \"The Energizer\" Big Al Rare Grey Crewneck Sweatshirt Small $65.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840869339276",
+   "title": "Vintage Alabama Grey Long Sleeve Embroidered T-Shirt Large $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840868061324",
+   "title": "1994 Iron Bowl White Crewneck Sweatshirt Boxy XL $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840866717836",
+   "title": "Vintage Iron Bowl White T-Shirt Medium $34.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840863998092",
+   "title": "1992 Iron Bowl White Crewneck Sweatshirt Large $60.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840861311116",
+   "title": "Alabama X Nike Team Issued Crimson Hoodie Sweatshirt Oversized XL $55.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840857739404",
+   "title": "Alabama X Nike Heavy Crimson Hoodie Sweatshirt L/XL $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840855380108",
+   "title": "Vintage Alabama X Jerzees Crimson Mockneck Long Sleeve Shirt Small $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840854560908",
+   "title": "Vintage Alabama X Jerzees Cutoff Sleeveless T-Shirt Medium $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840853840012",
+   "title": "Vintage Bama Football White Hanes T-Shirt Small $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840852758668",
+   "title": "2020 National Champs Black T-Shirt XL $20.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840851742860",
+   "title": "Vintage Alabama X Homefield Crimson Crewneck Sweatshirt S/M $55.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840850825356",
+   "title": "Vintage Alabama Reversible Zip Up Jacket Large $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840850530444",
+   "title": "Vintage Bama X Russell Spellout Ivory Crewneck Sweatshirt Boxy Large $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840850333836",
+   "title": "1970's Alabama Grey Tank Top Shirt Large $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840850104460",
+   "title": "Nike X Alabama Team Issued Black Hoodie Sweatshirt Large $50.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840849514636",
+   "title": "Vintage Bama X Russell Spellout Crimson Crewneck Sweatshirt Medium $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840849154188",
+   "title": "Vintage Alabama X Anvil Crimson Big Al Cropped T-Shirt XL $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840848892044",
+   "title": "Vintage Alabama X Russell Spellout Crimson Crewneck Sweatshirt Small $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840848760972",
+   "title": "Vintage Alabama Crimson Tank Top Shirt Medium $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840848203916",
+   "title": "Vintage Alabama X Cadre Red Hawaiian Type Button Down Shirt XL $34.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10840847679628",
+   "title": "Vintage Alabama X Galt Sand Crimson Crewneck Sweatshirt XL $60.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10842383483020",
+   "title": "Dancing Elephant X Alabama Vintage Koozies $3.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822892388492",
+   "title": "Alabama X Nike Team Issued Crimson Long Sleeve Medium $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822890291340",
+   "title": "Alabama X Nike Team Issued White Long Sleeve Medium $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822889603212",
+   "title": "Alabama X Nike Team Issued Crimson Long Sleeve Medium $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822813712524",
+   "title": "Alabama X Nike #83 Crimson Boxy Cropped Football Jersey Women's S/M $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822812893324",
+   "title": "Vintage Alabama Football X Nike Orange Bowl Repurposed Crewneck Sweatshirt 3XL XXXL $99.95",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822810763404",
+   "title": "Vintage Alabama X Nike White Long Sleeve Mockneck Shirt XL $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822809911436",
+   "title": "Vintage Alabama X Nike White Long Sleeve Mockneck Shirt Medium $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822809452684",
+   "title": "Vintage Alabama X Nike White Long Sleeve Mockneck Shirt Medium $40.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822809256076",
+   "title": "Vintage Alabama X Spike Sports Crimson Mockneck Long Sleeve Shirt Medium $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822808436876",
+   "title": "Vintage Alabama X Spike Sports Crimson Mockneck Long Sleeve Shirt XL $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822807945356",
+   "title": "Vintage Alabama X Spike Sports Crimson Mockneck Long Sleeve Shirt Large $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822807617676",
+   "title": "Vintage Alabama X Starter White Turtleneck Long Sleeve Shirt XL $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822790545548",
+   "title": "Vintage Alabama X Spike Sports Crimson Mockneck Long Sleeve Shirt Small $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822790185100",
+   "title": "Vintage Alabama X Starter Crimson Zip Up Puffer Jacket Large $175.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822789955724",
+   "title": "Alabama X Logo 7 Crimson Puffer Jacket XL $140.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10822758662284",
+   "title": "Vintage Alabama X Pro Player Crimson/White Puffer Jacket XL $140.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821491327116",
+   "title": "Vintage Alabama X Logo Athletic Crimson Zip Up Puffer Jacket Large $140.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821431459980",
+   "title": "Vintage Alabama X Starter Black Half Zip Puffer Pullover XL $160.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821430149260",
+   "title": "Vintage Alabama X Pro Player Crimson Striped Puffer Jacket Large $150.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821428248716",
+   "title": "Vintage Alabama X Nike Crimson Puffer Jacket Large $140.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821427232908",
+   "title": "Vintage Alabama X Pro Player Crimson Puffer Jacket XL $140.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821426937996",
+   "title": "Vintage Alabama X Logo Athletic Crimson Puffer Jacket Large $150.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821360124044",
+   "title": "Vintage Alabama X Hartwell White Bomber Jacket XL $65.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821348294796",
+   "title": "Vintage Alabama Crimson Cardigan Womens Jacket Women's S/M $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821343412364",
+   "title": "Vintage Bama Pride White Crewneck Sweatshirt Small $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821315887244",
+   "title": "Vintage Alabama X Nike White Dri Fit Long Sleeve Shirt S/M $45.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10821315428492",
+   "title": "Alabama X Velocity Crimson Long Sleeve Mockneck Shirt Medium $30.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:10823261716620",
+   "title": "Alabama Oval Patch Throwback Snapback - Crimson/Black $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "alabamavtg:9672492122252",
+   "title": "Alabama Performance Rope Snapback Hat | Crimson & Ivory $35.00",
+   "verdict": "off-target-title",
+   "why": "2026-11-02 sweep: AlabamaVTG catalog title screen"
+  },
+  {
+   "id": "ebay:387830764640",
+   "title": "web-index eBay result",
+   "verdict": "off-target",
+   "why": "2026-11-02: web-index hit; ended/missing or not a gray seal crew"
+  },
+  {
+   "id": "ebay:365785641149",
+   "title": "web-index eBay result",
+   "verdict": "off-target",
+   "why": "2026-11-02: web-index hit; ended/missing or not a gray seal crew"
+  },
+  {
+   "id": "ebay:266987454726",
+   "title": "web-index eBay result",
+   "verdict": "off-target",
+   "why": "2026-11-02: web-index hit; ended/missing or not a gray seal crew"
+  },
+  {
+   "id": "ebay:236200186706",
+   "title": "web-index eBay result",
+   "verdict": "off-target",
+   "why": "2026-11-02: web-index hit; ended/missing or not a gray seal crew"
+  },
+  {
+   "id": "ebay:127206541686",
+   "title": "web-index eBay result",
+   "verdict": "off-target",
+   "why": "2026-11-02: web-index hit; ended/missing or not a gray seal crew"
+  },
+  {
+   "id": "sweep-2026-11-02",
+   "title": "sweep marker",
+   "verdict": "sweep-marker",
+   "why": "2026-11-02: eBay 6q (585 ids, 170 unseen), Poshmark 5q (263 ids, 125 unseen), Etsy 2q (13 unseen; homepage warm-up worked first try), Mercari 2q in-app (27 unseen), Depop 1q (5 unseen, all red), Grailed 1q (2 unseen), AlabamaVTG 495 products (80 unseen), web index 2q (5 unseen eBay ids, all dead/irrelevant). eBay + Poshmark dossier cards re-verified live (Pannill 2XL dead). FB BLOCKED (claude-in-chrome: no connected browsers)."
   }
  ]
 }
